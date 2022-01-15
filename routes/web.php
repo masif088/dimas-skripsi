@@ -17,11 +17,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/admin', function () {
-    return view('layouts.admin');
-});
-Route::post('/summernote-upload', [SupportController::class, 'upload'])->name('summernote_upload');
+//Route::get('/admin', function () {
+//    return view('layouts.admin');
+//});
+Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
+Route::middleware(['auth:sanctum',])->name('admin.')->prefix('admin')->group(function () {
+    Route::get('dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
 
-Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', function () {
-    return view('dashboard');
-})->name('dashboard');
+});

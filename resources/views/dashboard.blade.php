@@ -1,15 +1,20 @@
-<x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
-        </h2>
+<x-admin>
+    <x-slot name="title">
+        Something
     </x-slot>
+    <div>
+        <div class="container-fluid">
+            <x-greeting/>
+            <div class="row">
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <x-simple-card icon="user"/>
+                </div>
+                <div class="col-sm-6 col-xl-3 col-lg-6">
+                    <x-simple-card icon="users" value="100" title="Product" color="bg-secondary"/>
 
-    <div class="py-12">
-        <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-jet-welcome />
+                </div>
+                <livewire:check/>
             </div>
         </div>
     </div>
-</x-app-layout>
+</x-admin>

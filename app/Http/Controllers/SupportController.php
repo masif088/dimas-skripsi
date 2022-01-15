@@ -10,7 +10,6 @@ use Intervention\Image\Facades\Image;
 class SupportController extends Controller
 {
     public function upload(Request $request){
-dd("asd");
         $image = $request->file('file');
         $filename = time() . '.' . $image->getClientOriginalExtension();
 

@@ -24,9 +24,12 @@
             <li><div class="mode"><i class="fa fa-moon-o"></i></div></li>
             <li class="maximize"><a class="text-dark" href="#" onclick="javascript:toggleFullScreen()"><i data-feather="maximize"></i></a></li>
             <li class="profile-nav onhover-dropdown p-0 me-0">
-                <div class="media profile-media"><img class="b-r-10" src="{{asset('assets/images/dashboard/profile.jpg')}}" alt="">
-                    <div class="media-body"><span>Emay Walter</span>
-                        <p class="mb-0 font-roboto">Admin <i class="middle fa fa-angle-down"></i></p>
+                <div class="media profile-media">
+{{--                    <img class="b-r-10" src="{{asset('assets/images/dashboard/profile.jpg')}}" alt="">--}}
+                    <img src="{{ auth()->user()->profile_photo_url }}" alt="{{ auth()->user()->name }}" class="b-r-10 rounded-full object-cover round" style="height: 40px;width: 40px; border-radius: 100px !important;">
+{{--                    <img src="{{ $this->user->profile_photo_url }}" alt="{{ $this->user->name }}" class="rounded-full h-20 w-20 object-cover">--}}
+                    <div class="media-body"><span>{{ auth()->user()->name }}</span>
+                        <p class="mb-0 font-roboto"> Selamat datang <i class="middle fa fa-angle-down"></i></p>
                     </div>
                 </div>
                 <ul class="profile-dropdown onhover-show-div">
@@ -34,7 +37,13 @@
                     <li><a href="#"><i data-feather="mail"></i><span>Inbox</span></a></li>
                     <li><a href="#"><i data-feather="file-text"></i><span>Taskboard</span></a></li>
                     <li><a href="#"><i data-feather="settings"></i><span>Settings</span></a></li>
-                    <li><a href="#"><i data-feather="log-in"> </i><span>Log Out</span></a></li>
+
+                    <li>
+                        <form method="POST" action="{{ route('logout') }}" style="margin: 0;padding: 0;">
+                            @csrf
+                            <button style="border: none; background: none;width: 100%; text-align: start"><i data-feather="log-in"></i><span>Log Out</span></button>
+                        </form>
+                    </li>
                 </ul>
             </li>
         </ul>

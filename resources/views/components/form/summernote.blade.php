@@ -17,31 +17,33 @@
                             }
                         },
                         onChange: function (content, $editable) {
-                            @this.set('{{$model}}', content)
+                        @this.set('{{$model}}', content)
                         },
 
                     }
                 });
                 $.upload{{str_replace(".", "", $model)}} = function (file) {
                     let out = new FormData();
-                    out.append('file', file, file.name);
+                    out.append('file', file);
                     $.ajaxSetup({
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')}
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name=csrf-token]').attr('content')
+                        }
                     });
                     $.ajax({
                         method: 'POST',
-                        url: '{{route('summernote_upload')}}',
+                        url: '{{route('summernote')}}',
+                        contentType: false,
                         cache: false,
                         processData: false,
                         data: out,
                         success: function (img) {
+                            console.log("asdasda")
                             image = '<img src="' + window.location.protocol + '//' + window.location.host + img + '" alt="' + window.location.protocol + '//' + window.location.host + '/storage/' + img + '">'
                             $("textarea#{{str_replace('.', '', $model)}}").summernote('code', @this.get('{{$model}}') + image);
                         },
-                        error: function (jqXHR,textStatus, errorThrown) {
-                            console.log(jqXHR)
+                        error: function (jqXHR, textStatus, errorThrown) {
                             console.error(textStatus + " " + errorThrown);
-                            console.log($('meta[name="csrf-token"]').attr('content'))
                         }
                     });
                 };
@@ -49,12 +51,3 @@
         </script>
     </div>
 </div>
-
-
-{{--<div class="col">--}}
-{{--    <div class="mb-3">--}}
-{{--        <label class="form-label">{{$title}}</label>--}}
-{{--        <input type="{{ $type }}" wire:model="{{ $model }}" {{ $attributes->merge(['class'=>'form-control']) }} >--}}
-{{--        @error($model) <span class="error">{{ $message }}</span> @enderror--}}
-{{--    </div>--}}
-{{--</div>--}}
