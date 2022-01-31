@@ -21,7 +21,9 @@
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
                         <a href="{{ route('admin.product-company.edit',$pc->id) }}" class="btn btn-primary">Ubah</a>
+                        @if($pc->products==null)
                         <button type="submit" class="btn btn-danger" title="Delete">Hapus</button>
+                        @endif
                     </form>
                 </td>
             </tr>
