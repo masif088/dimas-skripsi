@@ -65,7 +65,7 @@
             }
         }
 
-        @media only screen and (min-width: 1200px) {
+        @media only screen and (min-width: 1000px) {
             .product-list {
                 overflow-y: scroll;
                 height: 800px;
