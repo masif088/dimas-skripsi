@@ -69,7 +69,7 @@
     <div style="text-align: center;">
         <p>Lekker Putar</p>
         <p ></p>
-        <p style="font-size: 12px">Jl. Bengawan Soli No.16 Sumbersari, Jember</p>
+        <p style="font-size: 12px">Jl. Bengawan Solo No.16F Sumbersari, Jember</p>
         <p>----------------------------</p>
     </div>
 
@@ -159,7 +159,8 @@
     <p style="font-size: 17px">
         Terima kasih telah membeli produk kami. <br>
         Kami tersedia dalam gofood dan grabfood.<br>
-        Kritik dan saran hubungi 082335456722
+        Kritik dan saran hubungi 0895620570402 <br>
+        Temukan kami di ig: @lekkerputar
     </p>
 </div>
 </body>

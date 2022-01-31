@@ -37,8 +37,8 @@
                             <h5>{{ $value3 }}</h5>
                             <p class="font-roboto">{{ $title3 }}</p>
                         </div>
-                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link1}}" class="btn {{$btnColor1}}">{{$btn1}}</a></div>
-                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link2}}" class="btn {{$btnColor2}}">{{$btn2}}</a></div>
+{{--                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link1}}" class="btn {{$btnColor1}}">{{$btn1}}</a></div>--}}
+{{--                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link2}}" class="btn {{$btnColor2}}">{{$btn2}}</a></div>--}}
                     </div>
                 </div>
                 <div class="col-xl-9 p-0">

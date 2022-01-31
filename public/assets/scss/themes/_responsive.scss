@@ -805,9 +805,9 @@
     }
   }
   .order-history{
-    table.dataTable.table thead th{     
-      padding-right:50px;     
-    }   
+    table.dataTable.table thead th{
+      padding-right:50px;
+    }
   }
 
 
@@ -2332,7 +2332,7 @@
 
         .header-wrapper {
           .maximize {
-            display: none;
+            //display: none;
           }
 
           .header-logo-wrapper {
@@ -2409,7 +2409,7 @@
       .page-header {
         .header-wrapper {
           .maximize {
-            display: none;
+            //display: none;
           }
         }
       }
@@ -2970,7 +2970,7 @@
   // editor_container //
   .editor_container{
     .CodeMirror{
-      min-height:250px;     
+      min-height:250px;
       height:250px;
     }
   }
@@ -4799,7 +4799,7 @@
   .invoice {
     .text-md-end {
       margin-top: 10px;
-    }  
+    }
     .text-right{
       text-align:right;
     }
@@ -5693,7 +5693,7 @@
     // editor_container //
     .editor_container{
       .CodeMirror{
-        min-height:190px;     
+        min-height:190px;
         height:190px;
       }
     }
@@ -5710,7 +5710,7 @@
         }
       }
     }
-  } 
+  }
 
 
   // tab material start
