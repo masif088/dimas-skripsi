@@ -222,6 +222,12 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
+        window.addEventListener("load",function() {
+            setTimeout(function(){
+                // This hides the address bar:
+                window.scrollTo(0, 1);
+            }, 0);
+        });
         this.livewire.on('swal:modal', data => {
             SwalModal(data.icon, data.title, data.text)
         })
