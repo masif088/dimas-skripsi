@@ -31,7 +31,7 @@ class Transaction extends Component
             ['title' => 'take away', 'value' => 'take away'],
             ['title' => 'dine in', 'value' => 'dine in'],
         ];
-        $this->reservation = 'dine in';
+        $this->reservation = 'take away';
         $this->paymentMethod = 1;
         $this->optionMethod = eloquent_to_options(PaymentMethod::get(), 'id', 'title');
         $this->products = Product::where('product_status_id', 1)->orderBy('product_type_id')->get();
