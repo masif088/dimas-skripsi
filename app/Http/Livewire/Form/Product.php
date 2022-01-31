@@ -105,13 +105,23 @@ class Product extends Component
 
     protected function getRules()
     {
-        return [
-            'data.title' => 'required|max:255',
-            'data.product_type_id' => 'required',
-            'data.product_company_id' => 'required',
-            'data.product_status_id' => 'required',
-            'data.price' => 'required',
-            'thumbnail' => 'required'
-        ];
+        if ($this->action=="create") {
+            return [
+                'data.title' => 'required|max:255',
+                'data.product_type_id' => 'required',
+                'data.product_company_id' => 'required',
+                'data.product_status_id' => 'required',
+                'data.price' => 'required',
+                'thumbnail' => 'required'
+            ];
+        }else{
+            return [
+                'data.title' => 'required|max:255',
+                'data.product_type_id' => 'required',
+                'data.product_company_id' => 'required',
+                'data.product_status_id' => 'required',
+                'data.price' => 'required',
+            ];
+        }
     }
 }
