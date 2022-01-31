@@ -40,7 +40,11 @@ class TransactionController extends Controller
         $transaction=Transaction::find($id);
         $height=420+($transaction->transactionDetails->count()*60);//base 420 // 1 item 60px
         $pdf = App::make('dompdf.wrapper');
-        $pdf->loadView('pdf-export.struck', compact('transaction'))->setPaper([0, 0, 250, $height]);;
+        $view="pdf-export.struck";
+        if (config('app.name', 'Laravel')=="Lekker Putar"){
+            $view="pdf-export.struck-lekker";
+        }
+        $pdf->loadView($view, compact('transaction'))->setPaper([0, 0, 250, $height]);;
         return $pdf->stream();
     }
 }
