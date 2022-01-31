@@ -1,5 +1,5 @@
 <div class="row second-chart-list third-news-update">
-    <div class="col-lg-8 col-sm-12 product-list">
+    <div class="col-lg-8 col-sm-8 product-list">
         <div class="product-wrapper-grid">
 {{--            <div class="row">--}}
             @php($productType=0)
@@ -76,7 +76,7 @@
     </div>
 </div>
 
-<div class="col-lg-4 col-sm-12">
+<div class="col-lg-4 col-sm-4">
     <div class="card">
         <div class="card-header" style="padding: 10px">
             <div class="header-top">
