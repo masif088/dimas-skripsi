@@ -4,9 +4,9 @@
         <x-form.input type="number" model="data.price" title="Harga Produk"/>
         <x-form.input type="number" model="data.discount_price" title="Harga diskon"/>
         <x-form.select :options="$optionDiscount" :selected="$data['discount_state']" model="data.discount_state" title="Diskon"/>
-        <x-form.select :options="$optionProductType" :selected="$data['product_type_id']" model="data.product_type_id" title="Harga Produk"/>
-        <x-form.select :options="$optionProductStatus" :selected="$data['product_company_id']" model="data.product_company_id" title="Harga Produk"/>
-        <x-form.select :options="$optionProductCompany" :selected="$data['product_status_id']" model="data.product_status_id" title="Harga Produk"/>
+        <x-form.select :options="$optionProductType" :selected="$data['product_type_id']" model="data.product_type_id" title="Jenis"/>
+        <x-form.select :options="$optionProductStatus" :selected="$data['product_company_id']" model="data.product_company_id" title="Usaha"/>
+        <x-form.select :options="$optionProductCompany" :selected="$data['product_status_id']" model="data.product_status_id" title="Status"/>
         <x-form.textarea model="data.description" title="Deskripsi Produk"/>
         <x-form.input type="file" model="thumbnail" title="Foto Produk"/>
         <div wire:loading wire:target="thumbnail">
