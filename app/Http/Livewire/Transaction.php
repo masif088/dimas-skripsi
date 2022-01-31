@@ -28,8 +28,8 @@ class Transaction extends Component
     public function mount()
     {
         $this->optionReservation = [
-            ['title' => 'dine in', 'value' => 'dine in'],
             ['title' => 'take away', 'value' => 'take away'],
+            ['title' => 'dine in', 'value' => 'dine in'],
         ];
         $this->reservation = 'dine in';
         $this->paymentMethod = 1;
