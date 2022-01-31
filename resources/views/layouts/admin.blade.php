@@ -59,13 +59,13 @@
             padding: 10px;
         }
 
-        @media (max-width: 1200px) {
+        @media (max-width: 800px) {
             .mobile-cashier {
                 width: 33%
             }
         }
 
-        @media only screen and (min-width: 1000px) {
+        @media only screen and (min-width:800px) {
             .product-list {
                 overflow-y: scroll;
                 height: 800px;
