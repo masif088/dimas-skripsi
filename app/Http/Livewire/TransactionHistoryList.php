@@ -24,7 +24,7 @@ class TransactionHistoryList extends Component
         $this->method = PaymentMethod::get();
         $this->type = ProductType::get();
         $this->company = ProductCompany::get();
-        $hls = DB::select(DB::raw('SELECT date(created_at) as dateList,count(*) as counter FROM transactions group by date(created_at)'));
+        $hls = DB::select(DB::raw('SELECT date(created_at) as dateList,count(*) as counter FROM transactions where status_order_id=2 group by date(created_at)'));
         $this->historyList = [];
 
         foreach ($hls as $hl) {
