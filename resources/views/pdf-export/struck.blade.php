@@ -118,7 +118,7 @@
                     <td style="">{{ $td->product->price }}</td>
                     <td style="text-align: right">
                         {{ $td->product->price*$td->amount }}
-                        @if($td->discount_state)
+                        @if($td->product->discount_state)
                             <br>-{{ ($td->product->price-$td->price)*$td->amount }}
                         @endif
                         @php($total+=$td->price*$td->amount)

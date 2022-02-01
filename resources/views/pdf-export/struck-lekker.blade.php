@@ -42,11 +42,13 @@
             padding: 0;
             margin: 0
         }
+
         .column6 {
             float: left;
             width: 60%;
             padding: 10px;
         }
+
         .column2 {
             float: left;
             width: 20%;
@@ -63,15 +65,15 @@
 </head>
 <body>
 <div style="text-align: center">
-{{--    <img src="{{ public_path('assets/images/kopi.png') }}" alt="" style="max-height: 50px">--}}
+    {{--    <img src="{{ public_path('assets/images/kopi.png') }}" alt="" style="max-height: 50px">--}}
     <img src="{{ public_path('assets/images/leker.png') }}" alt="" style="max-height: 50px">
 </div>
-    <div style="text-align: center;">
-        <p>Lekker Putar</p>
-        <p ></p>
-        <p style="font-size: 12px">Jl. Bengawan Solo No.16F Sumbersari, Jember</p>
-        <p>----------------------------</p>
-    </div>
+<div style="text-align: center;">
+    <p>Lekker Putar</p>
+    <p></p>
+    <p style="font-size: 12px">Jl. Bengawan Solo No.16F Sumbersari, Jember</p>
+    <p>----------------------------</p>
+</div>
 
 
 <div style="font-size: 20px;padding: 0">
@@ -117,7 +119,7 @@
                     <td style="">{{ $td->product->price }}</td>
                     <td style="text-align: right">
                         {{ $td->product->price*$td->amount }}
-                        @if($td->discount_state)
+                        @if($td->product->discount_state)
                             <br>-{{ ($td->product->price-$td->price)*$td->amount }}
                         @endif
                         @php($total+=$td->price*$td->amount)

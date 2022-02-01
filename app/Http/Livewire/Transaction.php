@@ -135,6 +135,7 @@ class Transaction extends Component
                     'price' => Product::find($order)->discount_price,
                     'amount' => $value
                 ]);
+
             } else {
                 TransactionDetail::create([
                     'product_id' => $order,

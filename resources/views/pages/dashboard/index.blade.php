@@ -37,10 +37,10 @@
                     dataTitle2="Pemasukkan"
                     :categories="$category"
                 />
-                {{--                <x-data-radar title="Keuangan"/>--}}
-                {{--                <x-data-radar title="Transaksi"/>--}}
-                {{--                <x-data-radar title="Barang"/>--}}
-                {{--                <x-data-radar title="Pengunjung"/>--}}
+{{--                                <x-data-radar title="Keuangan"/>--}}
+{{--                                <x-data-radar title="Transaksi"/>--}}
+{{--                                <x-data-radar title="Barang"/>--}}
+{{--                                <x-data-radar title="Pengunjung"/>--}}
             </div>
 
         </div>
