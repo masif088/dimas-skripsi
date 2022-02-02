@@ -10,7 +10,7 @@
                             </div>
                             <div class="card-body" style="padding: 10px">
                                 @foreach($transaction->transactionDetails as $td)
-                                {{$td->product->title}}
+                                    {{$td->product->title}}
                                     <br>
                                 @endforeach
                             </div>
@@ -43,7 +43,7 @@
                                     @else
                                         <div>Rp. {{ number_format($order->product->price) }}</div>
                                     @endif
-{{--                                    <span>Rp. {{number_format($order->product->price)}}</span>--}}
+                                    {{--                                    <span>Rp. {{number_format($order->product->price)}}</span>--}}
 
                                 </div>
                                 <div class="col-4 text-center">
@@ -51,10 +51,11 @@
                                     {{ $order->amount }}x
                                 </div>
                                 <div class="col-4">
-{{--                                    Rp. {{number_format($order->price*$order->amount)}}--}}
+                                    {{--                                    Rp. {{number_format($order->price*$order->amount)}}--}}
                                     @if($order->product->discount_state)
                                         <br>
-                                        <div>Rp. {{ number_format($order->product->discount_price*$order->amount) }}</div>
+                                        <div>
+                                            Rp. {{ number_format($order->product->discount_price*$order->amount) }}</div>
                                         <del>Rp. {{ number_format($order->product->price*$order->amount) }}</del>
                                         @php($total+=$order->product->discount_price*$order->amount)
                                         @php($discount+=($order->product->price - $order->product->discount_price)*$order->amount)
@@ -70,26 +71,33 @@
                         </div>
 
                     @endforeach
-                        <div class="news-update" style="padding: 10px">
-                        </div>
-                    @endif
+                    <div class="news-update" style="padding: 10px">
+                    </div>
+                @endif
 
 
             </div>
         </div>
 
-            <div class="col-lg-12 p-1">
-                <button class="btn btn-danger" style="width: 100%" @if($transactionDetail==null) disabled @endif wire:click="cancel()">
-                    Batal
-                </button>
-            </div>
-            <div class="col-lg-12 p-1">
-                <button class="btn btn-primary" style="width: 100%" @if($transactionDetail==null) disabled @endif wire:click="done()">
-                    Proses
-                </button>
-            </div>
+        <div class="col-lg-12 p-1">
+            <button class="btn btn-danger" style="width: 100%" @if($transactionDetail==null) disabled
+                    @endif wire:click="cancel()">
+                Batal
+            </button>
         </div>
-        <br>
+        <div class="col-lg-12 p-1">
+            <button class="btn btn-primary" style="width: 100%" @if($transactionDetail==null) disabled
+                    @endif wire:click="done()">
+                Proses
+            </button>
+        </div>
+        <div class="col-lg-12 p-1">
+            <button class="btn btn-primary" style="width: 100%" @if($transactionDetail==null) disabled
+                    @endif wire:click="print()">
+                Print Struk
+            </button>
+        </div>
     </div>
-
+    <br>
 </div>
+

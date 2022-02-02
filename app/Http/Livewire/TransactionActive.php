@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\TransactionDetail;
 use Carbon\Carbon;
 use Livewire\Component;
 
@@ -30,6 +31,7 @@ class TransactionActive extends Component
             'title' => $this->transactionDetail->transaction_code." selesai",
         ]);
         $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->whereDate('created_at', Carbon::today())->get();
+        $this->transactionDetail=null;
     }
 
     public function cancel()
@@ -40,6 +42,11 @@ class TransactionActive extends Component
             'title' => $this->transactionDetail->transaction_code." dibatalkan",
         ]);
         $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->whereDate('created_at', Carbon::today())->get();
+        $this->transactionDetail=null;
+    }
+    public function print(){
+        $url=route('admin.transaction.struck',$this->transactionDetail->id);
+        $this->emit('redirect:new',$url );
     }
 
     public function render()
