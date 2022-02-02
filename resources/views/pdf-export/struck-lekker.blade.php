@@ -161,7 +161,7 @@
     <p style="font-size: 17px">
         Terima kasih telah membeli produk kami. <br>
         Kami tersedia dalam gofood dan grabfood.<br>
-        Kritik dan saran hubungi 0895620570402 <br>
+        Kritik dan saran hubungi 081334731184 <br>
         Temukan kami di ig: @lekkerputar
     </p>
 </div>

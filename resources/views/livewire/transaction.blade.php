@@ -138,26 +138,25 @@
                 <div class="card-body" style="padding: 10px">
                     <x-form.input type="text" title="" placeholder="nama pembeli" model="name"/>
                     <x-form.input type="number" title="" placeholder="jumlah pengunjung" model="visitors"/>
-                    <div>
-                        <div class="btn-group special mb-2">
-                            <button type="button" class="btn" style="background-color: #9a7160;color: white"
+                    <div style="text-align: center">
+
+                            <button type="button" class="btn m-1" style="background-color: #9a7160;color: white"
                                     wire:click="feeOnChange(5000)">5000
                             </button>
-                            <button type="button" class="btn" style="background-color: #827788;color: white"
+                            <button type="button" class="btn m-1" style="background-color: #827788;color: white"
                                     wire:click="feeOnChange(10000)">10000
                             </button>
-                            <button type="button" class="btn" style="background-color: #6b9281;color: white"
+                            <button type="button" class="btn m-1" style="background-color: #6b9281;color: white"
                                     wire:click="feeOnChange(20000)">20000
                             </button>
-                        </div>
-                        <div class="btn-group special mb-2">
-                            <button type="button" class="btn" style="background-color: #447db0;color: white"
+
+                            <button type="button" class="btn m-1" style="background-color: #447db0;color: white"
                                     wire:click="feeOnChange(50000)">50000
                             </button>
-                            <button type="button" class="btn" style="background-color: #b1515d;color: white"
+                            <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
                                     wire:click="feeOnChange(100000)">100000
                             </button>
-                        </div>
+                        <br>
                     </div>
                     <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee"/>
                     <x-form.select :options="$optionMethod" :selected="$paymentMethod" model="paymentMethod"
