@@ -89,7 +89,7 @@
             @foreach($orderList as $order=>$value)
                 <div class="news-update" style="padding: 10px">
                     <div class="row">
-                        <div class="col-4">
+                        <div class="col-md-4">
                             <h6>{{ $products->find($order)->title }}</h6>
                             @if($products->find($order)->discount_state)
                                 <div>Rp. {{ number_format($products->find($order)->discount_price) }}</div>
@@ -100,7 +100,7 @@
                             {{--                                <span>Rp. {{number_format($products->find($order)->price)}}</span>--}}
 
                         </div>
-                        <div class="col-4 text-center">
+                        <div class="col-md-4 text-center">
                             <div class="row">
                                 <button class="btn btn-sm btn-danger col-4 float-start" type="button"
                                         style="padding: 5px" wire:click="decreaseOrderList({{$order}})">
@@ -113,7 +113,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-4">
+                        <div class="col-md-4">
                             {{--                                Rp. {{number_format($products->find($order)->price*$value)}}--}}
                             @if($products->find($order)->discount_state)
                                 <div>Rp. {{ number_format($products->find($order)->discount_price*$value) }}</div>
