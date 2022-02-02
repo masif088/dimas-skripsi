@@ -144,12 +144,13 @@ class Transaction extends Component
                     'amount' => $value
                 ]);
             }
-            $this->orderList = [];
-            $this->name = '';
-            $this->reservation = 'dine in';
-            $this->paymentMethod = 1;
-            $this->visitors = 1;
         }
+        $this->orderList = [];
+        $this->name = '';
+        $this->reservation = 'take away';
+        $this->paymentMethod = 1;
+        $this->visitors = null;
+        $this->fee=null;
         $this->emit('notify', [
             'type' => 'primary',
             'title' => $transaction->transaction_code . " dalam waiting list",
