@@ -97,8 +97,6 @@
                             @else
                                 <div>Rp. {{ number_format($products->find($order)->price) }}</div>
                             @endif
-                            {{--                                <span>Rp. {{number_format($products->find($order)->price)}}</span>--}}
-
                         </div>
                         <div class="col-md-4 text-center">
                             <div class="row">
@@ -114,7 +112,6 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            {{--                                Rp. {{number_format($products->find($order)->price*$value)}}--}}
                             @if($products->find($order)->discount_state)
                                 <div>Rp. {{ number_format($products->find($order)->discount_price*$value) }}</div>
                                 <del>Rp. {{ number_format($products->find($order)->price*$value) }}</del>
@@ -124,9 +121,7 @@
                                 <div>Rp. {{ number_format($products->find($order)->price*$value) }}</div>
                                 @php($total+=$products->find($order)->price*$value)
                             @endif
-
                         </div>
-
                     </div>
                 </div>
             @endforeach
