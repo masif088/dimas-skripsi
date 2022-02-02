@@ -88,7 +88,7 @@
         <div class="col-lg-12 p-1">
             <button class="btn btn-primary" style="width: 100%" @if($transactionDetail==null) disabled
                     @endif wire:click="done()">
-                Proses
+                Selesai
             </button>
         </div>
         <div class="col-lg-12 p-1">
