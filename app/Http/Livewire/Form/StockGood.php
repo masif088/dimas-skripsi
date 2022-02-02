@@ -22,6 +22,12 @@ class StockGood extends Component
             'amount' => 0,
             'note' => ''
         ];
+//        'supplier_id',
+// 'title',
+// 'minimal_amount',
+// 'maximal_amount',
+// 'amount',
+// 'note',
         $this->optionSupplier = eloquent_to_options(Supplier::get(), 'id', 'title');
         if ($this->dataId!=null) {
             $data = \App\Models\StockGood::find($this->dataId);
@@ -71,7 +77,6 @@ class StockGood extends Component
             'data.minimal_amount' => 'required',
             'data.maximal_amount' => 'required',
             'data.amount' => 'required',
-            'data.note' => 'required'
         ];
     }
 }

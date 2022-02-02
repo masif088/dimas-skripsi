@@ -28,6 +28,21 @@ class TransactionActiveNotification extends Component
         ]);
         $this->refresh();
     }
+    public function cancel($id)
+    {
+        $td = $this->transactionNotification->find($id);
+        $td->update(['status_order_id' => 3]);
+        $this->emit('notify', [
+            'type' => 'danger',
+            'title' => $td->transaction_code . " cancel",
+        ]);
+        $this->refresh();
+    }
+    public function print($id)
+    {
+        $url=route('admin.transaction.struck',$id);
+        $this->emit('redirect:new',$url );
+    }
 
     public function refresh()
     {

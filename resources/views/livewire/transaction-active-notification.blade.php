@@ -22,13 +22,17 @@
                         {{ $transaction->created_at->diffForHumans() }}
                         <br>
                         <div class="text-end">
-                            <i class="fa fa-check font-primary" style="font-size: 20px" wire:click="done({{$transaction->id}})"></i>
+                            <i class="fa fa-print font-primary mr-3" style="font-size: 20px;margin-right: 10px" wire:click="print({{$transaction->id}})"></i>
+                            <i class="fa fa-check font-primary mr-3" style="font-size: 20px;margin-right: 10px" wire:click="done({{$transaction->id}})"></i>
+                            <i class="fa fa-remove font-danger mr-3" style="font-size: 20px;margin-right: 10px" wire:click="cancel({{$transaction->id}})"></i>
+
                         </div>
                     </span>
                     <i class="fa fa-circle-o font-danger"></i>
-                    {{ $transaction->transaction_code }} - {{ $transaction->name }}
+                    {{ $transaction->transaction_code }} <br>
+                    {{ $transaction->name }}
                     @foreach($transaction->transactionDetails as $td)
-                        <div class="pl-4 col-6" style="padding-left: 20px">
+                        <div class="pl-1 col-6" style="padding-left: 5px">
                             {{ $td->product->title }} - {{ $td->amount }}x
                         </div>
                     @endforeach
