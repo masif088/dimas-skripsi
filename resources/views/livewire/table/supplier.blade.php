@@ -20,7 +20,7 @@
                           style="display: inline-block">
                         {{ method_field('DELETE') }}
                         {{ csrf_field() }}
-                        <a href="{{ route('admin.product-type.edit',$pt->id) }}" class="btn btn-primary">Ubah</a>
+                        <a href="{{ route('admin.supplier.edit',$pt->id) }}" class="btn btn-primary">Ubah</a>
                         <button type="submit" class="btn btn-danger" title="Delete">Hapus</button>
                     </form>
                 </td>

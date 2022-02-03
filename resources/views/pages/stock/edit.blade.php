@@ -8,7 +8,7 @@
                 <div class="col-sm-12">
                     <div class="card">
                         <div class="card-body">
-                            <livewire:form.product action="update" :dataId="$id"/>
+                            <livewire:form.stock-good action="update" :dataId="$id"/>
                         </div>
                     </div>
                 </div>
