@@ -1,47 +1,47 @@
 <div class="row second-chart-list third-news-update">
     <div class="col-lg-8 col-sm-8 product-list">
         <div class="product-wrapper-grid">
-{{--            <div class="row">--}}
+            {{--            <div class="row">--}}
             @php($productType=0)
             @foreach($products as $product)
-                        @if($productType!=$product->product_type_id)
-                            @if($productType!=0)</div>
-                            @endif
+                @if($productType!=$product->product_type_id)
+                    @if($productType!=0)</div>
+        @endif
         @php($productType=$product->product_type_id)
-            <div class="row">
-                <h4>{{ $product->productType->title }}</h4>
-                @endif
-                <div class="col-xl-3 col-sm-3 xl-3 mobile-cashier" wire:click="add({{$product->id}})">
-                    <div class="card">
-                        <div class="product-box">
-                            <div class="product-img">
-                                <div class="text-center">
-                                    <img class="img-fluid" src="{{ asset('storage/'.$product->thumbnail) }}" alt=""
-                                         style="width:100px">
-                                </div>
-                                <div class="product-hover">
-                                    <ul>
-                                        <li>
-                                            <button class="btn" type="button"><i class="icon-plus"></i></button>
-                                        </li>
-                                    </ul>
-                                </div>
+        <div class="row">
+            <h4>{{ $product->productType->title }}</h4>
+            @endif
+            <div class="col-xl-3 col-sm-3 xl-3 mobile-cashier" wire:click="add({{$product->id}})">
+                <div class="card">
+                    <div class="product-box">
+                        <div class="product-img">
+                            <div class="text-center">
+                                <img class="img-fluid" src="{{ asset('storage/'.$product->thumbnail) }}" alt=""
+                                     style="width:100px">
                             </div>
-                            <div class="product-price text-center">
-                                @if($product->discount_state)
-                                    Rp. {{ number_format($product->discount_price) }}
-                                    <del>Rp. {{ number_format($product->price) }}</del>
-                                @else
-                                    Rp. {{ number_format($product->price) }}
-                                @endif
+                            <div class="product-hover">
+                                <ul>
+                                    <li>
+                                        <button class="btn" type="button"><i class="icon-plus"></i></button>
+                                    </li>
+                                </ul>
                             </div>
-                            <div class="product-details text-center" style="margin: 0;padding: 0">
-                                <h6 style="margin: 0">{{ $product->title }}</h6>
-                                <p>{{ $product->description }}</p>
-                            </div>
+                        </div>
+                        <div class="product-price text-center">
+                            @if($product->discount_state)
+                                Rp. {{ number_format($product->discount_price) }}
+                                <del>Rp. {{ number_format($product->price) }}</del>
+                            @else
+                                Rp. {{ number_format($product->price) }}
+                            @endif
+                        </div>
+                        <div class="product-details text-center" style="margin: 0;padding: 0">
+                            <h6 style="margin: 0">{{ $product->title }}</h6>
+                            <p>{{ $product->description }}</p>
                         </div>
                     </div>
                 </div>
+            </div>
             @endforeach
         </div>
         <div class="row">
@@ -135,22 +135,25 @@
                     <x-form.input type="number" title="" placeholder="jumlah pengunjung" model="visitors"/>
                     <div style="text-align: center">
 
-                            <button type="button" class="btn m-1" style="background-color: #9a7160;color: white"
-                                    wire:click="feeOnChange(5000)">5000
-                            </button>
-                            <button type="button" class="btn m-1" style="background-color: #827788;color: white"
-                                    wire:click="feeOnChange(10000)">10000
-                            </button>
-                            <button type="button" class="btn m-1" style="background-color: #6b9281;color: white"
-                                    wire:click="feeOnChange(20000)">20000
-                            </button>
+                        <button type="button" class="btn m-1" style="background-color: #9a7160;color: white"
+                                wire:click="feeOnChange(5000)">5000
+                        </button>
+                        <button type="button" class="btn m-1" style="background-color: #827788;color: white"
+                                wire:click="feeOnChange(10000)">10000
+                        </button>
+                        <button type="button" class="btn m-1" style="background-color: #6b9281;color: white"
+                                wire:click="feeOnChange(20000)">20000
+                        </button>
 
-                            <button type="button" class="btn m-1" style="background-color: #447db0;color: white"
-                                    wire:click="feeOnChange(50000)">50000
-                            </button>
-                            <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
-                                    wire:click="feeOnChange(100000)">100000
-                            </button>
+                        <button type="button" class="btn m-1" style="background-color: #447db0;color: white"
+                                wire:click="feeOnChange(50000)">50000
+                        </button>
+                        <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
+                                wire:click="feeOnChange(100000)">100000
+                        </button>
+                        <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
+                                wire:click="feeOnChange({{$total}})">Uang Pas
+                        </button>
                         <br>
                     </div>
                     <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee"/>
