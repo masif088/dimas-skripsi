@@ -16,8 +16,8 @@
                     <div class="product-box">
                         <div class="product-img">
                             <div class="text-center">
-                                <img class="img-fluid" src="{{ asset('storage/'.$product->thumbnail) }}" alt=""
-                                     style="width:100px">
+                                <img class="img-fluid" src="" alt=""
+                                     style="height:100px;background-color: #2d2d2d">
                             </div>
                             <div class="product-hover">
                                 <ul>
