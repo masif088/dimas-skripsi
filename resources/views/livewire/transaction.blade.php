@@ -15,19 +15,19 @@
             <div class="col-xl-3 col-sm-3 xl-3 mobile-cashier" wire:click="add({{$product->id}})">
                 <div class="card">
                     <div class="product-box">
-                        <div class="product-img">
-                            <div class="text-center">
-                                <img class="img-fluid" src="" alt=""
-                                     style="height:100px;background-color: #2d2d2d">
-                            </div>
-                            <div class="product-hover">
-                                <ul>
-                                    <li>
-                                        <button class="btn" type="button"><i class="icon-plus"></i></button>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+{{--                        <div class="product-img">--}}
+{{--                            <div class="text-center">--}}
+{{--                                <img class="img-fluid" src="" alt=""--}}
+{{--                                     style="height:100px;background-color: #2d2d2d">--}}
+{{--                            </div>--}}
+{{--                            <div class="product-hover">--}}
+{{--                                <ul>--}}
+{{--                                    <li>--}}
+{{--                                        <button class="btn" type="button"><i class="icon-plus"></i></button>--}}
+{{--                                    </li>--}}
+{{--                                </ul>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
                         <div class="product-price text-center">
                             @if($product->discount_state)
                                 Rp. {{ number_format($product->discount_price) }}
