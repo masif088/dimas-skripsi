@@ -13,6 +13,7 @@ use Livewire\Component;
 class Transaction extends Component
 {
     public $products;
+    public $productSearch;
     public $productSold;
     public $orderList = [];
     public $name;
@@ -23,6 +24,7 @@ class Transaction extends Component
     public $optionMethod;
     public $optionReservation;
     public $some;
+    public $query;
     protected $listeners = ["payment" => "payment"];
 
     public function mount()
@@ -62,7 +64,21 @@ class Transaction extends Component
 
     public function render()
     {
+        $this->production();
         return view('livewire.transaction');
+    }
+
+    public function production()
+    {
+        $query = $this->query;
+        if (empty($query))
+        {
+            $this->productSearch =$this->products;
+        }else{
+            $this->productSearch =$this->products->filter(function ($item) use ($query) {
+                return false !== stristr($item->title, $query);
+            });
+        }
     }
 
     public function cancel()
@@ -150,14 +166,14 @@ class Transaction extends Component
         $this->reservation = 'take away';
         $this->paymentMethod = 1;
         $this->visitors = null;
-        $this->fee=null;
+        $this->fee = null;
         $this->emit('notify', [
             'type' => 'primary',
             'title' => $transaction->transaction_code . " dalam waiting list",
         ]);
         $this->emitTo('transaction-active-notification', 'refresh');
-        $url=route('admin.transaction.struck',$transaction->id);
-        $this->emit('redirect:new',$url );
+        $url = route('admin.transaction.struck', $transaction->id);
+        $this->emit('redirect:new', $url);
 //        $this->some= "<script>window.open('".$url."', '_blank')</script>";
 //        return redirect(route('admin.transaction.struck',$transaction->id));
     }

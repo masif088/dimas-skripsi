@@ -1,9 +1,10 @@
 <div class="row second-chart-list third-news-update">
     <div class="col-lg-8 col-sm-8 product-list">
+        <x-form.input title="" placeholder="Pencarian" model="query"/>
         <div class="product-wrapper-grid">
             {{--            <div class="row">--}}
             @php($productType=0)
-            @foreach($products as $product)
+            @foreach($productSearch as $product)
                 @if($productType!=$product->product_type_id)
                     @if($productType!=0)</div>
         @endif
