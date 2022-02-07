@@ -51,9 +51,11 @@ class Transaction extends Component
 
     public function decreaseOrderList($id)
     {
-        $this->orderList[$id] -= 1;
-        if ($this->orderList[$id] == 0) {
-            unset($this->orderList[$id]);
+        if (isset($this->orderList[$id])) {
+            $this->orderList[$id] -= 1;
+            if ($this->orderList[$id] == 0) {
+                unset($this->orderList[$id]);
+            }
         }
     }
 
@@ -71,11 +73,10 @@ class Transaction extends Component
     public function production()
     {
         $query = $this->query;
-        if (empty($query))
-        {
-            $this->productSearch =$this->products;
-        }else{
-            $this->productSearch =$this->products->filter(function ($item) use ($query) {
+        if (empty($query)) {
+            $this->productSearch = $this->products;
+        } else {
+            $this->productSearch = $this->products->filter(function ($item) use ($query) {
                 return false !== stristr($item->title, $query);
             });
         }
