@@ -38,7 +38,11 @@ class TransactionController extends Controller
     }
     public function struck($id){
         $transaction=Transaction::find($id);
-        $height=480+($transaction->transactionDetails->count()*60);//base 420 // 1 item 60px
+        if (config('app.name', 'Laravel')=="Lekker Putar") {
+            $height = 480 + ($transaction->transactionDetails->count() * 60);//base 420 // 1 item 60px
+        }else{
+            $height = 650 + ($transaction->transactionDetails->count() * 120);//base 420 // 1 item 60px
+        }
         $pdf = App::make('dompdf.wrapper');
         $view="pdf-export.struck";
         if (config('app.name', 'Laravel')=="Lekker Putar"){

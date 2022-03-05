@@ -35,11 +35,15 @@ Route::get('/', function () {
 Route::get('/dashboard', function () {
     return redirect(route('admin.dashboard'));
 });
+
 Route::get('/user/profile', function () {
     return redirect(route('profile.show'));
 })->name('profile.show');
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')->group(function () {
+
+
+
     Route::get('dashboard', function () {
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
@@ -99,6 +103,9 @@ GROUP BY date(transactions.created_at)";
     Route::get('transaction/active', [TransactionController::class, 'active'])->name('transaction.active');
     Route::get('transaction/history', [TransactionController::class, 'history'])->name('transaction.history');
     Route::get('transaction/history/{date}', [TransactionController::class, 'historyDetail'])->name('transaction.history-detail');
+    Route::get('transaction/history/month/{month}/year/{year}', function ($month,$year) {
+        return view('pages.transaction.history-list-month',compact('month','year'));
+    });
     Route::get('transaction/struck/{id}',[TransactionController::class,'struck'])->name('transaction.struck');
 
     Route::resource('stock', StockGoodController::class)->only('index', 'create', 'edit');

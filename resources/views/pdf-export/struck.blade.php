@@ -160,8 +160,66 @@
     <p style="font-size: 17px">
         Terima kasih telah membeli produk kami. <br>
         Kami tersedia dalam gofood dan grabfood.<br>
-        Kritik dan saran hubungi 082335456722
+        Kritik dan saran hubungi 082335456722 <br>
+        Wifi <br>
+        Imaji Sociopreneur : imaji212 <br>
+        sociopreneur : imaji2022
     </p>
 </div>
+<br>
+<p style="text-align: center">Kitchen Staff</p>
+<p>-------------------------------------------</p>
+<div style="font-size: 20px;padding: 0">
+    <table style="">
+        <tr>
+            <td>No</td>
+            <td>:</td>
+            <td>{{ $transaction->transaction_code }}</td>
+        </tr>
+        <tr>
+            <td>Tgl</td>
+            <td>:</td>
+            <td>{{ $transaction->created_at->format('d-m-Y') }}</td>
+        </tr>
+        <tr>
+            <td>Jam</td>
+            <td>:</td>
+            <td>{{ $transaction->created_at->format('h:i') }}</td>
+        </tr>
+        <tr>
+            <td>Kasir</td>
+            <td>:</td>
+            <td>{{ $transaction->user->name }}</td>
+        </tr>
+        <tr>
+            <td>Customer</td>
+            <td>:</td>
+            <td>{{ $transaction->name }}</td>
+        </tr>
+        <tr>
+            <td>Keterangan</td>
+            <td>:</td>
+            <td><br><br><br></td>
+        </tr>
+    </table>
+</div>
+
+<div style="font-size: 30px;padding: 0">
+
+    <div>
+        <table style="width: 100%;">
+            @php($total=0)
+            @foreach($transaction->transactionDetails as $td)
+                <tr>
+                    <td >{{ $td->product->title }}</td>
+                    <td style="">{{ $td->amount }}</td>
+                </tr>
+
+            @endforeach
+
+        </table>
+    </div>
+</div>
+
 </body>
 </html>

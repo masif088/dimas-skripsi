@@ -79,7 +79,7 @@
     </div>
 </div>
 <script>
-    document.addEventListener('livewire:load', function () {
+    document.addEventListener('DOMContentLoaded', () => {
         // currently sale
         var options = {
             series: [{
