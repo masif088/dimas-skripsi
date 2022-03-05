@@ -45,8 +45,11 @@ class TransactionActive extends Component
         $this->transactionDetail=null;
     }
     public function print(){
+//        $url = route('admin.transaction.struck-kitchen', $this->transactionDetail->id);
+//        $this->emit('redirect:new', $url);
         $url=route('admin.transaction.struck',$this->transactionDetail->id);
         $this->emit('redirect:new',$url );
+
     }
 
     public function render()

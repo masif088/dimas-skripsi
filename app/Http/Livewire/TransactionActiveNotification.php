@@ -40,8 +40,11 @@ class TransactionActiveNotification extends Component
     }
     public function print($id)
     {
-        $url=route('admin.transaction.struck',$id);
-        $this->emit('redirect:new',$url );
+        $url = route('admin.transaction.struck', $id);
+        $this->emit('redirect:new', $url);
+//        $url = route('admin.transaction.struck-kitchen', $id);
+//        $this->emit('redirect:new', $url);
+
     }
 
     public function refresh()

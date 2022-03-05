@@ -173,10 +173,11 @@ class Transaction extends Component
             'title' => $transaction->transaction_code . " dalam waiting list",
         ]);
         $this->emitTo('transaction-active-notification', 'refresh');
+
         $url = route('admin.transaction.struck', $transaction->id);
         $this->emit('redirect:new', $url);
-        $url = route('admin.transaction.struck-kitchen', $transaction->id);
-        $this->emit('redirect:new', $url);
+//        $url = route('admin.transaction.struck-kitchen', $transaction->id);
+//        $this->emit('redirect:new', $url);
 //        $this->some= "<script>window.open('".$url."', '_blank')</script>";
 //        return redirect(route('admin.transaction.struck',$transaction->id));
     }
