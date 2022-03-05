@@ -63,7 +63,9 @@ class Product extends Component
     public function create()
     {
         $this->validate();
-        $this->imageUpload();
+        if ($this->thumbnail != null) {
+            $this->imageUpload();
+        }
         \App\Models\Product::create($this->data);
         $this->emit('notify', [
             'type' => 'success',
