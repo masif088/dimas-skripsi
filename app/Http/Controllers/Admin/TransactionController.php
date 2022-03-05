@@ -41,7 +41,7 @@ class TransactionController extends Controller
         if (config('app.name', 'Laravel')=="Lekker Putar") {
             $height = 480 + ($transaction->transactionDetails->count() * 60);//base 420 // 1 item 60px
         }else{
-            $height = 650 + ($transaction->transactionDetails->count() * 120);//base 420 // 1 item 60px
+            $height = 700 + ($transaction->transactionDetails->count() * 120);//base 420 // 1 item 60px
         }
         $pdf = App::make('dompdf.wrapper');
         $view="pdf-export.struck";
