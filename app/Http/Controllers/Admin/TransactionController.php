@@ -11,16 +11,23 @@ use Illuminate\Support\Facades\App;
 
 class TransactionController extends Controller
 {
-    public function index(){
+    public function index()
+    {
         return view('pages.transaction.index');
     }
-    public function active(){
+
+    public function active()
+    {
         return view('pages.transaction.active');
     }
-    public function history(){
+
+    public function history()
+    {
         return view('pages.transaction.history-list');
     }
-    public function historyDetail($date) {
+
+    public function historyDetail($date)
+    {
         if ($date == "today") {
             $date = Carbon::today();
         } else {
@@ -36,19 +43,32 @@ class TransactionController extends Controller
         }
         return view('pages.transaction.history', compact('date'));
     }
-    public function struck($id){
-        $transaction=Transaction::find($id);
-        if (config('app.name', 'Laravel')=="Lekker Putar") {
-            $height = 480 + ($transaction->transactionDetails->count() * 60);//base 420 // 1 item 60px
-        }else{
-            $height = 700 + ($transaction->transactionDetails->count() * 120);//base 420 // 1 item 60px
-        }
+
+    public function struck($id)
+    {
+        $transaction = Transaction::find($id);
+
+        $height = 480 + ($transaction->transactionDetails->count() * 60);//base 420 // 1 item 60px
+
         $pdf = App::make('dompdf.wrapper');
-        $view="pdf-export.struck";
-        if (config('app.name', 'Laravel')=="Lekker Putar"){
-            $view="pdf-export.struck-lekker";
+        $view = "pdf-export.struck";
+        if (config('app.name', 'Laravel') == "Lekker Putar") {
+            $view = "pdf-export.struck-lekker";
         }
-        $pdf->loadView($view, compact('transaction'))->setPaper([0, 0, 250, $height]);;
-        return $pdf->stream($transaction->transaction_code.".pdf");
+        $pdf->loadView($view, compact('transaction'))->setPaper([0, 0, 250, $height]);
+        return $pdf->stream($transaction->transaction_code . ".pdf");
+    }
+
+    public function struckKitchen($id)
+    {
+        $transaction = Transaction::find($id);
+        $height = 400 + ($transaction->transactionDetails->count() * 130);//base 420 // 1 item 60px
+        $pdf = App::make('dompdf.wrapper');
+        $view = "pdf-export.struck-kitchen";
+//        if (config('app.name', 'Laravel') == "Lekker Putar") {
+//            $view = "pdf-export.struck-lekker";
+//        }
+        $pdf->loadView($view, compact('transaction'))->setPaper([0, 0, 250, $height]);
+        return $pdf->stream($transaction->transaction_code . "-kitchen.pdf");
     }
 }

@@ -107,6 +107,7 @@ GROUP BY date(transactions.created_at)";
         return view('pages.transaction.history-list-month',compact('month','year'));
     });
     Route::get('transaction/struck/{id}',[TransactionController::class,'struck'])->name('transaction.struck');
+    Route::get('transaction/struck-kitchen/{id}',[TransactionController::class,'struckKitchen'])->name('transaction.struck-kitchen');
 
     Route::resource('stock', StockGoodController::class)->only('index', 'create', 'edit');
     Route::resource('supplier', SupplierController::class)->only('index', 'create', 'edit', 'destroy');
