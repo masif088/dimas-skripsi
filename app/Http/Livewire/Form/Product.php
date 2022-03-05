@@ -112,7 +112,7 @@ class Product extends Component
                 'data.product_company_id' => 'required',
                 'data.product_status_id' => 'required',
                 'data.price' => 'required',
-                'thumbnail' => 'required'
+//                'thumbnail' => 'required'
             ];
         }else{
             return [
