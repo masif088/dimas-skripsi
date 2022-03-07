@@ -68,6 +68,12 @@
                         </li>
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title link-nav"
+                               href="{{ route('admin.transaction.history') }}">
+                                <i class="fas fa-history"></i><span> Riwayat Bulanan</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title link-nav"
                                href="{{ route('admin.product-type.index') }}">
                                 <i class="fa fa-product-hunt"></i><span> Jenis Produk</span>
                             </a>

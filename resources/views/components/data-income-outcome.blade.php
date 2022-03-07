@@ -1,8 +1,8 @@
 @props([
 'id' => 'some',
 'title1' => 'no title', 'value1'=>'0',
-'title2' => 'no title', 'value2'=>'0',
-'title3' => 'no title', 'value3'=>'0',
+'title2', 'value2'=>'0',
+'title3', 'value3'=>'0',
 'btn1' => 'PDF',
 'btnColor1' => 'btn-danger',
 'btn2' => 'csv',
@@ -25,18 +25,24 @@
                             <h5>DATA</h5>
                             <p class="font-roboto">Pemasukan - Pengeluaran</p>
                         </div>
+                        @if($title1!=null)
                         <div class="col-xl-12 p-0 left_side_earning">
                             <h5>Rp. {{ number_format($value1) }} </h5>
                             <p class="font-roboto">{{ $title1 }}</p>
                         </div>
+                        @endif
+                        @isset($title2)
                         <div class="col-xl-12 p-0 left_side_earning">
                             <h5>Rp. {{ number_format($value2) }}</h5>
                             <p class="font-roboto">{{$title2}}</p>
                         </div>
+                        @endisset
+                        @isset($title3)
                         <div class="col-xl-12 p-0 left_side_earning">
                             <h5>{{ $value3 }}</h5>
                             <p class="font-roboto">{{ $title3 }}</p>
                         </div>
+                        @endif
 {{--                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link1}}" class="btn {{$btnColor1}}">{{$btn1}}</a></div>--}}
 {{--                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link2}}" class="btn {{$btnColor2}}">{{$btn2}}</a></div>--}}
                     </div>
