@@ -60,6 +60,7 @@
                     </tr>
                     </thead>
                     <tbody>
+                    @php($total=0)
                     @php($count=1)
                     @foreach($productAmounts as $key=>$pa)
                         <tr>
