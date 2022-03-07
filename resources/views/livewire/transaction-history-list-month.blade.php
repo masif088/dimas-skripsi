@@ -70,7 +70,7 @@
                             <td>{{ number_format($pa) }}</td>
                             <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
                             <td>Rp. {{ number_format($productTotals[$key]) }}</td>
-                            @php($total+=$productTotals[$key])
+
                         </tr>
                     @endforeach
                     <tr>
