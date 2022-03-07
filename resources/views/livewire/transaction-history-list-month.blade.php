@@ -69,11 +69,12 @@
                             <td>{{ number_format($pa) }}</td>
                             <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
                             <td>Rp. {{ number_format($productTotals[$key]) }}</td>
+                            @php($total+=$productTotals[$key])
                         </tr>
                     @endforeach
                     <tr>
                         <td colspan="5">Total :</td>
-                        <td>Rp. {{ number_format(array_sum($productTotals)) }}</td>
+                        <td>Rp. {{ number_format($total) }}</td>
                     </tr>
                     </tbody>
                 </table>
