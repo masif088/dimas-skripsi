@@ -60,7 +60,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    @php($total=0)
+
                     @php($count=1)
                     @foreach($productAmounts as $key=>$pa)
                         <tr>
@@ -75,7 +75,7 @@
                     @endforeach
                     <tr>
                         <td colspan="5">Total :</td>
-                        <td>Rp. {{ number_format($total) }}</td>
+                        <td>Rp. {{ number_format(array_sum($productTotals)) }}</td>
                     </tr>
                     </tbody>
                 </table>
@@ -105,6 +105,7 @@
                         </tr>
                         </thead>
                         <tbody>
+                        @php($total=0)
                         @php($count=1)
                         @foreach($productAmounts as $key=>$pa)
                             @if($products->find($key)->product_company_id==$pc->id)
@@ -121,7 +122,7 @@
                         @endforeach
                         <tr>
                             <td colspan="5">Total :</td>
-                            <td>Rp. {{ number_format(array_sum($productTotals)) }}</td>
+                            <td>Rp. {{ number_format(array_sum()) }}</td>
                         </tr>
                         </tbody>
                     </table>
