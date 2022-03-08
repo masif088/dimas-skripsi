@@ -131,6 +131,68 @@ class Transaction extends Component
             'method' => 'payment']);
     }
 
+    public function prosesIm()
+    {
+        if ($this->name == null) {
+            $this->name = 'guest';
+        }
+        if ($this->visitors == null or $this->visitors == 0) {
+            $this->visitors = 1;
+        }
+        $total = 0;
+        $discount = 0;
+        foreach ($this->orderList as $order => $value) {
+            $total += $this->roundUpToAny($this->products->find($order)->price / 130) * 100 * $value;
+            $discount += ($this->products->find($order)->price - $this->roundUpToAny($this->products->find($order)->price / 130) * 100) * $value;
+        }
+
+        $this->emit('swal:confirm', ['title' => 'Periksa kembali',
+            'icon' => 'info',
+            'confirmText' => 'Proses',
+            'text' => 'pesanan atas nama : ' . $this->name . '<br>total : Rp.' . number_format($total) . '<br>total potongan : Rp.' . number_format($discount) . '<br>jumlah pengunjung : ' . $this->visitors,
+            'method' => 'paymentIm']);
+    }
+
+    public function roundUpToAny($n, $x = 5)
+    {
+        return (ceil($n) % $x === 0) ? ceil($n) : round(($n + $x / 2) / $x) * $x;
+    }
+
+    public function paymentIm()
+    {
+        $transaction = \App\Models\Transaction::create([
+            'name' => $this->name,
+            'transaction_code' => \App\Models\Transaction::getCode(),
+            'user_id' => auth()->id(),
+            'status_order_id' => 1,
+            'payment_method_id' => $this->paymentMethod,
+            'reservation' => $this->reservation,
+            'visitors' => $this->visitors,
+            'fee' => $this->fee
+        ]);
+        foreach ($this->orderList as $order => $value) {
+            TransactionDetail::create([
+                'product_id' => $order,
+                'transaction_id' => $transaction->id,
+                'price' => $this->roundUpToAny($this->products->find($order)->price / 130) * 100,
+                'amount' => $value
+            ]);
+        }
+        $this->orderList = [];
+        $this->name = '';
+        $this->reservation = 'take away';
+        $this->paymentMethod = 1;
+        $this->visitors = null;
+        $this->fee = null;
+        $this->emit('notify', [
+            'type' => 'primary',
+            'title' => $transaction->transaction_code . " dalam waiting list",
+        ]);
+        $this->emitTo('transaction-active-notification', 'refresh');
+        $url = route('admin.transaction.struck', $transaction->id);
+        $this->emit('redirect:new', $url);
+    }
+
     public function payment()
     {
         $transaction = \App\Models\Transaction::create([
