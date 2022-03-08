@@ -25,7 +25,7 @@ class Transaction extends Component
     public $optionReservation;
     public $some;
     public $query;
-    protected $listeners = ["payment" => "payment"];
+    protected $listeners = ["payment" => "payment","paymentIm" => "paymentIm"];
 
     public function mount()
     {
@@ -160,6 +160,7 @@ class Transaction extends Component
 
     public function paymentIm()
     {
+
         $transaction = \App\Models\Transaction::create([
             'name' => $this->name,
             'transaction_code' => \App\Models\Transaction::getCode(),
