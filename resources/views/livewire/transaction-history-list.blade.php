@@ -11,7 +11,7 @@
                     @endphp
                     @if($month!=$monthHistory[1])
                         @if($month!=0)
-                            {{ '</div>' }}
+                            {!! '</div>' !!}
                         @endif
                         @php
                             $month=$monthHistory[1];
