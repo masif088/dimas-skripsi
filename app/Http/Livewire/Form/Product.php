@@ -42,7 +42,8 @@ class Product extends Component
             'thumbnail' => '',
             'description' => '',
             'discount_state' => 0,
-            'discount_price' => 0
+            'discount_price' => 0,
+            'product_code' => '',
         ];
         if ($this->dataId != null) {
             $data = \App\Models\Product::find($this->dataId);
@@ -51,6 +52,7 @@ class Product extends Component
                 'product_type_id' => $data->product_type_id,
                 'product_company_id' => $data->product_company_id,
                 'product_status_id' => $data->product_status_id,
+                'product_code'=>$data->product_code,
                 'price' => $data->price,
                 'thumbnail' => $data->thumbnail,
                 'description' => $data->description,

@@ -31,6 +31,7 @@ class TransactionHistoryList extends Component
             $hl = json_decode(json_encode($hl), true);
             array_push($this->historyList, $hl);
         }
+        $this->historyList = array_reverse($this->historyList);
     }
 
     public function getTurnover()
@@ -82,6 +83,7 @@ class TransactionHistoryList extends Component
         $this->datas['total'] = $total;
         $this->datas['amount'] = $amount;
         $this->datas['product'] = $product;
+        $this->datas['visitor']=$transactions->sum('visitors');
     }
 
     public function render()

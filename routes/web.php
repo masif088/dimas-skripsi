@@ -105,7 +105,7 @@ GROUP BY date(transactions.created_at)";
     Route::get('transaction/history/{date}', [TransactionController::class, 'historyDetail'])->name('transaction.history-detail');
     Route::get('transaction/history/month/{month}/year/{year}', function ($month,$year) {
         return view('pages.transaction.history-list-month',compact('month','year'));
-    });
+    })->name('transaction.history-detail-month');
     Route::get('transaction/struck/{id}',[TransactionController::class,'struck'])->name('transaction.struck');
     Route::get('transaction/struck-kitchen/{id}',[TransactionController::class,'struckKitchen'])->name('transaction.struck-kitchen');
 

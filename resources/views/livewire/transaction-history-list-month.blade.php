@@ -1,50 +1,106 @@
 <div class="row">
-    {{--    @php($month=['-','Januari','Pebruari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'])--}}
-    {{--    <div class="col-lg-2">--}}
-    {{--        <div class="row second-chart-list third-news-update">--}}
-    {{--            <div class="product-list">--}}
-    {{--                <div class="product-wrapper-grid">--}}
-    {{--                    <div class="row">--}}
-    {{--                        @foreach($historyList as $key=>$history)--}}
-    {{--                            <div class="card" wire:click="setDetail({{$key}})">--}}
-    {{--                                <div class="card-body" style="padding: 10px">--}}
-    {{--                                    <div>{{ $month[$history['monthList']].' - '.$history['yearList'] }}</div>--}}
-
-    {{--                                </div>--}}
-    {{--                            </div>--}}
-    {{--                        @endforeach--}}
-    {{--                    </div>--}}
-    {{--                </div>--}}
-    {{--            </div>--}}
-    {{--        </div>--}}
-    {{--    </div>--}}
     <div class="col-lg-12">
-
         <x-data-income-outcome
             componentId="some"
             title1="Pemasukan bulan ini"
             :value1="$totalMonth"
-            {{--            title2="Total minggu ini"--}}
-            {{--            :value2="$totalWeek"--}}
-            {{--            title3="Capain bulan ini"--}}
-            {{--            value3="90%"--}}
             btn1="PDF"
             btnColor1="btn-danger"
             btn2="CSV"
             btnColor2="btn-success"
             link1="#"
             link2="#"
-            {{--                    data1="[]"--}}
-            {{--                    dataTitle1="Pengeluaran"--}}
             :data2="$income"
             dataTitle2="Pemasukkan"
             :categories="$category"
         />
-
     </div>
     <div>
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="padding: 10px">
+                <h1>Statistik Pengunjung</h1>
+            </div>
+            <div class="card-body table-responsive">
+                Total Pengunjung : {{ number_format(($visitorCount),0,',','.')}}
+                <br>
+                Total Transaksi : {{ number_format(($transactionCount),0,',','.')}}
+                <br>
+                Total Omset : Rp. {{ number_format(array_sum($income),0,',','.')}}
+                <br>
+                Total Penjualan :
+                <br>
+                <br>
+                <b>BERDASARKAN JENIS</b>
+                <br>
+                @php
+                    foreach ($type as $t){
+                        if (isset($datas['product']['type'][$t->id])) {
+                            arsort($datas['product']['type'][$t->id]);
+                        }
+                    }
+                    foreach ($company as $t){
+                        if (isset($datas['product']['company'][$t->id])) {
+                            arsort($datas['product']['company'][$t->id]);
+                        }
+                    }
+                @endphp
+                <div class="row">
+                    @foreach($type as $t)
+                        @isset($datas['product']['type'][$t->id])
+                            <div class="col-4">
+                                <b>Favorit {{$t->title}}:</b> <br>
+                                1. {{ \App\Models\Product::find(array_keys($datas['product']['type'][$t->id])[0])->title }}
+                                ({{ $productAmounts[array_keys($datas['product']['type'][$t->id])[0]] }})
+                                <br>
+                                @isset(array_keys($datas['product']['type'][$t->id])[1])
+                                    2. {{ \App\Models\Product::find(array_keys($datas['product']['type'][$t->id])[1])->title }}
+                                    ({{ $productAmounts[array_keys($datas['product']['type'][$t->id])[1]] }})
+                                    <br>
+                                @endif
+                                <br>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+
+                <b>BERDASARKAN USAHA</b>
+                <br>
+                <div class="row">
+                    @foreach($company as $t)
+                        @isset($datas['product']['company'][$t->id])
+                            <div class="col-4">
+                                <b>Favorit {{$t->title}}:</b> <br>
+                                1. {{ \App\Models\Product::find(array_keys($datas['product']['company'][$t->id])[0])->title }}
+                                ({{ $productAmounts[array_keys($datas['product']['company'][$t->id])[0]] }})
+                                <br>
+                                @isset(array_keys($datas['product']['company'][$t->id])[1])
+                                    2. {{ \App\Models\Product::find(array_keys($datas['product']['company'][$t->id])[1])->title }}
+                                ({{ $productAmounts[array_keys($datas['product']['company'][$t->id])[1]] }})
+
+                                    <br>
+                                @endif
+                                <br>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                <br>
+                <b>OMZET</b> <br>
+                @foreach($method as $t)
+                    @isset($datas['product']['payment_method'][$t->id])
+                        <b>{{$t->title}}</b>
+                        : Rp. {{ number_format($datas['product']['payment_method'][$t->id],0,',','.') }}
+                        <br>
+                    @endif
+                @endforeach
+                <b>TOTAL : Rp. {{ number_format(array_sum($datas['product']['payment_method']),0,',','.') }}</b>
+                <br>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="card">
+            <div class="card-header" style="padding: 10px">
                 <h1>Keseluruhan</h1>
             </div>
             <div class="card-body table-responsive">
@@ -67,9 +123,9 @@
                             <td>{{ $count++ }}</td>
                             <td>{{ $products->find($key)->product_code }}</td>
                             <td>{{ $products->find($key)->title }}</td>
-                            <td>{{ number_format($pa) }}</td>
-                            <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
-                            <td>Rp. {{ number_format($productTotals[$key]) }}</td>
+                            <td>{{ number_format($pa,0,',','.') }}</td>
+                            <td>Rp. {{ number_format($productTotals[$key]/$pa,0,',','.') }}</td>
+                            <td>Rp. {{ number_format($productTotals[$key],0,',','.') }}</td>
 
                         </tr>
                     @endforeach
@@ -79,17 +135,13 @@
                     </tr>
                     </tbody>
                 </table>
-
-            </div>
-            <div id="table_pagination" class="py-3">
-
             </div>
         </div>
     </div>
     @foreach(\App\Models\ProductCompany::get() as $pc)
         <div>
             <div class="card">
-                <div class="card-header">
+                <div class="card-header" style="padding: 10px">
                     <h1>{{$pc->title}}</h1>
                 </div>
                 <div class="card-body table-responsive">
@@ -109,27 +161,24 @@
                         @php($count=1)
                         @foreach($productAmounts as $key=>$pa)
                             @if($products->find($key)->product_company_id==$pc->id)
-                            <tr>
+                                <tr>
 
-                                <td>{{ $count++ }}</td>
-                                <td>{{ $products->find($key)->product_code }}</td>
-                                <td>{{ $products->find($key)->title }}</td>
-                                <td>{{ number_format($pa) }}</td>
-                                <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
-                                <td>Rp. {{ number_format($productTotals[$key]) }}</td>
-                            </tr>
+                                    <td>{{ $count++ }}</td>
+                                    <td>{{ $products->find($key)->product_code }}</td>
+                                    <td>{{ $products->find($key)->title }}</td>
+                                    <td>{{ number_format($pa) }}</td>
+                                    <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
+                                    <td>Rp. {{ number_format($productTotals[$key]) }}</td>
+                                    @php($total+=$productTotals[$key])
+                                </tr>
                             @endif
                         @endforeach
                         <tr>
                             <td colspan="5">Total :</td>
-                            <td>Rp. {{ number_format(array_sum()) }}</td>
+                            <td>Rp. {{ number_format($total) }}</td>
                         </tr>
                         </tbody>
                     </table>
-
-                </div>
-                <div id="table_pagination" class="py-3">
-
                 </div>
             </div>
         </div>

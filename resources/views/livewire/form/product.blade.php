@@ -1,6 +1,7 @@
 <div>
     <form wire:submit.prevent="{{$action}}">
         <x-form.input type="text" model="data.title" title="Nama Produk"/>
+        <x-form.input type="text" model="data.product_code" title="Kode Produk"/>
         <x-form.input type="number" model="data.price" title="Harga Produk"/>
         <x-form.input type="number" model="data.discount_price" title="Harga diskon"/>
         <x-form.select :options="$optionDiscount" :selected="$data['discount_state']" model="data.discount_state" title="Diskon" defer="true"/>

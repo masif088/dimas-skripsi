@@ -63,13 +63,7 @@
                         <li class="sidebar-list">
                             <a class="sidebar-link sidebar-title link-nav"
                                href="{{ route('admin.transaction.history') }}">
-                                <i class="fas fa-history"></i><span> Riwayat harian</span>
-                            </a>
-                        </li>
-                        <li class="sidebar-list">
-                            <a class="sidebar-link sidebar-title link-nav"
-                               href="{{ route('admin.transaction.history') }}">
-                                <i class="fas fa-history"></i><span> Riwayat Bulanan</span>
+                                <i class="fas fa-history"></i><span> Riwayat</span>
                             </a>
                         </li>
                         <li class="sidebar-list">
