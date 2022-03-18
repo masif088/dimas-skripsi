@@ -68,7 +68,7 @@
         @media (min-width:800px) {
             .product-list {
                 overflow-y: scroll;
-                height: 800px;
+                height: 1200px;
             }
 
             .transaction-list {

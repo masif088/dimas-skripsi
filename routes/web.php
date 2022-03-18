@@ -42,37 +42,34 @@ Route::get('/user/profile', function () {
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')->group(function () {
 
-
-
     Route::get('dashboard', function () {
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');
         $weekEndDate = $now->endOfWeek()->format('Y-m-d H:i');
-        $totalDay=0;
-        $day=Transaction::whereStatusOrderId(2)->whereDate('created_at',Carbon::now())->get();
-        foreach ($day as $d){
-            foreach ($d->transactionDetails as $td){
-                $totalDay+=$td->amount*$td->price;
+        $totalDay = 0;
+        $day = Transaction::whereStatusOrderId(2)->whereDate('created_at', Carbon::now())->get();
+        foreach ($day as $d) {
+            foreach ($d->transactionDetails as $td) {
+                $totalDay += $td->amount * $td->price;
             }
         }
-        $totalWeek=0;
-        $week=Transaction::whereStatusOrderId(2)->whereBetween('created_at', [$weekStartDate, $weekEndDate])->get();
-        foreach ($week as $d){
-            foreach ($d->transactionDetails as $td){
-                $totalWeek+=$td->amount*$td->price;
+        $totalWeek = 0;
+        $week = Transaction::whereStatusOrderId(2)->whereBetween('created_at', [$weekStartDate, $weekEndDate])->get();
+        foreach ($week as $d) {
+            foreach ($d->transactionDetails as $td) {
+                $totalWeek += $td->amount * $td->price;
             }
         }
-        $totalMonth=0;
-        $monthly=Transaction::whereStatusOrderId(2)->whereMonth('created_at',Carbon::now())->get();
-//dd($monthly);
-        foreach ($monthly as $d){
-            foreach ($d->transactionDetails as $td){
-                $totalMonth+=$td->amount*$td->price;
+        $totalMonth = 0;
+        $monthly = Transaction::whereStatusOrderId(2)->whereMonth('created_at', Carbon::now())->get();
+
+        foreach ($monthly as $d) {
+            foreach ($d->transactionDetails as $td) {
+                $totalMonth += $td->amount * $td->price;
             }
         }
-//        dd(Carbon::now());
-        $month=date('n');
-        $query="
+        $month = date('n');
+        $query = "
 SELECT date(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total
 FROM transactions
@@ -80,34 +77,34 @@ JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE month(transactions.created_at)=$month and
  transactions.status_order_id=2
 GROUP BY date(transactions.created_at)";
-        $g= DB::select(DB::raw($query));
-        $income=[];
+        $g = DB::select(DB::raw($query));
+        $income = [];
         $now = Carbon::now();
-        $start    = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
-        $end      = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
-//        dd($start);
+        $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
+        $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
+
         $interval = DateInterval::createFromDateString('1 day');
-        $period   = new DatePeriod($start, $interval, $end);
-        $category=[];
+        $period = new DatePeriod($start, $interval, $end);
+        $category = [];
         foreach ($period as $dt) {
-            $income[$dt->format("Y-m-d")]=0;
-            array_push($category,$dt->format("Y-m-d"));
+            $income[$dt->format("Y-m-d")] = 0;
+            array_push($category, $dt->format("Y-m-d"));
         }
-        foreach ($g as $g1){
-            $income[$g1->dateList]=$g1->total;
+        foreach ($g as $g1) {
+            $income[$g1->dateList] = $g1->total;
         }
-        return view('pages.dashboard.index',compact('totalDay','totalMonth','totalWeek','category','income'));
+        return view('pages.dashboard.index', compact('totalDay', 'totalMonth', 'totalWeek', 'category', 'income'));
     })->name('dashboard');
 
     Route::get('transaction', [TransactionController::class, 'index'])->name('transaction.index');
     Route::get('transaction/active', [TransactionController::class, 'active'])->name('transaction.active');
     Route::get('transaction/history', [TransactionController::class, 'history'])->name('transaction.history');
     Route::get('transaction/history/{date}', [TransactionController::class, 'historyDetail'])->name('transaction.history-detail');
-    Route::get('transaction/history/month/{month}/year/{year}', function ($month,$year) {
-        return view('pages.transaction.history-list-month',compact('month','year'));
+    Route::get('transaction/history/month/{month}/year/{year}', function ($month, $year) {
+        return view('pages.transaction.history-list-month', compact('month', 'year'));
     })->name('transaction.history-detail-month');
-    Route::get('transaction/struck/{id}',[TransactionController::class,'struck'])->name('transaction.struck');
-    Route::get('transaction/struck-kitchen/{id}',[TransactionController::class,'struckKitchen'])->name('transaction.struck-kitchen');
+    Route::get('transaction/struck/{id}', [TransactionController::class, 'struck'])->name('transaction.struck');
+    Route::get('transaction/struck-kitchen/{id}', [TransactionController::class, 'struckKitchen'])->name('transaction.struck-kitchen');
 
     Route::resource('stock', StockGoodController::class)->only('index', 'create', 'edit');
     Route::resource('supplier', SupplierController::class)->only('index', 'create', 'edit', 'destroy');

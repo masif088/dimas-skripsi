@@ -1,8 +1,9 @@
 <x-admin>
     <x-slot name="title">
-        Kasir
+        Dashboard
     </x-slot>
     <div>
+        @if (auth()->user()->role==1)
         <div class="container-fluid">
             <div class="row second-chart-list third-news-update">
                 <div class="col-sm-6 col-xl-4 col-lg-6">
@@ -44,6 +45,6 @@
             </div>
 
         </div>
-
+        @endif
     </div>
 </x-admin>

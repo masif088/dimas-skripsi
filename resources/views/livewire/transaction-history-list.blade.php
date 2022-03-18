@@ -17,7 +17,8 @@
                             $month=$monthHistory[1];
                         @endphp
                         {!! '<div class="row">' !!}
-                            <a href="{{ route('admin.transaction.history-detail-month',[$monthHistory[1],$monthHistory[0]]) }}" class="col-12" style="padding-right: 5px">
+                            <a href="{{ route('admin.transaction.history-detail-month',[$monthHistory[1],$monthHistory[0]]) }}"
+                               class="col-12" style="padding-right: 5px">
                                 <div class="card" style="" wire:click="setDetail({{$key}})">
                                     <div class="card-body" style="padding: 10px; text-align: center">
                                         <div>{{ $monthHistory[1] }} -  {{ $monthHistory[0] }}</div>
@@ -33,7 +34,6 @@
                         </div>
                     </div>
                 @endforeach
-
         </div>
     </div>
 </div>

@@ -25,7 +25,8 @@ class Transaction extends Component
     public $optionReservation;
     public $some;
     public $query;
-    protected $listeners = ["payment" => "payment","paymentIm" => "paymentIm"];
+    public $t;
+    protected $listeners = ["payment" => "payment", "paymentIm" => "paymentIm"];
 
     public function mount()
     {
@@ -124,6 +125,7 @@ class Transaction extends Component
                 $total += $this->products->find($order)->price * $value;
             }
         }
+        $this->t = $total;
         $this->emit('swal:confirm', ['title' => 'Periksa kembali',
             'icon' => 'info',
             'confirmText' => 'Proses',
@@ -160,7 +162,9 @@ class Transaction extends Component
 
     public function paymentIm()
     {
-
+        if ($this->fee == null) {
+            $this->fee = $this->t;
+        }
         $transaction = \App\Models\Transaction::create([
             'name' => $this->name,
             'transaction_code' => \App\Models\Transaction::getCode(),
@@ -196,6 +200,9 @@ class Transaction extends Component
 
     public function payment()
     {
+        if ($this->fee == null) {
+            $this->fee = $this->t;
+        }
         $transaction = \App\Models\Transaction::create([
             'name' => $this->name,
             'transaction_code' => \App\Models\Transaction::getCode(),
