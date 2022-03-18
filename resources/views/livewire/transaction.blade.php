@@ -181,13 +181,13 @@
             {{--                </button>--}}
             {{--            </div>--}}
             <div class="col-lg-12 p-1">
-                <button class="btn btn-primary" style="width: 100%" @if($orderList==null and $total<=$fee) disabled
+                <button class="btn btn-primary" style="width: 100%" @if($orderList==null or $total<=$fee) disabled
                         @endif wire:click="proses()">
                     Proses
                 </button>
             </div>
             <div class="col-lg-12 p-1">
-                <button class="btn btn-primary" style="width: 100%" @if($orderList==null and $total<=$fee) disabled
+                <button class="btn btn-primary" style="width: 100%" @if($orderList==null or $total<=$fee) disabled
                         @endif wire:click="prosesIm()">
                     Proses Karyawan
                 </button>
