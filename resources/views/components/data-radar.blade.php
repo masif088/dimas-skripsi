@@ -58,7 +58,7 @@
                 width: 3,
                 curve: 'smooth',
             },
-            labels: ['','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             plotOptions: {
                 radar: {
                     size: 140,
