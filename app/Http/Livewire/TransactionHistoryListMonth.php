@@ -161,6 +161,7 @@ group BY DAYOFWEEK(created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
         $w=0;
+        dd($dow);
         foreach ($dow as $d) {
             if ($w!=$d->weeks){
                 if ($w!=0){
