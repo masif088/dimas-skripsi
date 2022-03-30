@@ -41,7 +41,6 @@ Route::get('/user/profile', function () {
 })->name('profile.show');
 Route::post('/summernote', [SupportController::class, 'upload'])->name('summernote');
 Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')->group(function () {
-
     Route::get('dashboard', function () {
         $now = Carbon::now();
         $weekStartDate = $now->startOfWeek()->format('Y-m-d H:i');

@@ -15,6 +15,7 @@
             :categories="$category"
         />
     </div>
+    <x-data-radar title="Keuangan" :datas="$dayOfWeek"/>
     <div>
         <div class="card">
             <div class="card-header" style="padding: 10px">
@@ -75,7 +76,7 @@
                                 <br>
                                 @isset(array_keys($datas['product']['company'][$t->id])[1])
                                     2. {{ \App\Models\Product::find(array_keys($datas['product']['company'][$t->id])[1])->title }}
-                                ({{ $productAmounts[array_keys($datas['product']['company'][$t->id])[1]] }})
+                                    ({{ $productAmounts[array_keys($datas['product']['company'][$t->id])[1]] }})
 
                                     <br>
                                 @endif

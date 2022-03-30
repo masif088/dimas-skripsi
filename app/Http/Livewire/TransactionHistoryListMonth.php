@@ -36,6 +36,8 @@ class TransactionHistoryListMonth extends Component
     public $visitorCount;
     public $tdactionCount;
 
+    public $dayOfWeek;
+
     public function mount()
     {
         $this->method = PaymentMethod::get();
@@ -83,6 +85,32 @@ GROUP BY date(transactions.created_at)";
         $amount=0;
         $this->products=Product::get();
         $product=[];
+
+        $query="SELECT DAYOFWEEK(transactions.created_at) as days,
+       sum(transaction_details.amount*transaction_details.price) as total
+FROM `transactions` JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+WHERE transactions.status_order_id=2 and
+month(transactions.created_at)= month(NOW())
+group BY DAYOFWEEK(transactions.created_at)";
+        $dow=DB::select(DB::raw($query));
+//        $this->dayOfWeek
+        $b=[
+            1=>0,
+            2=>0,
+            3=>0,
+            4=>0,
+            5=>0,
+            6=>0,
+            7=>0,
+        ];
+
+        foreach ($dow as $d){
+            $b[$d->days]=$d->total;
+        }
+        $this->dayOfWeek['Bulan ini']=$b;
+//        dd($this->dayOfWeek);
+
+
         foreach ($this->transactions as $tl){
             foreach ($tl->transactionDetails as $td){
                 $total += $td->price * $td->amount;

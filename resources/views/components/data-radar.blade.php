@@ -1,4 +1,4 @@
-@props(['title'])
+@props(['title','datas'])
 <div class="col-xl-6 appointment box-col-6">
     <div class="card">
         <div class="card-header">
@@ -46,25 +46,19 @@
                     show: false
                 },
             },
-            series: [{
-                name: 'Minggu 1',
-                data: [20, 100, 40, 30, 50, 80, 33],
-            }, {
-                name: 'Minggu 2',
-                data: [30, 120, 50, 50, 40, 10, 33],
-            }, {
-                name: 'Minggu 3',
-                data: [40, 100, 40, 30, 50, 80, 50],
-            }, {
-                name: 'Minggu 4',
-                data: [50, 130, 50, 10, 30, 20, 60],
-            },
+            series: [
+                @foreach($datas as $key=>$data)
+                {
+                    name: '{{ $key }}',
+                    data: [ @foreach($data as $d) {{$d}}, @endforeach],
+                },
+                @endforeach
             ],
             stroke: {
                 width: 3,
                 curve: 'smooth',
             },
-            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            labels: ['','Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
             plotOptions: {
                 radar: {
                     size: 140,
