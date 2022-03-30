@@ -40,7 +40,7 @@
         borderColor = shuffle(borderColor);
         var options1 = {
             legend: {
-                show: false
+                show: true
             },
             chart: {
                 height: 380,

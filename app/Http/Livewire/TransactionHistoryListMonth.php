@@ -165,6 +165,88 @@ group BY DAYOFWEEK(created_at)";
         foreach ($dow as $d) {
             if ($w!=$d->weeks){
                 if ($w!=0){
+                    $this->dayMoney['Minggu ke-'. $w0] = $b;
+                    $w0+=1;
+                }
+                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+                $w=$d->weeks;
+            }
+            $b[$d->days] = intval($d->total);
+        }
+        $this->dayMoney['Minggu ke-'. $w0] = $b;
+
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+               DATE(transactions.created_at) as dates,
+               WEEK(transactions.created_at) as weeks,
+               SUM(transaction_details.amount) as total
+        FROM `transactions`
+            JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+        WHERE transactions.status_order_id=2 and
+              MONTH(transactions.created_at) = month(NOW())
+        GROUP BY days, weeks, dates
+        ORDER BY weeks, days";
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        $w=0;
+        $w0=1;
+        foreach ($dow as $d) {
+            if ($w!=$d->weeks){
+                if ($w!=0){
+                    $this->dayItem['Minggu ke-'. $w0] = $b;
+                    $w0+=1;
+                }
+                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+                $w=$d->weeks;
+            }
+            $b[$d->days] = intval($d->total);
+        }
+        $this->dayItem['Minggu ke-'. $w0] = $b;
+
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+               DATE(transactions.created_at) as dates,
+               WEEK(transactions.created_at) as weeks,
+               SUM(transactions.visitors) as total
+        FROM `transactions`
+        WHERE transactions.status_order_id=2 and
+              MONTH(transactions.created_at) = month(NOW())
+        GROUP BY days, weeks, dates
+        ORDER BY weeks, days";
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        $w=0;
+        $w0=1;
+        foreach ($dow as $d) {
+            if ($w!=$d->weeks){
+                if ($w!=0){
+                    $this->dayVisitor['Minggu ke-'. $w0] = $b;
+                    $w0+=1;
+                }
+                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+                $w=$d->weeks;
+            }
+            $b[$d->days] = intval($d->total);
+        }
+        $this->dayVisitor['Minggu ke-'. $w0] = $b;
+
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+               DATE(transactions.created_at) as dates,
+               WEEK(transactions.created_at) as weeks,
+               count(transactions.id) as total
+        FROM `transactions`
+        WHERE transactions.status_order_id=2 and
+              MONTH(transactions.created_at) = month(NOW())
+        GROUP BY days, weeks, dates
+        ORDER BY weeks, days";
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        $w=0;
+        $w0=1;
+        foreach ($dow as $d) {
+            if ($w!=$d->weeks){
+                if ($w!=0){
                     $this->dayTransaction['Minggu ke-'. $w0] = $b;
                     $w0+=1;
                 }
@@ -174,6 +256,8 @@ group BY DAYOFWEEK(created_at)";
             $b[$d->days] = intval($d->total);
         }
         $this->dayTransaction['Minggu ke-'. $w0] = $b;
+
+
 
         foreach ($this->transactions as $tl) {
             foreach ($tl->transactionDetails as $td) {
