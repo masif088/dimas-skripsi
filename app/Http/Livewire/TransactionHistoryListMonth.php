@@ -161,18 +161,19 @@ group BY DAYOFWEEK(created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
         $w=0;
-        dd($dow);
+//        dd($dow);
         foreach ($dow as $d) {
             if ($w!=$d->weeks){
                 if ($w!=0){
-                    $this->dayTransaction['Minggu ke-'. $d->weeks] = $b;
+                    $this->dayTransaction['Minggu ke-'. $w] = $b;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
                 $w=$d->weeks;
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayTransaction['Minggu ke-'. $d->weeks] = $b;
+        $this->dayTransaction['Minggu ke-'. $w] = $b;
+//        dd($this->dayTransaction);
 
         foreach ($this->transactions as $tl) {
             foreach ($tl->transactionDetails as $td) {
