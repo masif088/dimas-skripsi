@@ -36,7 +36,10 @@ class TransactionHistoryListMonth extends Component
     public $visitorCount;
     public $tdactionCount;
 
-    public $dayOfWeek;
+    public $dayOfWeekMoney;
+    public $dayOfWeekVisitor;
+    public $dayOfWeekItem;
+    public $dayOfWeekTransaction;
 
     public function mount()
     {
@@ -62,7 +65,7 @@ WHERE month(transactions.created_at)=$this->month and
 GROUP BY date(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         $this->income = [];
-        $now = Carbon::create($this->year,$this->month,1);
+        $now = Carbon::create($this->year, $this->month, 1);
         $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
         $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
 
@@ -75,44 +78,72 @@ GROUP BY date(transactions.created_at)";
         }
         foreach ($g as $g1) {
             $this->income[$g1->dateList] = $g1->total;
-            $this->visitorCount=$g1->visitors;
-            $this->transactionCount=$g1->counter;
+            $this->visitorCount = $g1->visitors;
+            $this->transactionCount = $g1->counter;
         }
-        $this->transactions=\App\Models\Transaction::where('status_order_id',2)->whereBetween('created_at',[$start->format('Y-m-d'),$end->format('Y-m-d')])->get();
-        $this->productAmounts=[];
-        $this->productTotals=[];
-        $total=0;
-        $amount=0;
-        $this->products=Product::get();
-        $product=[];
+        $this->transactions = \App\Models\Transaction::where('status_order_id', 2)->whereBetween('created_at', [$start->format('Y-m-d'), $end->format('Y-m-d')])->get();
+        $this->productAmounts = [];
+        $this->productTotals = [];
+        $total = 0;
+        $amount = 0;
+        $this->products = Product::get();
+        $product = [];
 
-        $query="SELECT DAYOFWEEK(transactions.created_at) as days,
+        $query = "SELECT DAYOFWEEK(transactions.created_at) as days,
        sum(transaction_details.amount*transaction_details.price) as total
 FROM `transactions` JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE transactions.status_order_id=2 and
 month(transactions.created_at)= month(NOW())
 group BY DAYOFWEEK(transactions.created_at)";
-        $dow=DB::select(DB::raw($query));
-//        $this->dayOfWeek
-        $b=[
-            1=>0,
-            2=>0,
-            3=>0,
-            4=>0,
-            5=>0,
-            6=>0,
-            7=>0,
-        ];
-
-        foreach ($dow as $d){
-            $b[$d->days]=$d->total;
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        foreach ($dow as $d) {
+            $b[$d->days] = $d->total;
         }
-        $this->dayOfWeek['Bulan ini']=$b;
-//        dd($this->dayOfWeek);
+        $this->dayOfWeekMoney['Bulan ini'] = $b;
+
+        $query = "SELECT DAYOFWEEK(created_at) as days,
+       sum(visitors) as total
+FROM `transactions`
+WHERE status_order_id=2 and
+month(created_at)= month(NOW())
+group BY DAYOFWEEK(created_at)";
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        foreach ($dow as $d) {
+            $b[$d->days] = $d->total;
+        }
+        $this->dayOfWeekVisitor['Bulan ini'] = $b;
+
+        $query = "SELECT DAYOFWEEK(transactions.created_at) as days,
+       sum(transaction_details.amount) as total
+FROM `transactions` JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+WHERE transactions.status_order_id=2 and
+month(transactions.created_at)= month(NOW())
+group BY DAYOFWEEK(transactions.created_at)";
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        foreach ($dow as $d) {
+            $b[$d->days] = $d->total;
+        }
+        $this->dayOfWeekItem['Bulan ini'] = $b;
+
+        $query = "SELECT DAYOFWEEK(created_at) as days,
+       count(id) as total
+FROM `transactions`
+WHERE status_order_id=2 and
+month(created_at)= month(NOW())
+group BY DAYOFWEEK(created_at)";
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        foreach ($dow as $d) {
+            $b[$d->days] = $d->total;
+        }
+        $this->dayOfWeekTransaction['Bulan ini'] = $b;
 
 
-        foreach ($this->transactions as $tl){
-            foreach ($tl->transactionDetails as $td){
+        foreach ($this->transactions as $tl) {
+            foreach ($tl->transactionDetails as $td) {
                 $total += $td->price * $td->amount;
                 $amount += $td->amount;
                 if (isset($product['type'][$td->product->product_type_id][$td->product_id])) {
@@ -127,12 +158,12 @@ group BY DAYOFWEEK(transactions.created_at)";
                 } else {
                     $product['payment_method'][$td->transaction->payment_method_id] = $td->price * $td->amount;
                 }
-                if (isset($this->productAmounts[$td->product_id])){
-                    $this->productAmounts[$td->product_id]+=$td->amount;
-                    $this->productTotals[$td->product_id]+=$td->amount*$td->price;
-                }else{
-                    $this->productAmounts[$td->product_id]=$td->amount;
-                    $this->productTotals[$td->product_id]=$td->amount*$td->price;
+                if (isset($this->productAmounts[$td->product_id])) {
+                    $this->productAmounts[$td->product_id] += $td->amount;
+                    $this->productTotals[$td->product_id] += $td->amount * $td->price;
+                } else {
+                    $this->productAmounts[$td->product_id] = $td->amount;
+                    $this->productTotals[$td->product_id] = $td->amount * $td->price;
                 }
                 if (isset($this->money[$td->transaction->payment_method_id])) {
                     $this->money[$td->transaction->payment_method_id] += $td->price * $td->amount;

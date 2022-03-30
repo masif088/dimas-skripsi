@@ -1,7 +1,7 @@
-@props(['title','datas'])
-<div class="col-xl-6 appointment box-col-6">
+@props(['title','datas','id'])
+<div class="col-xl-6 appointment box-col-6" style="padding: 10px">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" style="padding: 10px">
             <div class="header-top">
                 <h5 class="m-0">{{$title}}</h5>
                 <div class="card-header-right-icon">
@@ -18,7 +18,7 @@
         </div>
         <div class="card-Body">
             <div class="radar-chart">
-                <div id="{{$title}}"></div>
+                <div id="{{$id}}"></div>
             </div>
         </div>
     </div>
@@ -58,7 +58,7 @@
                 width: 3,
                 curve: 'smooth',
             },
-            labels: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            labels: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jum at', 'Sabtu'],
             plotOptions: {
                 radar: {
                     size: 140,
@@ -101,7 +101,7 @@
         }
 
         var chart1 = new ApexCharts(
-            document.querySelector("#{{$title}}"),
+            document.querySelector("#{{$id}}"),
             options1
         );
 

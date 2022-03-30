@@ -15,7 +15,10 @@
             :categories="$category"
         />
     </div>
-    <x-data-radar title="Keuangan" :datas="$dayOfWeek"/>
+    <x-data-radar title="Keuangan Bulan Ini" id="keuangan" :datas="$dayOfWeekMoney"/>
+    <x-data-radar title="Pengunjung Bulan Ini" id="visitor" :datas="$dayOfWeekVisitor"/>
+    <x-data-radar title="Penjualan Item Bulan Ini" id="item" :datas="$dayOfWeekItem"/>
+    <x-data-radar title="Transaksi Bulan Ini" id="transaction" :datas="$dayOfWeekTransaction"/>
     <div>
         <div class="card">
             <div class="card-header" style="padding: 10px">
