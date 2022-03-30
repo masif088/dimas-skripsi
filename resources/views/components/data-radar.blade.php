@@ -39,9 +39,6 @@
         var borderColor = ['#FAA255', '#F0C348', '#E27CF1', '#F562AC', '#EB5959', '#9EE67A', '#50D989', '#66CFF2', '#7F7CE6'];
         borderColor = shuffle(borderColor);
         var options1 = {
-            dataLabels: {
-                enabled: false
-            },
             legend: {
                 show: false
             },
