@@ -40,7 +40,6 @@
         borderColor = shuffle(borderColor);
         var options1 = {
             chart: {
-                height: 380,
                 type: 'radar',
                 toolbar: {
                     show: false
