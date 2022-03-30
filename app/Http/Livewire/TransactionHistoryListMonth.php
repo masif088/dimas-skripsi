@@ -150,7 +150,7 @@ group BY DAYOFWEEK(created_at)";
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
                DATE(transactions.created_at) as dates,
-               FLOOR((DayOfMonth(transactions.created_at)-1)/7)+1 as weeks,
+               WEEK(transactions.created_at) as weeks,
                SUM(transaction_details.amount*transaction_details.price) as total
         FROM `transactions`
             JOIN transaction_details ON transaction_details.transaction_id=transactions.id
@@ -161,19 +161,19 @@ group BY DAYOFWEEK(created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
         $w=0;
-//        dd($dow);
+        $w0=1;
         foreach ($dow as $d) {
             if ($w!=$d->weeks){
                 if ($w!=0){
-                    $this->dayTransaction['Minggu ke-'. $w] = $b;
+                    $this->dayTransaction['Minggu ke-'. $w0] = $b;
+                    $w0+=1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
                 $w=$d->weeks;
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayTransaction['Minggu ke-'. $w] = $b;
-//        dd($this->dayTransaction);
+        $this->dayTransaction['Minggu ke-'. $w0] = $b;
 
         foreach ($this->transactions as $tl) {
             foreach ($tl->transactionDetails as $td) {
