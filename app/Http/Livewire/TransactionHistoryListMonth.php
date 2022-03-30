@@ -98,7 +98,7 @@ GROUP BY date(transactions.created_at)";
        sum(transaction_details.amount*transaction_details.price) as total
 FROM `transactions` JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE transactions.status_order_id=2 and
-month(transactions.created_at)= month(NOW())
+month(transactions.created_at)= $this->month
 group BY DAYOFWEEK(transactions.created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -111,7 +111,7 @@ group BY DAYOFWEEK(transactions.created_at)";
        sum(visitors) as total
 FROM `transactions`
 WHERE status_order_id=2 and
-month(created_at)= month(NOW())
+month(created_at)= $this->month
 group BY DAYOFWEEK(created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -124,7 +124,7 @@ group BY DAYOFWEEK(created_at)";
        sum(transaction_details.amount) as total
 FROM `transactions` JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE transactions.status_order_id=2 and
-month(transactions.created_at)= month(NOW())
+month(transactions.created_at)= $this->month
 group BY DAYOFWEEK(transactions.created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -137,7 +137,7 @@ group BY DAYOFWEEK(transactions.created_at)";
        count(id) as total
 FROM `transactions`
 WHERE status_order_id=2 and
-month(created_at)= month(NOW())
+month(created_at)= $this->month
 group BY DAYOFWEEK(created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -155,7 +155,7 @@ group BY DAYOFWEEK(created_at)";
         FROM `transactions`
             JOIN transaction_details ON transaction_details.transaction_id=transactions.id
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = month(NOW())
+              MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
@@ -183,7 +183,7 @@ group BY DAYOFWEEK(created_at)";
         FROM `transactions`
             JOIN transaction_details ON transaction_details.transaction_id=transactions.id
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = month(NOW())
+              MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
@@ -210,7 +210,7 @@ group BY DAYOFWEEK(created_at)";
                SUM(transactions.visitors) as total
         FROM `transactions`
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = month(NOW())
+              MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
@@ -237,7 +237,7 @@ group BY DAYOFWEEK(created_at)";
                count(transactions.id) as total
         FROM `transactions`
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = month(NOW())
+              MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
