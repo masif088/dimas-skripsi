@@ -41,6 +41,11 @@ class TransactionHistoryListMonth extends Component
     public $dayOfWeekItem;
     public $dayOfWeekTransaction;
 
+    public $dayMoney;
+    public $dayVisitor;
+    public $dayItem;
+    public $dayTransaction;
+
     public function mount()
     {
         $this->method = PaymentMethod::get();
@@ -158,15 +163,14 @@ group BY DAYOFWEEK(created_at)";
         foreach ($dow as $d) {
             if ($w!=$d->weeks){
                 if ($w!=0){
-
+                    $this->dayTransaction['Minggu ini '. $d->weeks] = $b;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-
+                $w=$d->weeks;
             }
-            $b[$d->days] = $d->total;
+            $b[$d->days] = intval($d->total);
         }
-        $this->dayOfWeekItem['Bulan ini'] = $b;
-
+        $this->dayTransaction['Minggu ke-'. $d->weeks] = $b;
 
         foreach ($this->transactions as $tl) {
             foreach ($tl->transactionDetails as $td) {

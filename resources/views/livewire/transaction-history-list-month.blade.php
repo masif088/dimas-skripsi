@@ -19,6 +19,8 @@
     <x-data-radar title="Pengunjung Bulan Ini" id="visitor" :datas="$dayOfWeekVisitor"/>
     <x-data-radar title="Penjualan Item Bulan Ini" id="item" :datas="$dayOfWeekItem"/>
     <x-data-radar title="Transaksi Bulan Ini" id="transaction" :datas="$dayOfWeekTransaction"/>
+
+    <x-data-radar title="Transaksi Minggu Ini" id="transaction1" :datas="$dayTransaction"/>
     <div>
         <div class="card">
             <div class="card-header" style="padding: 10px">
