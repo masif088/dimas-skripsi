@@ -164,14 +164,14 @@ group BY DAYOFWEEK(created_at)";
         foreach ($dow as $d) {
             if ($w!=$d->weeks){
                 if ($w!=0){
-                    $this->dayTransaction['Minggu ini '. $d->weeks] = $b;
+                    $this->dayTransaction[ $d->dates ] = $b;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
                 $w=$d->weeks;
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayTransaction['Minggu ke-'. $d->weeks] = $b;
+        $this->dayTransaction[ $d->dates ] = $b;
 
         foreach ($this->transactions as $tl) {
             foreach ($tl->transactionDetails as $td) {
