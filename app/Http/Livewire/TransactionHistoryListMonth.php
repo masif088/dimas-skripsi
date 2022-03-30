@@ -142,6 +142,32 @@ group BY DAYOFWEEK(created_at)";
         $this->dayOfWeekTransaction['Bulan ini'] = $b;
 
 
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+               FLOOR((DayOfMonth(transactions.created_at)-1)/7)+1 as weeks,
+               SUM(transaction_details.amount*transaction_details.price) as total
+        FROM `transactions`
+            JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+        WHERE transactions.status_order_id=2 and
+              MONTH(transactions.created_at) = month(NOW())
+        GROUP BY days, weeks
+        ORDER BY weeks,days";
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        $w=0;
+        foreach ($dow as $d) {
+            if ($w!=$d->weeks){
+                if ($w!=0){
+
+                }
+                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+
+            }
+            $b[$d->days] = $d->total;
+        }
+        $this->dayOfWeekItem['Bulan ini'] = $b;
+
+
         foreach ($this->transactions as $tl) {
             foreach ($tl->transactionDetails as $td) {
                 $total += $td->price * $td->amount;
