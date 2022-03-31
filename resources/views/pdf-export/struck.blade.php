@@ -100,7 +100,7 @@
         <tr>
             <td>Customer</td>
             <td>:</td>
-            <td>{{ $transaction->name }}</td>
+            <td>Kak {{ $transaction->name }}</td>
         </tr>
     </table>
 </div>
