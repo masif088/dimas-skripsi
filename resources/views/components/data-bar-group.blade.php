@@ -1,5 +1,5 @@
 @props(['title','datas','id'])
-<div class="col-xl-6 appointment box-col-6">
+<div class="col-xl-12 appointment box-col-12">
     <div class="card">
         <div class="card-Body">
             <div class="radar-chart">
@@ -42,14 +42,16 @@
                 },
             },
             dataLabels: {
-                enabled: true
+                enabled: false,
+                orientation: 'vertical',
+                position: 'center'
             },
             legend: {
                 show: true
             },
             chart: {
                 height: 380,
-                type: 'radar',
+                type: 'bar',
                 toolbar: {
                     show: true,
                     margin: 20,
@@ -101,7 +103,7 @@
                 }
             },
             yaxis: {
-                tickAmount: 7,
+                tickAmount: 12,
                 labels: {
                     formatter: function (val, i) {
                         if (i % 2 === 0) {

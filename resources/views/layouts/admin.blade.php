@@ -78,6 +78,10 @@
         }
 
     </style>
+    @isset($style)
+        {{ $style }}
+    @endisset
+
     @livewireStyles
 </head>
 <body onload="startTime()">

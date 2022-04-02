@@ -42,11 +42,13 @@
             padding: 0;
             margin: 0
         }
+
         .column6 {
             float: left;
             width: 60%;
             padding: 10px;
         }
+
         .column2 {
             float: left;
             width: 20%;
@@ -64,16 +66,15 @@
 <body>
 <div style="text-align: center">
     <img src="{{ public_path('assets/images/kopi.png') }}" alt="" style="max-height: 50px">
-    <img src="{{ public_path('assets/images/leker.png') }}" alt="" style="max-height: 50px">
-
+    <img src="{{ public_path('assets/images/leker.png') }}" alt="" style="max-height: 50px"
 </div>
-    <div style="text-align: center;">
-        <p>Imaji Sociopreneur</p>
-        <p >Creative Space</p>
-        <p style="font-size: 12px">Jl. Mastrip No. Sumbersari</p>
-        <p>----------------------------</p>
-    </div>
 
+<div style="text-align: center;">
+    <p>Imaji Sociopreneur</p>
+    <p>Creative Space</p>
+    <p style="font-size: 12px">Jl. Mastrip No. Sumbersari</p>
+    <p>----------------------------</p>
+</div>
 
 <div style="font-size: 20px;padding: 0">
     <table style="">
@@ -128,12 +129,22 @@
 
         </table>
         <table style="font-size: 20px; width: 100%">
+            @if($transaction->donate!=0)
+                <tr>
+                    <td style="text-align: left" colspan="3">
+                        <b>DONASI</b>
+                    </td>
+                    <td style="text-align: right">
+                        <b>{{ $transaction->donate }}</b>
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <td style="text-align: left" colspan="3">
                     <b>TOTAL</b>
                 </td>
                 <td style="text-align: right">
-                    <b>{{ $total }}</b>
+                    <b>{{ $total+$transaction->donate }}</b>
                 </td>
             </tr>
             <tr>
@@ -149,7 +160,7 @@
                     <b>KEMBALI</b>
                 </td>
                 <td style="text-align: right">
-                    <b>{{ $transaction->fee-$total }}</b>
+                    <b>{{ $transaction->fee-$transaction->donate-$total }}</b>
                 </td>
             </tr>
         </table>
@@ -211,10 +222,9 @@
             @php($total=0)
             @foreach($transaction->transactionDetails as $td)
                 <tr>
-                    <td >{{ $td->product->title }}</td>
+                    <td>{{ $td->product->title }}</td>
                     <td style="">{{ $td->amount }}</td>
                 </tr>
-
             @endforeach
 
         </table>

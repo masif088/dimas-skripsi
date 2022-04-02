@@ -46,8 +46,56 @@ class TransactionHistoryListMonth extends Component
     public $dayItem;
     public $dayTransaction;
 
+    public $dayTimeMoney;
+    public $dayTimeVisitor;
+    public $dayTimeItem;
+    public $dayTimeTransaction;
+
     public function mount()
     {
+
+        $time=[
+            '00.00-04.00',
+            '04.00-08.00',
+            '08.00-12.00',
+            '12.00-16.00',
+            '16.00-20.00',
+            '20.00-00.00',
+        ];
+        $c=[
+            $time[0]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[1]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[2]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[3]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[4]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[5]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+        ];
+        $a=4;
+        if (config('app.name', 'Laravel') == "Lekker Putar") {
+            $a=2;
+            $time=[
+                '00.00-02.00',
+                '02.00-04.00',
+                '04.00-06.00',
+                '06.00-08.00',
+                '08.00-10.00',
+                '10.00-12.00',
+                '12.00-14.00',
+                '14.00-16.00',
+                '16.00-18.00',
+                '18.00-20.00',
+                '20.00-22.00',
+                '22.00-24.00',
+            ];
+            $c=[
+                $time[7]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[8]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[9]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[10]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[11]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            ];
+        }
+
         $this->method = PaymentMethod::get();
         $this->type = ProductType::get();
         $this->company = ProductCompany::get();
@@ -256,6 +304,73 @@ group BY DAYOFWEEK(created_at)";
             $b[$d->days] = intval($d->total);
         }
         $this->dayTransaction['Minggu ke-'. $w0] = $b;
+
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+FLOOR(hour(transactions.created_at) / $a) as hourgroup,
+COUNT(transactions.id) as total
+FROM `transactions`
+WHERE transactions.status_order_id=2 and
+	MONTH(transactions.created_at) = 3
+GROUP BY days,hourgroup
+ORDER BY hourgroup, days ASC;";
+        $dow = DB::select(DB::raw($query));
+        $b=$c;
+        foreach ($dow as $d) {
+            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
+        }
+        $this->dayTimeTransaction = $b;
+
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+               FLOOR(hour(transactions.created_at) / $a) as hourgroup,
+               SUM(transactions.visitors) as total
+        FROM `transactions`
+        WHERE transactions.status_order_id=2 and
+              MONTH(transactions.created_at) = $this->month
+        GROUP BY days,hourgroup
+        ORDER BY hourgroup, days ASC;";
+        $dow = DB::select(DB::raw($query));
+        $b=$c;
+        foreach ($dow as $d) {
+            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
+        }
+        $this->dayTimeVisitor = $b;
+
+
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+               FLOOR(hour(transactions.created_at) / $a) as hourgroup,
+               SUM(transaction_details.amount*transaction_details.price) as total
+        FROM `transactions`
+            JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+        WHERE transactions.status_order_id=2 and
+              MONTH(transactions.created_at) = $this->month
+        GROUP BY days,hourgroup
+        ORDER BY hourgroup, days ASC;";
+        $dow = DB::select(DB::raw($query));
+        $b=$c;
+        foreach ($dow as $d) {
+            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
+        }
+        $this->dayTimeMoney = $b;
+
+        $query = "
+        SELECT DAYOFWEEK(transactions.created_at) as days,
+               FLOOR(hour(transactions.created_at) / $a) as hourgroup,
+               SUM(transaction_details.amount) as total
+        FROM `transactions`
+            JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+        WHERE transactions.status_order_id=2 and
+              MONTH(transactions.created_at) = $this->month
+        GROUP BY days,hourgroup
+        ORDER BY hourgroup, days ASC;";
+        $dow = DB::select(DB::raw($query));
+        $b=$c;
+        foreach ($dow as $d) {
+            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
+        }
+        $this->dayTimeItem = $b;
 
 
 

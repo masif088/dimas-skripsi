@@ -5,9 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\TransactionDetail;
-use Facade\FlareClient\Http\Response;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Storage;
 use Livewire\Component;
 
 class Transaction extends Component
@@ -26,6 +23,8 @@ class Transaction extends Component
     public $some;
     public $query;
     public $t;
+    public $donate;
+
     protected $listeners = ["payment" => "payment", "paymentIm" => "paymentIm"];
 
     public function mount()
@@ -112,6 +111,9 @@ class Transaction extends Component
         if ($this->name == null) {
             $this->name = 'guest';
         }
+        if ($this->donate == null) {
+            $this->donate = 0;
+        }
         if ($this->visitors == null or $this->visitors == 0) {
             $this->visitors = 1;
         }
@@ -137,6 +139,9 @@ class Transaction extends Component
     {
         if ($this->name == null) {
             $this->name = 'guest';
+        }
+        if ($this->donate == null) {
+            $this->donate = 0;
         }
         if ($this->visitors == null or $this->visitors == 0) {
             $this->visitors = 1;
@@ -173,7 +178,8 @@ class Transaction extends Component
             'payment_method_id' => $this->paymentMethod,
             'reservation' => $this->reservation,
             'visitors' => $this->visitors,
-            'fee' => $this->fee
+            'fee' => $this->fee,
+            'donate' => $this->donate
         ]);
         foreach ($this->orderList as $order => $value) {
             TransactionDetail::create([
@@ -189,6 +195,7 @@ class Transaction extends Component
         $this->paymentMethod = 1;
         $this->visitors = null;
         $this->fee = null;
+        $this->donate = null;
         $this->emit('notify', [
             'type' => 'primary',
             'title' => $transaction->transaction_code . " dalam waiting list",
@@ -211,7 +218,8 @@ class Transaction extends Component
             'payment_method_id' => $this->paymentMethod,
             'reservation' => $this->reservation,
             'visitors' => $this->visitors,
-            'fee' => $this->fee
+            'fee' => $this->fee,
+            'donate' => $this->donate
         ]);
         foreach ($this->orderList as $order => $value) {
             $product = Product::find($order);
@@ -238,6 +246,7 @@ class Transaction extends Component
         $this->paymentMethod = 1;
         $this->visitors = null;
         $this->fee = null;
+        $this->donate = null;
         $this->emit('notify', [
             'type' => 'primary',
             'title' => $transaction->transaction_code . " dalam waiting list",

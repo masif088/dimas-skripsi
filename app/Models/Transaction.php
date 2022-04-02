@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * @property integer $id
@@ -33,10 +35,18 @@ class Transaction extends Model
     /**
      * @var array
      */
-    protected $fillable = ['fee','user_id', 'status_order_id', 'payment_method_id', 'created_at', 'updated_at', 'transaction_code', 'name', 'visitors', 'reservation'];
+    protected $fillable = ['fee', 'donate', 'user_id', 'status_order_id', 'payment_method_id', 'created_at', 'updated_at', 'transaction_code', 'name', 'visitors', 'reservation'];
+
+    public static function getCode()
+    {
+        $day = ['MG', 'SN', 'SL', 'RB', 'KM', 'JM', 'SB'];
+        $date = Carbon::now();
+        $transaction = Transaction::whereDate('created_at', Carbon::today())->get()->count() + 1;
+        return $day[$date->dayOfWeek] . $date->format('dmy') . str_pad($transaction, 3, '0', STR_PAD_LEFT);
+    }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function paymentMethod()
     {
@@ -44,7 +54,7 @@ class Transaction extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function statusOrder()
     {
@@ -52,7 +62,7 @@ class Transaction extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return BelongsTo
      */
     public function user()
     {
@@ -60,16 +70,10 @@ class Transaction extends Model
     }
 
     /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return HasMany
      */
     public function transactionDetails()
     {
         return $this->hasMany('App\Models\TransactionDetail');
-    }
-    public static function getCode(){
-        $day=['MG','SN','SL','RB','KM','JM','SB'];
-        $date=Carbon::now();
-        $transaction=Transaction::whereDate('created_at', Carbon::today())->get()->count()+1;
-        return $day[$date->dayOfWeek].$date->format('dmy').str_pad($transaction, 3, '0', STR_PAD_LEFT);;
     }
 }

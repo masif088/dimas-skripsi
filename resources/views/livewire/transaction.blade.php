@@ -122,6 +122,7 @@
                     <div class="card-body" style="padding: 10px">
                         <x-form.input type="text" title="" placeholder="nama pembeli" model="name"/>
                         <x-form.input type="number" title="" placeholder="jumlah pengunjung" model="visitors"/>
+                        <x-form.input type="number" title="" placeholder="donasi" model="donate"/>
                         <div style="text-align: center">
 
                             <button type="button" class="btn m-1" style="background-color: #9a7160;color: white"
@@ -133,7 +134,6 @@
                             <button type="button" class="btn m-1" style="background-color: #6b9281;color: white"
                                     wire:click="feeOnChange(20000)">20000
                             </button>
-
                             <button type="button" class="btn m-1" style="background-color: #447db0;color: white"
                                     wire:click="feeOnChange(50000)">50000
                             </button>
@@ -141,7 +141,7 @@
                                     wire:click="feeOnChange(100000)">100000
                             </button>
                             <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
-                                    wire:click="feeOnChange({{$total}})">Uang Pas
+                                    wire:click="feeOnChange({{$total + $donate}})">Uang Pas
                             </button>
                             <br>
                         </div>
@@ -150,6 +150,10 @@
                                        title="" defer="true"/>
                         <x-form.select :options="$optionReservation" :selected="$reservation" model="reservation"
                                        title="" defer="true"/>
+
+                        Donasi
+                        <h6>Rp. {{ number_format($donate) }}</h6>
+
                         Total
                         @if($discount!=0)
                             <h4>
@@ -163,7 +167,7 @@
                         Kembalian
                         <h4>Rp.
                             @if (is_numeric($fee) && is_numeric($total))
-                                {{ number_format($fee-$total) }}
+                                {{ number_format($fee-$donate-$total) }}
                             @endif
                         </h4>
                     </div>
