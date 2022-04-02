@@ -152,8 +152,9 @@
                                        title="" defer="true"/>
 
                         Donasi
+                        @if(is_numeric($donate))
                         <h6>Rp. {{ number_format($donate) }}</h6>
-
+@endif
                         Total
                         @if($discount!=0)
                             <h4>
@@ -166,7 +167,7 @@
                         @endif
                         Kembalian
                         <h4>Rp.
-                            @if (is_numeric($fee) && is_numeric($total))
+                            @if (is_numeric($fee) && is_numeric($total) && is_numeric($donate))
                                 {{ number_format($fee-$donate-$total) }}
                             @endif
                         </h4>
