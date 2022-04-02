@@ -17,19 +17,19 @@
     </div>
     <x-data-radar title="Omzer Mingguan Bulan Ini" id="money" :datas="$dayOfWeekMoney"/>
     <x-data-radar title="Omzet Harian Bulan Ini" id="money1" :datas="$dayMoney"/>
-    <x-data-bar-group title="Omzet per4jam Bulan ini" id="money3" :datas="$dayTimeMoney"/>
+    <x-data-bar-group title="Omzet Perjam Bulan ini" id="money3" :datas="$dayTimeMoney"/>
 
     <x-data-radar title="Pengunjung Bulan Ini" id="visitor" :datas="$dayOfWeekVisitor"/>
     <x-data-radar title="Pengunjung Harian Bulan Ini" id="visitor1" :datas="$dayVisitor"/>
-    <x-data-bar-group title="Pengunjung per4jam Bulan ini" id="visitor2" :datas="$dayTimeVisitor"/>
+    <x-data-bar-group title="Pengunjung Perjam Bulan ini" id="visitor2" :datas="$dayTimeVisitor"/>
 
     <x-data-radar title="Penjualan Item Bulan Ini" id="item" :datas="$dayOfWeekItem"/>
     <x-data-radar title="Penjualan Harian Bulan Ini" id="item1" :datas="$dayItem"/>
-    <x-data-bar-group title="Penjualan per4jam Bulan ini" id="item2" :datas="$dayTimeItem"/>
+    <x-data-bar-group title="Penjualan Perjam Bulan ini" id="item2" :datas="$dayTimeItem"/>
 
     <x-data-radar title="Transaksi Bulan Ini" id="transaction" :datas="$dayOfWeekTransaction"/>
     <x-data-radar title="Transaksi Harian Bulan Ini" id="transaction1" :datas="$dayTransaction"/>
-    <x-data-bar-group title="Transaksi per4jam Bulan ini" id="transaction2" :datas="$dayTimeTransaction"/>
+    <x-data-bar-group title="Transaksi Perjam Bulan ini" id="transaction2" :datas="$dayTimeTransaction"/>
 
 {{--    <x-data-radar title="Transaksi Minggu Ini" id="transaction1" :datas="$dayTransaction"/>--}}
 
