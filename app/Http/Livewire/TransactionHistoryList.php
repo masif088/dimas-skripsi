@@ -18,6 +18,7 @@ class TransactionHistoryList extends Component
     public $keyState = 0;
     public $datas;
     public $method;
+    public $donate;
 
     public function mount()
     {
@@ -48,6 +49,7 @@ class TransactionHistoryList extends Component
         $transactions = \App\Models\Transaction::whereDate('created_at', $this->historyList[$this->keyHistory]['dateList'])
             ->whereStatusOrderId(2)
             ->get();
+        $this->donate=$transactions->sum('donate');
         $total = 0;
         $amount = 0;
         $product = [];

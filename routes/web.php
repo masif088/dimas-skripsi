@@ -92,7 +92,8 @@ GROUP BY date(transactions.created_at)";
         foreach ($g as $g1) {
             $income[$g1->dateList] = $g1->total;
         }
-        return view('pages.dashboard.index', compact('totalDay', 'totalMonth', 'totalWeek', 'category', 'income'));
+        $donate=$monthly->sum('donate');
+        return view('pages.dashboard.index', compact('totalDay', 'totalMonth', 'totalWeek', 'category', 'income','donate'));
     })->name('dashboard');
 
     Route::get('transaction', [TransactionController::class, 'index'])->name('transaction.index');

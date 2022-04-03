@@ -108,7 +108,8 @@
                         <br>
                     @endif
                 @endforeach
-                Total : {{ number_format(array_sum($datas['product']['payment_method'])) }}
+                Total : {{ number_format(array_sum($datas['product']['payment_method'])) }} <br>
+                Donasi : {{ number_format(array_sum($donate)) }}
                 <br>
                 <br>
 
