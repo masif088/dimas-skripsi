@@ -129,12 +129,22 @@
 
         </table>
         <table style="font-size: 20px; width: 100%">
+            @if($transaction->donate!=0)
+                <tr>
+                    <td style="text-align: left" colspan="3">
+                        <b>DONASI</b>
+                    </td>
+                    <td style="text-align: right">
+                        <b>{{ $transaction->donate }}</b>
+                    </td>
+                </tr>
+            @endif
             <tr>
                 <td style="text-align: left" colspan="3">
                     <b>TOTAL</b>
                 </td>
                 <td style="text-align: right">
-                    <b>{{ $total }}</b>
+                    <b>{{ $total+$transaction->donate }}</b>
                 </td>
             </tr>
             <tr>
@@ -150,7 +160,7 @@
                     <b>KEMBALI</b>
                 </td>
                 <td style="text-align: right">
-                    <b>{{ $transaction->fee-$total }}</b>
+                    <b>{{ $transaction->fee-$transaction->donate-$total }}</b>
                 </td>
             </tr>
         </table>
