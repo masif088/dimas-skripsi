@@ -84,7 +84,7 @@
             </div>
         </div>
     </div>
-    @if(\App\Models\ProductCompany::get()>1)
+    @if(\App\Models\ProductCompany::get()->count()>1)
     @foreach(\App\Models\ProductCompany::get() as $pc)
         <div>
             <div class="card">
