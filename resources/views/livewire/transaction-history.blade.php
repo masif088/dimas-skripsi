@@ -84,6 +84,7 @@
             </div>
         </div>
     </div>
+    @if(\App\Models\ProductCompany::get()>1)
     @foreach(\App\Models\ProductCompany::get() as $pc)
         <div>
             <div class="card">
@@ -133,6 +134,7 @@
             </div>
         </div>
     @endforeach
+    @endif
     <div class="col-lg-8 col-sm-12 product-list">
         <div class="product-wrapper-grid">
             <div class="row">
@@ -178,25 +180,14 @@
                                     @else
                                         <div>Rp. {{ number_format($order->product->price) }}</div>
                                     @endif
-                                    {{--                                    <span>Rp. {{number_format($order->product->price)}}</span>--}}
-
                                 </div>
                                 <div class="col-4 text-center">
                                     <br>
                                     <div class="row">
-                                        {{--                                            <button class="btn btn-sm btn-danger col-4 float-start" type="button"--}}
-                                        {{--                                                    style="padding: 1px" wire:click="decreaseOrderList({{$order}})">--}}
-                                        {{--                                                <i class="icon-minus"></i>--}}
-                                        {{--                                            </button>--}}
                                         <div class="col-8">{{ number_format($order->amount) }}x</div>
-                                        {{--                                            <button class="btn btn-sm btn-primary col-4 float-end" type="button"--}}
-                                        {{--                                                    style="padding: 1px" wire:click="increaseOrderList({{$order}})">--}}
-                                        {{--                                                <i class="icon-plus"></i>--}}
-                                        {{--                                            </button>--}}
                                     </div>
                                 </div>
                                 <div class="col-4">
-                                    {{--                                    Rp. {{number_format($order->price*$order->amount)}}--}}
                                     @if($order->product->discount_state)
                                         <br>
                                         <div>
