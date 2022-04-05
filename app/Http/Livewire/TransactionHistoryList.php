@@ -5,7 +5,6 @@ namespace App\Http\Livewire;
 use App\Models\PaymentMethod;
 use App\Models\ProductCompany;
 use App\Models\ProductType;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
 
@@ -49,7 +48,7 @@ class TransactionHistoryList extends Component
         $transactions = \App\Models\Transaction::whereDate('created_at', $this->historyList[$this->keyHistory]['dateList'])
             ->whereStatusOrderId(2)
             ->get();
-        $this->donate=$transactions->sum('donate');
+        $this->donate = $transactions;
         $total = 0;
         $amount = 0;
         $product = [];
@@ -85,7 +84,7 @@ class TransactionHistoryList extends Component
         $this->datas['total'] = $total;
         $this->datas['amount'] = $amount;
         $this->datas['product'] = $product;
-        $this->datas['visitor']=$transactions->sum('visitors');
+        $this->datas['visitor'] = $transactions->sum('visitors');
     }
 
     public function render()
