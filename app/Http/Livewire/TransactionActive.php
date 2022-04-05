@@ -14,7 +14,7 @@ class TransactionActive extends Component
     public function mount()
     {
         $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)
-            ->whereDate('created_at', Carbon::today())
+
             ->get();
     }
 
@@ -45,11 +45,8 @@ class TransactionActive extends Component
         $this->transactionDetail=null;
     }
     public function print(){
-//        $url = route('admin.transaction.struck-kitchen', $this->transactionDetail->id);
-//        $this->emit('redirect:new', $url);
         $url=route('admin.transaction.struck',$this->transactionDetail->id);
         $this->emit('redirect:new',$url );
-
     }
 
     public function render()

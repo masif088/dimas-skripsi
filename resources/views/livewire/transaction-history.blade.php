@@ -85,55 +85,55 @@
         </div>
     </div>
     @if(\App\Models\ProductCompany::get()->count()>1)
-    @foreach(\App\Models\ProductCompany::get() as $pc)
-        <div>
-            <div class="card">
-                <div class="card-header">
-                    <h1>{{$pc->title}}</h1>
-                </div>
-                <div class="card-body table-responsive">
-                    <table class="table">
-                        <thead>
-                        <tr style="font-weight: bold">
-                            <td>No</td>
-                            <td>Kode</td>
-                            <td>Produk</td>
-                            <td>Qty</td>
-                            <td>Harga Rata-rata</td>
-                            <td>Total</td>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        @php($count=1)
-                        @php($total=0)
-                        @foreach($productAmounts as $key=>$pa)
-                            @if($products->find($key)->product_company_id==$pc->id)
-                                <tr>
+        @foreach(\App\Models\ProductCompany::get() as $pc)
+            <div>
+                <div class="card">
+                    <div class="card-header">
+                        <h1>{{$pc->title}}</h1>
+                    </div>
+                    <div class="card-body table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr style="font-weight: bold">
+                                <td>No</td>
+                                <td>Kode</td>
+                                <td>Produk</td>
+                                <td>Qty</td>
+                                <td>Harga Rata-rata</td>
+                                <td>Total</td>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            @php($count=1)
+                            @php($total=0)
+                            @foreach($productAmounts as $key=>$pa)
+                                @if($products->find($key)->product_company_id==$pc->id)
+                                    <tr>
 
-                                    <td>{{ $count++ }}</td>
-                                    <td>{{ $products->find($key)->product_code }}</td>
-                                    <td>{{ $products->find($key)->title }}</td>
-                                    <td>{{ number_format($pa) }}</td>
-                                    <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
-                                    <td>Rp. {{ number_format($productTotals[$key]) }}</td>
-                                    @php($total+=$productTotals[$key])
-                                </tr>
-                            @endif
-                        @endforeach
-                        <tr>
-                            <td colspan="5">Total :</td>
-                            <td>Rp. {{ number_format($total) }}</td>
-                        </tr>
-                        </tbody>
-                    </table>
+                                        <td>{{ $count++ }}</td>
+                                        <td>{{ $products->find($key)->product_code }}</td>
+                                        <td>{{ $products->find($key)->title }}</td>
+                                        <td>{{ number_format($pa) }}</td>
+                                        <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
+                                        <td>Rp. {{ number_format($productTotals[$key]) }}</td>
+                                        @php($total+=$productTotals[$key])
+                                    </tr>
+                                @endif
+                            @endforeach
+                            <tr>
+                                <td colspan="5">Total :</td>
+                                <td>Rp. {{ number_format($total) }}</td>
+                            </tr>
+                            </tbody>
+                        </table>
 
-                </div>
-                <div id="table_pagination" class="py-3">
+                    </div>
+                    <div id="table_pagination" class="py-3">
 
+                    </div>
                 </div>
             </div>
-        </div>
-    @endforeach
+        @endforeach
     @endif
     <div class="col-lg-8 col-sm-12 product-list">
         <div class="product-wrapper-grid">
@@ -210,9 +210,8 @@
                     <div class="news-update" style="padding: 10px">
                     </div>
                 @endif
-
-
             </div>
+
         </div>
 
     </div>

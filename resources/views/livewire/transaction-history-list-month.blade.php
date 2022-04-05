@@ -182,7 +182,6 @@
                             @foreach($productAmounts as $key=>$pa)
                                 @if($products->find($key)->product_company_id==$pc->id)
                                     <tr>
-
                                         <td>{{ $count++ }}</td>
                                         <td>{{ $products->find($key)->product_code }}</td>
                                         <td>{{ $products->find($key)->title }}</td>
