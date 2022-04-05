@@ -30,7 +30,7 @@ class TransactionActive extends Component
             'type' => 'success',
             'title' => $this->transactionDetail->transaction_code." selesai",
         ]);
-        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->whereDate('created_at', Carbon::today())->get();
+        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->get();
         $this->transactionDetail=null;
     }
 
@@ -41,7 +41,7 @@ class TransactionActive extends Component
             'type' => 'danger',
             'title' => $this->transactionDetail->transaction_code." dibatalkan",
         ]);
-        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->whereDate('created_at', Carbon::today())->get();
+        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->get();
         $this->transactionDetail=null;
     }
     public function print(){
