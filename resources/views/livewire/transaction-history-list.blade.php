@@ -46,6 +46,8 @@
         </div>
         <div class="card-body" style="padding: 10px">
             @if($keyState!=null)
+                Tanggal : {{ $historyList[$keyHistory]['dateList'] }}
+                <br>
                 Total Pengunjung : {{ $datas['visitor'] }}
                 <br>
                 Total Transaksi : {{ $historyList[$keyHistory]['counter'] }}
