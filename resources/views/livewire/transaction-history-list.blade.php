@@ -111,9 +111,11 @@
                 Total : {{ number_format(array_sum($datas['product']['payment_method'])) }} <br>
                 <br><br>
                 @foreach($method as $t)
+                    @if($donate->where('payment_method_id',$t->id)->sum('donate')!=0)
                         Donasi {{$t->title}}
                         : {{ number_format($donate->where('payment_method_id',$t->id)->sum('donate')) }}
                         <br>
+                    @endif
                 @endforeach
                 Total Donasi : {{ number_format($donate->sum('donate')) }}
                 <br>
