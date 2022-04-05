@@ -1,6 +1,6 @@
 <x-admin>
     <x-slot name="title">
-        Riwayat Bulanan
+        Riwayat Bulanan {{ $month }}-{{$year}}
     </x-slot>
     <x-slot name="style">
         <style>

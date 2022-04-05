@@ -26,13 +26,13 @@
                                 </div>
                             </a>
                     @endif
-                    <div class="col-2" style="padding-right: 5px">
+                    <a href="#" class="col-2" style="padding-right: 5px;">
                         <div class="card" style="" wire:click="setDetail({{$key}})">
                             <div class="card-body" style="padding: 10px; text-align: center">
                                 <div>{{ $monthHistory[2] }}</div>
                             </div>
                         </div>
-                    </div>
+                    </a>
                 @endforeach
         </div>
     </div>
