@@ -126,7 +126,7 @@
                                     @foreach($ma as $key2=>$m)
                                         <tr>
                                             <td colspan="5">{{ \App\Models\PaymentMethod::find($key2)->title }}</td>
-                                            <td>Rp. {{ number_format($m) }}@if(\App\Models\PaymentMethod::find($key2)->take!=1) -> {{ number_format($m*\App\Models\PaymentMethod::find($key2)->take) }}(perkiraan) @endif</td>
+                                            <td>Rp. {{ number_format($m) }}</td>
                                         </tr>
                                     @endforeach
                                 @endif
