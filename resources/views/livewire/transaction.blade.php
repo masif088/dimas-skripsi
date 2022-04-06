@@ -160,17 +160,26 @@
 
                         Donasi
                         @if(is_numeric($donate))
-                        <h6>Rp. {{ number_format($donate) }}</h6>
+                            <h6>Rp. {{ number_format($donate) }}</h6>
                         @else
                             <h6>Rp. 0</h6>
                         @endif
-                        Total
+                        Total Pembelian
                         @if($discount!=0)
-                            <h4>
+                            <h6>
                                 <del>Rp. {{ number_format($total+$discount) }}</del>
-                            </h4>
+                            </h6>
                         @endif
-                        <h4>Rp. {{ number_format($total) }} </h4>
+                        <h6>Rp. {{ number_format($total) }} </h6>
+
+                        Total Keseluruhan :
+                        @if(is_numeric($donate))
+                            <h4>Rp. {{ number_format($total+$donate) }}</h4>
+                        @else
+                            <h4>Rp. {{ number_format($total)}}</h4>
+                        @endif
+
+
                         @if($discount!=0)
                             <h6>Hemat Rp. {{number_format($discount)}}</h6>
                         @endif
@@ -178,6 +187,8 @@
                         <h4>Rp.
                             @if (is_numeric($fee) && is_numeric($total) && is_numeric($donate))
                                 {{ number_format($fee-$donate-$total) }}
+                            @elseif ((is_numeric($fee) && is_numeric($total)))
+                                {{ number_format($fee-$total) }}
                             @endif
                         </h4>
                     </div>
@@ -185,7 +196,7 @@
             </div>
             <div class="col-lg-12 p-1">
                 <button class="btn btn-danger" style="width: 100%"
-                         wire:click="cancel()">
+                        wire:click="cancel()">
                     Batal
                 </button>
             </div>
@@ -195,12 +206,12 @@
             {{--                </button>--}}
             {{--            </div>--}}
             <div class="col-lg-12 p-1">
-                <button class="btn btn-primary" style="width: 100%"  wire:click="proses()">
+                <button class="btn btn-primary" style="width: 100%" wire:click="proses()">
                     Proses
                 </button>
             </div>
             <div class="col-lg-12 p-1">
-                <button class="btn btn-primary" style="width: 100%"  wire:click="prosesIm()">
+                <button class="btn btn-primary" style="width: 100%" wire:click="prosesIm()">
                     Proses Karyawan
                 </button>
             </div>
