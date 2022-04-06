@@ -109,12 +109,14 @@
                             @foreach($productAmounts as $key=>$pa)
                                 @if($products->find($key)->product_company_id==$pc->id)
                                     <tr>
+
                                         <td>{{ $count++ }}</td>
                                         <td>{{ $products->find($key)->product_code }}</td>
                                         <td>{{ $products->find($key)->title }}</td>
                                         <td>{{ number_format($pa) }}</td>
                                         <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
                                         <td>Rp. {{ number_format($productTotals[$key]) }}</td>
+                                        @php($total+=$productTotals[$key])
                                     </tr>
                                 @endif
                             @endforeach
