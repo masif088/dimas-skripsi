@@ -109,21 +109,32 @@
                             @foreach($productAmounts as $key=>$pa)
                                 @if($products->find($key)->product_company_id==$pc->id)
                                     <tr>
-
                                         <td>{{ $count++ }}</td>
                                         <td>{{ $products->find($key)->product_code }}</td>
                                         <td>{{ $products->find($key)->title }}</td>
                                         <td>{{ number_format($pa) }}</td>
                                         <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
                                         <td>Rp. {{ number_format($productTotals[$key]) }}</td>
-                                        @php($total+=$productTotals[$key])
                                     </tr>
                                 @endif
                             @endforeach
+
+                            @foreach($productMethod as $key=>$ma)
+                                @if($key==$pc->id)
+                                    @foreach($ma as $key2=>$m)
+                                        <tr>
+                                            <td colspan="5">{{ \App\Models\PaymentMethod::find($key2)->title }}</td>
+                                            <td>Rp. {{ number_format($m) }}@if(\App\Models\PaymentMethod::find($key2)->take!=1) -> {{ number_format($m*\App\Models\PaymentMethod::find($key2)->take) }}(perkiraan) @endif</td>
+                                        </tr>
+                                    @endforeach
+                                @endif
+                            @endforeach
                             <tr>
-                                <td colspan="5">Total :</td>
-                                <td>Rp. {{ number_format($total) }}</td>
+                                <td colspan="5"><b>Total :</b></td>
+                                <td><b>Rp. {{ number_format($total) }}</b></td>
                             </tr>
+
+                            {{--                            {{ $productTotals }}--}}
                             </tbody>
                         </table>
 
