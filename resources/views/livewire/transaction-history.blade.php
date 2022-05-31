@@ -160,7 +160,7 @@
                             <div class="card-body" style="padding: 10px">
                                 @php($total=0)
                                 @php($discount=0)
-                                @foreach($transaction->transactionDetails as $td)
+                                @foreach($transaction->transactionDetails as $order)
                                     @if($order->product->discount_state)
                                         @php($total+=$order->product->discount_price*$order->amount)
                                         @php($discount+=($order->product->price - $order->product->discount_price)*$order->amount)
