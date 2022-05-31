@@ -135,14 +135,12 @@
                                 <td colspan="5"><b>Total :</b></td>
                                 <td><b>Rp. {{ number_format($total) }}</b></td>
                             </tr>
-
                             {{--                            {{ $productTotals }}--}}
                             </tbody>
                         </table>
 
                     </div>
                     <div id="table_pagination" class="py-3">
-
                     </div>
                 </div>
             </div>
@@ -156,13 +154,23 @@
                         <div class="card">
                             <div class="card-header {{ $transaction->status_order_id=="2"?'bg-primary':'bg-danger' }}"
                                  style="padding: 10px">
-                                {{ $transaction->transaction_code }} - {{$transaction->name}}
+                                {{ $transaction->transaction_code }} - {{ $transaction->paymentMethod->title }}
+                                <br>{{$transaction->name}} - {{}}
                             </div>
                             <div class="card-body" style="padding: 10px">
+                                @php($total=0)
+                                @php($discount=0)
                                 @foreach($transaction->transactionDetails as $td)
+                                    @if($order->product->discount_state)
+                                        @php($total+=$order->product->discount_price*$order->amount)
+                                        @php($discount+=($order->product->price - $order->product->discount_price)*$order->amount)
+                                    @else
+                                        @php($total+=$order->product->price*$order->amount)
+                                    @endif
                                     {{$td->product->title}}
                                     <br>
                                 @endforeach
+                                <b>{{ $total }}</b>
                             </div>
                         </div>
                     </div>
