@@ -167,7 +167,7 @@
                                     @else
                                         @php($total+=$order->product->price*$order->amount)
                                     @endif
-                                    {{$td->product->title}}
+                                    {{$order->product->title}}
                                     <br>
                                 @endforeach
                                 <b>{{ $total }}</b>
