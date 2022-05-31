@@ -155,7 +155,7 @@
                             <div class="card-header {{ $transaction->status_order_id=="2"?'bg-primary':'bg-danger' }}"
                                  style="padding: 10px">
                                 {{ $transaction->transaction_code }} - {{ $transaction->paymentMethod->title }}
-                                <br>{{$transaction->name}} - {{}}
+                                <br>{{$transaction->name}}
                             </div>
                             <div class="card-body" style="padding: 10px">
                                 @php($total=0)
