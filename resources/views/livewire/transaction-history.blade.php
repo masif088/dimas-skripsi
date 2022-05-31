@@ -161,12 +161,8 @@
                                 @php($total=0)
                                 @php($discount=0)
                                 @foreach($transaction->transactionDetails as $order)
-                                    @if($order->product->discount_state)
-                                        @php($total+=$order->product->discount_price*$order->amount)
-                                        @php($discount+=($order->product->price - $order->product->discount_price)*$order->amount)
-                                    @else
-                                        @php($total+=$order->product->price*$order->amount)
-                                    @endif
+
+                                        @php($total+=$order->price*$order->amount)
                                     {{$order->product->title}}
                                     <br>
                                 @endforeach
