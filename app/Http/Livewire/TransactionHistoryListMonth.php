@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\EmployeePayment;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\ProductCompany;
@@ -54,7 +55,7 @@ class TransactionHistoryListMonth extends Component
     public function mount()
     {
 
-        $time=[
+        $time = [
             '00.00-04.00',
             '04.00-08.00',
             '08.00-12.00',
@@ -62,18 +63,18 @@ class TransactionHistoryListMonth extends Component
             '16.00-20.00',
             '20.00-00.00',
         ];
-        $c=[
-            $time[0]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[1]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[2]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[3]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[4]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[5]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+        $c = [
+            $time[0] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[1] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[2] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[3] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[4] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[5] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
         ];
-        $a=4;
+        $a = 4;
         if (config('app.name', 'Laravel') == "Lekker Putar") {
-            $a=2;
-            $time=[
+            $a = 2;
+            $time = [
                 '00.00-02.00',
                 '02.00-04.00',
                 '04.00-06.00',
@@ -87,12 +88,12 @@ class TransactionHistoryListMonth extends Component
                 '20.00-22.00',
                 '22.00-24.00',
             ];
-            $c=[
-                $time[7]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[8]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[9]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[10]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[11]=>[1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $c = [
+                $time[7] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[8] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[9] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[10] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[11] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
             ];
         }
 
@@ -208,20 +209,20 @@ group BY DAYOFWEEK(created_at)";
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w=0;
-        $w0=1;
+        $w = 0;
+        $w0 = 1;
         foreach ($dow as $d) {
-            if ($w!=$d->weeks){
-                if ($w!=0){
-                    $this->dayMoney['Minggu ke-'. $w0] = $b;
-                    $w0+=1;
+            if ($w != $d->weeks) {
+                if ($w != 0) {
+                    $this->dayMoney['Minggu ke-' . $w0] = $b;
+                    $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w=$d->weeks;
+                $w = $d->weeks;
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayMoney['Minggu ke-'. $w0] = $b;
+        $this->dayMoney['Minggu ke-' . $w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -236,20 +237,20 @@ group BY DAYOFWEEK(created_at)";
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w=0;
-        $w0=1;
+        $w = 0;
+        $w0 = 1;
         foreach ($dow as $d) {
-            if ($w!=$d->weeks){
-                if ($w!=0){
-                    $this->dayItem['Minggu ke-'. $w0] = $b;
-                    $w0+=1;
+            if ($w != $d->weeks) {
+                if ($w != 0) {
+                    $this->dayItem['Minggu ke-' . $w0] = $b;
+                    $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w=$d->weeks;
+                $w = $d->weeks;
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayItem['Minggu ke-'. $w0] = $b;
+        $this->dayItem['Minggu ke-' . $w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -263,20 +264,20 @@ group BY DAYOFWEEK(created_at)";
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w=0;
-        $w0=1;
+        $w = 0;
+        $w0 = 1;
         foreach ($dow as $d) {
-            if ($w!=$d->weeks){
-                if ($w!=0){
-                    $this->dayVisitor['Minggu ke-'. $w0] = $b;
-                    $w0+=1;
+            if ($w != $d->weeks) {
+                if ($w != 0) {
+                    $this->dayVisitor['Minggu ke-' . $w0] = $b;
+                    $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w=$d->weeks;
+                $w = $d->weeks;
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayVisitor['Minggu ke-'. $w0] = $b;
+        $this->dayVisitor['Minggu ke-' . $w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -290,20 +291,20 @@ group BY DAYOFWEEK(created_at)";
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w=0;
-        $w0=1;
+        $w = 0;
+        $w0 = 1;
         foreach ($dow as $d) {
-            if ($w!=$d->weeks){
-                if ($w!=0){
-                    $this->dayTransaction['Minggu ke-'. $w0] = $b;
-                    $w0+=1;
+            if ($w != $d->weeks) {
+                if ($w != 0) {
+                    $this->dayTransaction['Minggu ke-' . $w0] = $b;
+                    $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w=$d->weeks;
+                $w = $d->weeks;
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayTransaction['Minggu ke-'. $w0] = $b;
+        $this->dayTransaction['Minggu ke-' . $w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -315,7 +316,7 @@ WHERE transactions.status_order_id=2 and
 GROUP BY days,hourgroup
 ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
-        $b=$c;
+        $b = $c;
         foreach ($dow as $d) {
             $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
         }
@@ -331,7 +332,7 @@ ORDER BY hourgroup, days ASC;";
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
-        $b=$c;
+        $b = $c;
         foreach ($dow as $d) {
             $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
         }
@@ -349,7 +350,7 @@ ORDER BY hourgroup, days ASC;";
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
-        $b=$c;
+        $b = $c;
         foreach ($dow as $d) {
             $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
         }
@@ -366,12 +367,11 @@ ORDER BY hourgroup, days ASC;";
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
-        $b=$c;
+        $b = $c;
         foreach ($dow as $d) {
             $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
         }
         $this->dayTimeItem = $b;
-
 
 
         foreach ($this->transactions as $tl) {
@@ -408,6 +408,45 @@ ORDER BY hourgroup, days ASC;";
         $this->datas['amount'] = $amount;
         $this->datas['product'] = $product;
 //        $this->datas['visitor']=$transactions->sum('visitors');
+    }
+
+    public function downlaod()
+    {
+        $fileName = "Rekap-kas_$this->month-$this->year" . ".csv";
+        $headers = array(
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        );
+        $callback = function () {
+            $delimiter = ';';
+            $file = fopen('php://output', 'w');
+//            $company=ProductCompany::pluck('title')->toArray();
+            $company = ProductCompany::get();
+            $head = ['Tanggal', 'Nama', 'Item', 'amount', 'discount', 'total'];
+            foreach ($company as $c) {
+                fputcsv($file, [$c->title], $delimiter);
+                fputcsv($file, $head, $delimiter);
+                $transaction = EmployeePayment::whereMonth('created_at', $this->month)
+                    ->whereYear('created_at', $this->year)
+                    ->whereHas('product', function ($q) use ($c) {
+                        $q->where('product_company_id', $c->id);
+                    })->get();
+                $date = "";
+                foreach ($transaction as $t) {
+                    if ($date != $t->created_at) {
+                        $date = $t->created_at;
+                        fputcsv($file, [$t->created_at->format('d/M/Y')], $delimiter);
+                    }
+                    fputcsv($file, ['', $t->name, $t->product->title, $t->amount, $t->discount, $t->amount * $t->discount], $delimiter);
+                }
+                fputcsv($file, [''], $delimiter);
+            }
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
     }
 
     public function render()

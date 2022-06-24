@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\EmployeePayment;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\TransactionDetail;
@@ -182,11 +183,19 @@ class Transaction extends Component
             'donate' => $this->donate
         ]);
         foreach ($this->orderList as $order => $value) {
+            $price = $this->products->find($order)->price;
             TransactionDetail::create([
                 'product_id' => $order,
                 'transaction_id' => $transaction->id,
-                'price' => $this->roundUpToAny($this->products->find($order)->price / 130) * 100,
+                'price' => $this->roundUpToAny($price / 130) * 100,
                 'amount' => $value
+            ]);
+            EmployeePayment::create([
+                'product_id' => $order,
+                'name' => $this->name,
+                'transaction_id' => $transaction->id,
+                'amount'=>$value,
+                'discount' => ($price - $this->roundUpToAny($price / 130) * 100),
             ]);
         }
         $this->orderList = [];

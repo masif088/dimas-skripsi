@@ -97,6 +97,7 @@ GROUP BY date(transactions.created_at)";
     })->name('dashboard');
 
     Route::get('transaction', [TransactionController::class, 'index'])->name('transaction.index');
+    Route::get('transaction/download-employee-payment',[TransactionController::class,'download'])->name('transaction.download');
     Route::get('transaction/active', [TransactionController::class, 'active'])->name('transaction.active');
     Route::get('transaction/history', [TransactionController::class, 'history'])->name('transaction.history');
     Route::get('transaction/history/{date}', [TransactionController::class, 'historyDetail'])->name('transaction.history-detail');

@@ -13,7 +13,7 @@ class DataIncomeOutcome extends Component
 //'title3' => 'no title', 'value3'=>'0',
 //'btn1' => 'PDF',
 //'btnColor1' => 'btn-danger',
-//'btn2' => 'csv',
+//'btn2' => ' csv',
 //'btnColor2' => 'btn-success',
 //'link1' => '#',
 //'link2' => '#',

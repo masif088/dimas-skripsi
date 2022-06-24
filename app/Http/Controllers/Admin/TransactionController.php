@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\CodeCashBook;
+use App\Models\ProductCompany;
 use App\Models\Transaction;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Str;
 
 class TransactionController extends Controller
 {
@@ -72,5 +75,27 @@ class TransactionController extends Controller
 //        }
         $pdf->loadView($view, compact('transaction'))->setPaper([0, 0, 250, $height]);
         return $pdf->stream($transaction->transaction_code . "-kitchen.pdf");
+    }
+
+    public function download($month, $year){
+        $fileName = "Rekap-kas_$month-$year" . ".csv";
+        $headers = array(
+            "Content-type" => "text/csv",
+            "Content-Disposition" => "attachment; filename=$fileName",
+            "Pragma" => "no-cache",
+            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
+            "Expires" => "0"
+        );
+        $callback = function () {
+            $delimiter = ';';
+            $file = fopen('php://output', 'w');
+            $company=ProductCompany::pluck('title')->toArray();
+            $head=['Tanggal','Nama','Item'];
+            array_push($head,$company);
+            fputcsv($file,$head,$delimiter);
+
+            fclose($file);
+        };
+        return response()->stream($callback, 200, $headers);
     }
 }

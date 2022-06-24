@@ -1,20 +1,25 @@
 <div class="row">
+    <div class="col-lg-4 mb-3">
+        <button href="" wire:click="downlaod" class="btn btn-primary">Download rekap diskon karyawan</button>
+        <br>
+    </div>
     <div class="col-lg-12">
         <x-data-income-outcome
             componentId="some"
             title1="Pemasukan bulan ini"
             :value1="$totalMonth"
-            btn1="PDF"
+            btn1="Potongan karyawan"
             btnColor1="btn-danger"
             btn2="CSV"
             btnColor2="btn-success"
-            link1="#"
+            link1=""
             link2="#"
             :data2="$income"
             dataTitle2="Pemasukkan"
             :categories="$category"
         />
     </div>
+
     <x-data-radar title="Omzer Mingguan Bulan Ini" id="money" :datas="$dayOfWeekMoney"/>
     <x-data-radar title="Omzet Harian Bulan Ini" id="money1" :datas="$dayMoney"/>
     <x-data-bar-group title="Omzet Perjam Bulan ini" id="money3" :datas="$dayTimeMoney"/>
