@@ -436,8 +436,8 @@ ORDER BY hourgroup, days ASC;";
                     })->get();
                 $date = "";
                 foreach ($transaction as $t) {
-                    if ($date != $t->created_at) {
-                        $date = $t->created_at;
+                    if ($date != $t->created_at->format('d/M/Y')) {
+                        $date = $t->created_at->format('d/M/Y');
                         fputcsv($file, [$t->created_at->format('d/M/Y')], $delimiter);
                     }
                     fputcsv($file, ['', $t->name, $t->product->title, $t->amount, $t->discount, $t->amount * $t->discount], $delimiter);
