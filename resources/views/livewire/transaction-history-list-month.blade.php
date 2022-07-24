@@ -108,6 +108,27 @@
                     @endforeach
                 </div>
                 <br>
+                <b>BERDASARKAN USAHA</b>
+                <br>
+                <div class="row">
+                    @foreach($company as $t)
+                        @isset($datas['product']['company'][$t->id])
+                            <div class="col-4">
+                                <b>Favorit {{$t->title}}:</b> <br>
+                                1. {{ $this->products->find(array_keys($datas['product']['company'][$t->id])[0])->title }}
+                                ({{ $productAmounts[array_keys($datas['product']['company'][$t->id])[0]] }})
+                                <br>
+                                @isset(array_keys($datas['product']['company'][$t->id])[1])
+                                    2. {{ $this->products->find(array_keys($datas['product']['company'][$t->id])[1])->title }}
+                                    ({{ $productAmounts[array_keys($datas['product']['company'][$t->id])[1]] }})
+                                    <br>
+                                @endif
+                                <br>
+                            </div>
+                        @endif
+                    @endforeach
+                </div>
+                <br>
                 <b>OMZET</b> <br>
                 @foreach($method as $t)
                     @isset($datas['product']['payment_method'][$t->id])
@@ -174,7 +195,7 @@
                             <thead>
                             <tr style="font-weight: bold">
                                 <td>No</td>
-                                <td>Kode</td>
+                                <td>Jenis</td>
                                 <td>Produk</td>
                                 <td>Qty</td>
                                 <td>Harga Rata-rata</td>
@@ -188,7 +209,7 @@
                                 @if($products->find($key)->product_company_id==$pc->id)
                                     <tr>
                                         <td>{{ $count++ }}</td>
-                                        <td>{{ $products->find($key)->product_code }}</td>
+                                        <td>{{ $products->find($key)->productType->title }}</td>
                                         <td>{{ $products->find($key)->title }}</td>
                                         <td>{{ number_format($pa) }}</td>
                                         <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
