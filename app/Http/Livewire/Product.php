@@ -22,6 +22,9 @@ class Product extends Component
     public $incomeThisMonth;
     public $incomePreviousMonth;
     public $income2PreviousMonth;
+    public $saleThisMonth;
+    public $salePreviousMonth;
+    public $sale2PreviousMonth;
     public $revenueThisMonth=0;
     public $revenuePreviousMonth=0;
     public $revenue2PreviousMonth=0;
@@ -40,6 +43,7 @@ class Product extends Component
         $category1 = [];
         foreach ($period as $dt) {
             $this->incomeThisMonth[intval($dt->format("d"))] = 0;
+            $this->saleThisMonth[intval($dt->format("d"))] = 0;
             array_push($category1, intval($dt->format("d")));
         }
 
@@ -58,6 +62,7 @@ GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
             $this->incomeThisMonth[$g1->dateList] = $g1->total;
+            $this->saleThisMonth[$g1->dateList] = $g1->amount;
             $this->revenueThisMonth+=$g1->total;
             $this->amountThisMonth+=$g1->amount;
 
@@ -71,6 +76,7 @@ GROUP BY day(transactions.created_at)";
         $category2 = [];
         foreach ($period as $dt) {
             $this->incomePreviousMonth[intval($dt->format("d"))] = 0;
+            $this->salePreviousMonth[intval($dt->format("d"))] = 0;
             array_push($category2, intval($dt->format("d")));
         }
         $query = "
@@ -88,6 +94,7 @@ GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
             $this->incomePreviousMonth[$g1->dateList] = $g1->total;
+            $this->salePreviousMonth[$g1->dateList] = $g1->amount;
             $this->revenuePreviousMonth+=$g1->total;
             $this->amountPreviousMonth+=$g1->amount;
         }
@@ -99,7 +106,7 @@ GROUP BY day(transactions.created_at)";
         $period = new DatePeriod($start, $interval, $end);
         foreach ($period as $dt) {
             $this->income2PreviousMonth[intval($dt->format("d"))] = 0;
-
+            $this->sale2PreviousMonth[intval($dt->format("d"))] = 0;
         }
         $query = "
 SELECT day(transactions.created_at) as dateList,count(*) as counter,
@@ -116,6 +123,7 @@ GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
             $this->income2PreviousMonth[$g1->dateList] = $g1->total;
+            $this->sale2PreviousMonth[$g1->dateList] = $g1->amount;
             $this->revenue2PreviousMonth+=$g1->total;
             $this->amount2PreviousMonth+=$g1->amount;
         }
