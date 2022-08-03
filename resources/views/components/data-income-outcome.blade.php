@@ -1,6 +1,6 @@
 @props([
 'componentId' => 'some',
-'title'=> 'Pemasukan - Pengeluaran',
+'title',
 'title1', 'value1'=>'0',
 'title2', 'value2'=>'0',
 'title3', 'value3'=>'0',
@@ -24,10 +24,12 @@
             <div class="row m-0">
                 <div class="col-xl-3 earning-content p-0">
                     <div class="row m-0 chart-left">
+                        @isset($title)
                         <div class="col-xl-12 p-0 left_side_earning">
                             <h5>DATA</h5>
                             <p class="font-roboto">{{ $title }}</p>
                         </div>
+                        @endif
                         @isset($title1)
                         <div class="col-xl-12 p-0 left_side_earning">
                             <h5>{{ $value1 }}</h5>

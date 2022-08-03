@@ -7,7 +7,9 @@
         <x-data-income-outcome
             componentId="some"
             title1="Pemasukan bulan ini"
-            :value1="$totalMonth"
+            value1="Rp. {{ number_format($totalMonth,0,',','.') }}"
+            title2="Pemasukan bulan ini"
+            value1="Rp. {{ number_format($totalMonth,0,',','.') }}"
             btn1="Potongan karyawan"
             btnColor1="btn-danger"
             btn2="CSV"

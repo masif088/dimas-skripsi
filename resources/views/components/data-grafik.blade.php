@@ -11,39 +11,17 @@
 ])
 <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
     <div class="card earning-card">
-        <div class="card-header" style="padding: 10px">
+        <div class="card-header" style="padding: 20px">
             <h4>{{ $title }}</h4>
         </div>
         <div class="card-body p-0">
             <div class="row m-0">
                 <div class="col-xl-12 p-0">
-                    <div class="chart-right">
-                        <div class="row m-0 p-tb">
-                            <div class="col-xl-8 col-md-8 col-sm-8 col-12 p-0">
-                                <div class="inner-top-left">
-                                    <ul class="d-flex list-unstyled">
-                                        {{--                                                    <li>Daily</li>--}}
-                                        {{--                                                    <li class="active">Weekly</li>--}}
-                                        {{--                                                    <li>Monthly</li>--}}
-                                        {{--                                                    <li>Yearly</li>--}}
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-4 col-sm-4 col-12 p-0 justify-content-end">
-                                <div class="inner-top-right">
-                                    <ul class="d-flex list-unstyled justify-content-end">
-                                        {{--                                                    <li>Online</li>--}}
-                                        {{--                                                    <li>Store</li>--}}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xl-12">
-                                <div class="card-body p-0">
-                                    <div class="current-sale-container">
-                                        <div id="{{$componentId}}"></div>
-                                    </div>
+                    <div class="row">
+                        <div class="col-xl-12">
+                            <div class="card-body p-0">
+                                <div class="current-sale-container">
+                                    <div id="{{$componentId}}"></div>
                                 </div>
                             </div>
                         </div>
@@ -61,7 +39,7 @@
                 name: '{{ $dataTitle1 }}',
                 data: [
                     @foreach($data1 as $d1)
-                    {{$d1}},
+                        {{$d1}},
                     @endforeach
                 ]
             }, {
@@ -117,7 +95,7 @@
             markers: {
                 strokeWidth: 3,
                 colors: "#ffffff",
-                strokeColors: [CubaAdminConfig.primary, CubaAdminConfig.secondary,'#00ff00'],
+                strokeColors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#00ff00'],
                 hover: {
                     size: 6,
                 }
@@ -147,7 +125,7 @@
                     top: -40
                 }
             },
-            colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary,'#00ff00'],
+            colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary, '#00ff00'],
             fill: {
                 type: 'gradient',
                 gradient: {
