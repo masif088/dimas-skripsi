@@ -151,7 +151,7 @@
             markers: {
                 strokeWidth: 3,
                 colors: "#ffffff",
-                strokeColors: [CubaAdminConfig.primary, CubaAdminConfig.secondary],
+                strokeColors: [CubaAdminConfig.primary, CubaAdminConfig.secondary,'#00ff00'],
                 hover: {
                     size: 6,
                 }
@@ -181,7 +181,7 @@
                     top: -40
                 }
             },
-            colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary],
+            colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary,'#00ff00'],
             fill: {
                 type: 'gradient',
                 gradient: {
