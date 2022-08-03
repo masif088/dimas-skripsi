@@ -19,6 +19,9 @@ class ProductController extends Controller
     public function edit($id){
         return view('pages.product.edit',compact('id'));
     }
+    public function show($id){
+        return view('pages.product.show',compact('id'));
+    }
     public function destroy($id){
         Product::find($id)->delete();
         return redirect(route('admin.product.index'));

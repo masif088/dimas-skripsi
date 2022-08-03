@@ -43,7 +43,8 @@
                 <td style="{{ !($product->discount_state)?'opacity: 0.5':'' }}">{{number_format($product->discount_price)}}</td>
                 <td>
                     <div class="form-check checkbox checkbox-primary mb-0">
-                        <input class="form-check-input" type="checkbox" data-bs-original-title="" title="" disabled {{ ($product->discount_state)?'checked':'' }}>
+                        <input class="form-check-input" type="checkbox" data-bs-original-title="" title=""
+                               disabled {{ ($product->discount_state)?'checked':'' }}>
                         <label class="form-check-label" for="checkbox-primary-1"></label>
                     </div>
                 </td>
@@ -61,15 +62,19 @@
                     <img src="{{ asset('storage/'.$product->thumbnail) }}" alt="" style="width: 150px">
                 </td>
                 <td style="width: 100px">
-                    <a href="{{ route('admin.product.edit',$product->id) }}" class="btn btn-primary" style="width: 100px">Ubah</a>
+                    <a href="{{ route('admin.product.show',$product->id) }}" class="btn btn-success"
+                       style="width: 100px">Lihat</a>
+                    <a href="{{ route('admin.product.edit',$product->id) }}" class="btn btn-primary"
+                       style="width: 100px">Ubah</a>
                     @if($product->has('transactionDetails')!=null)
-                    <form method="POST" action="{{ route('admin.product.destroy',$product->id) }}"
-                          style="display: inline-block">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-danger" title="Delete" style="width: 100px">Hapus</button>
-                    </form>
-                        @endif
+                        <form method="POST" action="{{ route('admin.product.destroy',$product->id) }}"
+                              style="display: inline-block">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
+                            <button type="submit" class="btn btn-danger" title="Delete" style="width: 100px">Hapus
+                            </button>
+                        </form>
+                    @endif
                 </td>
             </tr>
         @endforeach

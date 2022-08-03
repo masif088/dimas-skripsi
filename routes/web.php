@@ -112,7 +112,7 @@ GROUP BY date(transactions.created_at)";
     Route::get('stock/add/{id}', [StockGoodController::class, 'add'])->name('stock.add');
     Route::resource('product-type', ProductTypeController::class)->only('index', 'create', 'edit', 'destroy');
     Route::resource('product-company', ProductCompanyController::class)->only('index', 'create', 'edit', 'destroy');
-    Route::resource('product', ProductController::class)->only('index', 'create', 'edit', 'destroy');
+    Route::resource('product', ProductController::class)->only('index', 'create', 'edit','show', 'destroy');
 
 //    Route::resource('shift', ShiftController::class)->only()
 
