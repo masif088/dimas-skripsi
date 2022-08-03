@@ -104,7 +104,7 @@ GROUP BY day(transactions.created_at)";
         $query = "
 SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total ,
-  SUM(transaction_details.amount) as total ,
+  SUM(transaction_details.amount) as amount ,
   SUM(transactions.visitors) as visitors
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
