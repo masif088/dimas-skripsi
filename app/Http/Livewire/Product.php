@@ -20,8 +20,14 @@ class Product extends Component
     public $data;
     public $category;
     public $incomeThisMonth;
-    public $incomePreviewMonth;
-    public $income2PreviewMonth;
+    public $incomePreviousMonth;
+    public $income2PreviousMonth;
+    public $revenueThisMonth=0;
+    public $revenuePreviousMonth=0;
+    public $revenue2PreviousMonth=0;
+    public $amountThisMonth=0;
+    public $amountPreviousMonth=0;
+    public $amount2PreviousMonth=0;
 
     public function mount()
     {
@@ -40,6 +46,7 @@ class Product extends Component
         $query = "
 SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total ,
+  SUM(transaction_details.amount) as amount ,
   SUM(transactions.visitors) as visitors
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
@@ -51,21 +58,25 @@ GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
             $this->incomeThisMonth[$g1->dateList] = $g1->total;
+            $this->revenueThisMonth+=$g1->total;
+            $this->amountThisMonth+=$g1->amount;
+
         }
 
-        $now=$now->subMonth(1);
+        $now=$now->subMonth();
         $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
         $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($start, $interval, $end);
         $category2 = [];
         foreach ($period as $dt) {
-            $this->incomePreviewMonth[intval($dt->format("d"))] = 0;
+            $this->incomePreviousMonth[intval($dt->format("d"))] = 0;
             array_push($category2, intval($dt->format("d")));
         }
         $query = "
 SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total ,
+  SUM(transaction_details.amount) as amount ,
   SUM(transactions.visitors) as visitors
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
@@ -76,21 +87,24 @@ WHERE month(transactions.created_at)=$now->month and
 GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
-            $this->incomePreviewMonth[$g1->dateList] = $g1->total;
+            $this->incomePreviousMonth[$g1->dateList] = $g1->total;
+            $this->revenuePreviousMonth+=$g1->total;
+            $this->amountPreviousMonth+=$g1->amount;
         }
 
-        $now=$now->subMonth(1);
+        $now=$now->subMonth();
         $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
         $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($start, $interval, $end);
         foreach ($period as $dt) {
-            $this->income2PreviewMonth[intval($dt->format("d"))] = 0;
+            $this->income2PreviousMonth[intval($dt->format("d"))] = 0;
 
         }
         $query = "
 SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total ,
+  SUM(transaction_details.amount) as total ,
   SUM(transactions.visitors) as visitors
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
@@ -101,10 +115,10 @@ WHERE month(transactions.created_at)=$now->month and
 GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
-            $this->income2PreviewMonth[$g1->dateList] = $g1->total;
+            $this->income2PreviousMonth[$g1->dateList] = $g1->total;
+            $this->revenue2PreviousMonth+=$g1->total;
+            $this->amount2PreviousMonth+=$g1->amount;
         }
-
-//        dd($this->incomePreviewMonth);
         if (count($category1)<count($category2)){
             $this->category=$category2;
         }else{
@@ -122,6 +136,7 @@ GROUP BY day(transactions.created_at)";
         }
 
     }
+
 
     public function render()
     {
