@@ -14,6 +14,8 @@
 'dataTitle1' => 'no title',
 'data2' => [],
 'dataTitle2' => 'no title',
+'data3' => [],
+'dataTitle3' => 'no title',
 'categories' => [],
 ])
 <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
@@ -101,6 +103,13 @@
                 data: [
                     @foreach($data2 as $d2)
                         {{$d2}},
+                    @endforeach
+                ]
+            }, {
+                name: '{{ $dataTitle3 }}',
+                data: [
+                    @foreach($data3 as $d3)
+                        {{$d3}},
                     @endforeach
                 ]
             }],

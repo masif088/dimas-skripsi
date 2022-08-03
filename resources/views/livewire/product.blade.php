@@ -17,7 +17,10 @@
             dataTitle1="Bulan Lalu"
             :data2="$incomeThisMonth"
             dataTitle2="Bulan Ini"
+            :data3="$income2PreviewMonth"
+            dataTitle3="2 Bulan Lalu"
             :categories="$category"
+
         />
     </div>
 </div>
