@@ -86,7 +86,7 @@ GROUP BY day(transactions.created_at)";
         $period = new DatePeriod($start, $interval, $end);
         $category = [];
         foreach ($period as $dt) {
-            $income[$dt->format("d")] = 0;
+            $income[intval($dt->format("d"))] = 0;
             array_push($category, $dt->format("d"));
         }
         foreach ($g as $g1) {
@@ -111,7 +111,7 @@ GROUP BY day(transactions.created_at)";
         $period = new DatePeriod($start, $interval, $end);
         $category = [];
         foreach ($period as $dt) {
-            $income2[$dt->format("d")] = 0;
+            $income2[intval($dt->format("d"))] = 0;
         }
         foreach ($g as $g1) {
             $income2[$g1->dateList] = $g1->total;
