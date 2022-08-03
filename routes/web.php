@@ -115,7 +115,7 @@ GROUP BY day(transactions.created_at)";
             array_push($category, $dt->format("d"));
         }
         foreach ($g as $g1) {
-            $income[$g1->dateList] = $g1->total;
+            $income2[$g1->dateList] = $g1->total;
         }
 
         $donate=$monthly->sum('donate');
