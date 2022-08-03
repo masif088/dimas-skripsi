@@ -2,13 +2,13 @@
     <h5>Omzet Produk</h5>
     <div class="row">
         <div class="col-4">
-            <x-simple-card color="bg-primary" title="Bulan ini" value="{{ $revenueThisMonth }}" icon="dollar-sign"/>
+            <x-simple-card color="bg-primary" title="Bulan ini" value="Rp. {{ number_format($revenueThisMonth) }}" icon="dollar-sign"/>
         </div>
         <div class="col-4">
-            <x-simple-card color="bg-secondary" title="Bulan lalu" value="{{ $revenuePreviousMonth }}" icon="dollar-sign"/>
+            <x-simple-card color="bg-secondary" title="Bulan lalu" value="Rp. {{ number_format($revenuePreviousMonth) }}" icon="dollar-sign"/>
         </div>
         <div class="col-4">
-            <x-simple-card color="bg-success" title="2 Bulan lalu" value="{{ $revenue2PreviousMonth }}" icon="dollar-sign"/>
+            <x-simple-card color="bg-success" title="2 Bulan lalu" value="Rp. {{ number_format($revenue2PreviousMonth) }}" icon="dollar-sign"/>
         </div>
     </div>
 
