@@ -89,14 +89,14 @@
         // currently sale
         var options = {
             series: [{
-                name: 'Pengeluaran',
+                name: '{{ $dataTitle1 }}',
                 data: [
                     @foreach($data1 as $d1)
                     {{$d1}},
                     @endforeach
                 ]
             }, {
-                name: 'Pemasukan',
+                name: '{{ $dataTitle2 }}',
                 data: [
                     @foreach($data2 as $d2)
                         {{$d2}},
