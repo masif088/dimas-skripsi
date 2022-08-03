@@ -136,7 +136,7 @@
                 }
             },
             legend: {
-                show: false,
+                show: true,
             },
             tooltip: {
                 x: {
