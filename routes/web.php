@@ -111,7 +111,7 @@ GROUP BY day(transactions.created_at)";
         $period = new DatePeriod($start, $interval, $end);
         $category = [];
         foreach ($period as $dt) {
-            $income[$dt->format("d")] = 0;
+            $income2[$dt->format("d")] = 0;
             array_push($category, $dt->format("d"));
         }
         foreach ($g as $g1) {
