@@ -24,7 +24,7 @@ class Product extends Component
 
     public function mount()
     {
-        $now = Carbon::now();
+        $now = Carbon::create(2022,3,1);
         $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
         $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
 
@@ -47,7 +47,9 @@ WHERE month(transactions.created_at)=$now->month and
   transactions.status_order_id=2 and
   transaction_details.product_id=$this->dataId
 GROUP BY day(transactions.created_at)";
+
         $g = DB::select(DB::raw($query));
+//        dd($g);
         foreach ($g as $g1) {
             $this->incomeThisMonth[$g1->dateList] = $g1->total;
         }
@@ -62,6 +64,7 @@ GROUP BY day(transactions.created_at)";
             $this->incomePreviewMonth[$dt->format("d")] = 0;
             array_push($category2, $dt->format("d"));
         }
+        dd($this->incomePreviewMonth);
         if (count($category1)<count($category2)){
             $this->category=$category2;
         }else{
