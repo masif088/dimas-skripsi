@@ -1,29 +1,15 @@
 <div>
+    <h2>{{ $product->title }}</h2>
+
     <div class="row">
-        <div class="col-lg-12">
-            <x-data-income-outcome
-                componentId="produk"
-                :title="$product->title"
-                title1="Produk Terjual"
-                value1="{{ $data['amount'] }}"
-                title2="Omzet Produk"
-                value2="Rp. {{ number_format($data['total']) }}"
-                btn1="Potongan karyawan"
-                btnColor1="btn-danger"
-                btn2="CSV"
-                btnColor2="btn-success"
-                link1=""
-                link2="#"
-                :data2="$salePreviousMonth"
-                dataTitle2="Bulan Lalu"
-                :data1="$saleThisMonth"
-                dataTitle1="Bulan Ini"
-                :data3="$sale2PreviousMonth"
-                dataTitle3="2 Bulan Lalu"
-                :categories="$category"
-            />
+        <div class="col-6">
+            <x-simple-card color="bg-primary" title="Produk terjual" value="{{ $data['amount'] }}" icon="dollar-sign"/>
+        </div>
+        <div class="col-6">
+            <x-simple-card color="bg-secondary" title="Omzet Produk" value="Rp. {{ number_format($data['total']) }}" icon="dollar-sign"/>
         </div>
     </div>
+
     <h5>Omzet Produk</h5>
     <div class="row">
         <div class="col-4">
@@ -49,15 +35,34 @@
             <x-simple-card color="bg-success" title="2 Bulan lalu" value="{{ $amount2PreviousMonth }}" icon="dollar-sign"/>
         </div>
     </div>
+
+    <div class="row">
+        <div class="col-lg-12">
+            <x-data-income-outcome
+                componentId="produk"
+                title="Jumlah Terjual"
+                btn1="Potongan karyawan"
+                btnColor1="btn-danger"
+                btn2="CSV"
+                btnColor2="btn-success"
+                link1=""
+                link2="#"
+                :data2="$salePreviousMonth"
+                dataTitle2="Bulan Lalu"
+                :data1="$saleThisMonth"
+                dataTitle1="Bulan Ini"
+                :data3="$sale2PreviousMonth"
+                dataTitle3="2 Bulan Lalu"
+                :categories="$category"
+            />
+        </div>
+    </div>
+
     <div class="row">
         <div class="col-lg-12">
             <x-data-income-outcome
                 componentId="some"
-                :title="$product->title"
-                title1="Produk Terjual"
-                value1="{{ $data['amount'] }}"
-                title2="Omzet Produk"
-                value2="Rp. {{ number_format($data['total']) }}"
+                title="Omzet"
                 btn1="Potongan karyawan"
                 btnColor1="btn-danger"
                 btn2="CSV"

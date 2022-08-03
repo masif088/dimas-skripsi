@@ -1,7 +1,7 @@
 @props([
 'componentId' => 'some',
 'title'=> 'Pemasukan - Pengeluaran',
-'title1' => 'no title', 'value1'=>'0',
+'title1', 'value1'=>'0',
 'title2', 'value2'=>'0',
 'title3', 'value3'=>'0',
 'btn1' => 'PDF',
@@ -28,7 +28,7 @@
                             <h5>DATA</h5>
                             <p class="font-roboto">{{ $title }}</p>
                         </div>
-                        @if($title1!=null)
+                        @isset($title1)
                         <div class="col-xl-12 p-0 left_side_earning">
                             <h5>{{ $value1 }}</h5>
                             <p class="font-roboto">{{ $title1 }}</p>
