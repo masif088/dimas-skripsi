@@ -64,7 +64,7 @@ GROUP BY day(transactions.created_at)";
             $this->incomePreviewMonth[$dt->format("d")] = 0;
             array_push($category2, $dt->format("d"));
         }
-        dd($this->incomePreviewMonth);
+//        dd($this->incomePreviewMonth);
         if (count($category1)<count($category2)){
             $this->category=$category2;
         }else{
@@ -98,8 +98,6 @@ GROUP BY day(transactions.created_at)";
             $this->incomePreviewMonth[$g1->dateList] = $g1->total;
         }
         dd($this->incomePreviewMonth);
-
-
     }
 
     public function render()
