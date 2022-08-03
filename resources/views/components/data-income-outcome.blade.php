@@ -30,13 +30,13 @@
                         </div>
                         @if($title1!=null)
                         <div class="col-xl-12 p-0 left_side_earning">
-                            <h5>Rp. {{ number_format($value1) }} </h5>
+                            <h5>{{ $value1 }}</h5>
                             <p class="font-roboto">{{ $title1 }}</p>
                         </div>
                         @endif
                         @isset($title2)
                         <div class="col-xl-12 p-0 left_side_earning">
-                            <h5>Rp. {{ number_format($value2) }}</h5>
+                            <h5>{{ $value2 }}</h5>
                             <p class="font-roboto">{{$title2}}</p>
                         </div>
                         @endisset
