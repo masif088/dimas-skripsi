@@ -97,7 +97,7 @@ GROUP BY day(transactions.created_at)";
         foreach ($g as $g1) {
             $this->incomePreviewMonth[$g1->dateList] = $g1->total;
         }
-//        dd($this->incomePreviewMonth);
+        dd($this->incomePreviewMonth);
 
 
     }
