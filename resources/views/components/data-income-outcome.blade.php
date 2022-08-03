@@ -1,5 +1,5 @@
 @props([
-'id' => 'some',
+'componentId' => 'some',
 'title'=> 'Pemasukan - Pengeluaran',
 'title1' => 'no title', 'value1'=>'0',
 'title2', 'value2'=>'0',
@@ -76,7 +76,7 @@
                             <div class="col-xl-12">
                                 <div class="card-body p-0">
                                     <div class="current-sale-container">
-                                        <div id="chart-currently"></div>
+                                        <div id="{{$componentId}}"></div>
                                     </div>
                                 </div>
                             </div>
@@ -201,7 +201,7 @@
             },
         };
 
-        var chart = new ApexCharts(document.querySelector("#chart-currently"), options);
+        var chart = new ApexCharts(document.querySelector("#{{$componentId}}"), options);
         chart.render();
     });
 </script>
