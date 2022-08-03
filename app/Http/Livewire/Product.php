@@ -32,7 +32,7 @@ class Product extends Component
         $period = new DatePeriod($start, $interval, $end);
         $category1 = [];
         foreach ($period as $dt) {
-            $this->incomeThisMonth[$dt->format("d")] = 0;
+            $this->incomeThisMonth[intval($dt->format("d"))] = 0;
             array_push($category1, intval($dt->format("d")));
         }
 
@@ -61,7 +61,7 @@ GROUP BY day(transactions.created_at)";
         $period = new DatePeriod($start, $interval, $end);
         $category2 = [];
         foreach ($period as $dt) {
-            $this->incomePreviewMonth[$dt->format("d")] = 0;
+            $this->incomePreviewMonth[intval($dt->format("d"))] = 0;
             array_push($category2, intval($dt->format("d")));
         }
 //        dd($this->incomePreviewMonth);
@@ -97,6 +97,7 @@ GROUP BY day(transactions.created_at)";
         foreach ($g as $g1) {
             $this->incomePreviewMonth[$g1->dateList] = $g1->total;
         }
+//        dd($this->incomePreviewMonth);
     }
 
     public function render()
