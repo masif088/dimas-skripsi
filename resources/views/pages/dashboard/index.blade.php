@@ -25,8 +25,10 @@
                     value1="Rp. {{ number_format($totalMonth,0,',','.') }}"
                     title2="Total minggu ini"
                     value2="Rp. {{ number_format($totalWeek,0,',','.') }}"
-                    :data2="$income"
-                    dataTitle2="Pemasukkan"
+                    :data2="$income2"
+                    dataTitle2="Bulan lalu"
+                    :data1="$income"
+                    dataTitle1="Bulan ini"
                     :categories="$category"
                 />
             </div>

@@ -69,13 +69,13 @@ Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')->group(func
         }
         $month = date('n');
         $query = "
-SELECT date(transactions.created_at) as dateList,count(*) as counter,
+SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE month(transactions.created_at)=$month and
  transactions.status_order_id=2
-GROUP BY date(transactions.created_at)";
+GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         $income = [];
         $now = Carbon::now();
@@ -86,14 +86,40 @@ GROUP BY date(transactions.created_at)";
         $period = new DatePeriod($start, $interval, $end);
         $category = [];
         foreach ($period as $dt) {
-            $income[$dt->format("Y-m-d")] = 0;
-            array_push($category, $dt->format("Y-m-d"));
+            $income[$dt->format("d")] = 0;
+            array_push($category, $dt->format("d"));
         }
         foreach ($g as $g1) {
             $income[$g1->dateList] = $g1->total;
         }
+
+        $month-=1;
+        $query = "
+SELECT day(transactions.created_at) as dateList,count(*) as counter,
+SUM(transaction_details.price*transaction_details.amount) as total
+FROM transactions
+JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+WHERE month(transactions.created_at)=$month and
+ transactions.status_order_id=2
+GROUP BY day(transactions.created_at)";
+        $g = DB::select(DB::raw($query));
+        $income2 = [];
+        $now = Carbon::now();
+        $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
+        $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
+        $interval = DateInterval::createFromDateString('1 day');
+        $period = new DatePeriod($start, $interval, $end);
+        $category = [];
+        foreach ($period as $dt) {
+            $income[$dt->format("d")] = 0;
+            array_push($category, $dt->format("d"));
+        }
+        foreach ($g as $g1) {
+            $income[$g1->dateList] = $g1->total;
+        }
+
         $donate=$monthly->sum('donate');
-        return view('pages.dashboard.index', compact('totalDay', 'totalMonth', 'totalWeek', 'category', 'income','donate'));
+        return view('pages.dashboard.index', compact('income2','totalDay', 'totalMonth', 'totalWeek', 'category', 'income','donate'));
     })->name('dashboard');
 
     Route::get('transaction', [TransactionController::class, 'index'])->name('transaction.index');
