@@ -1,6 +1,6 @@
 @props([
 'id' => 'some',
-'title'=> 'Pemasukan - Pengeluaran'
+'title'=> 'Pemasukan - Pengeluaran',
 'title1' => 'no title', 'value1'=>'0',
 'title2', 'value2'=>'0',
 'title3', 'value3'=>'0',
