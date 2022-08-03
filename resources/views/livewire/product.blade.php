@@ -2,7 +2,7 @@
     <div class="col-lg-12">
         <x-data-income-outcome
             componentId="some"
-            title="$product->title"
+            :title="$product->title"
             title1="Produk Terjual"
             :value1="$data['amount']"
             title2="Omzet Produk"
