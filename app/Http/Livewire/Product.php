@@ -33,7 +33,7 @@ class Product extends Component
         $category1 = [];
         foreach ($period as $dt) {
             $this->incomeThisMonth[$dt->format("d")] = 0;
-            array_push($category1, $dt->format("d"));
+            array_push($category1, intval($dt->format("d")));
         }
 
         $query = "
@@ -62,7 +62,7 @@ GROUP BY day(transactions.created_at)";
         $category2 = [];
         foreach ($period as $dt) {
             $this->incomePreviewMonth[$dt->format("d")] = 0;
-            array_push($category2, $dt->format("d"));
+            array_push($category2, intval($dt->format("d")));
         }
 //        dd($this->incomePreviewMonth);
         if (count($category1)<count($category2)){
@@ -97,7 +97,6 @@ GROUP BY day(transactions.created_at)";
         foreach ($g as $g1) {
             $this->incomePreviewMonth[$g1->dateList] = $g1->total;
         }
-        dd($this->incomePreviewMonth);
     }
 
     public function render()
