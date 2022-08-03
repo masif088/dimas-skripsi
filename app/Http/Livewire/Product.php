@@ -32,12 +32,12 @@ class Product extends Component
         $period = new DatePeriod($start, $interval, $end);
         $category1 = [];
         foreach ($period as $dt) {
-            $this->incomeThisMonth[$dt->format("Y-m-d")] = 0;
-            array_push($category1, $dt->format("Y-m-d"));
+            $this->incomeThisMonth[$dt->format("d")] = 0;
+            array_push($category1, $dt->format("d"));
         }
 
         $query = "
-SELECT date(transactions.created_at) as dateList,count(*) as counter,
+SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total ,
   SUM(transactions.visitors) as visitors
 FROM transactions
@@ -46,7 +46,7 @@ WHERE month(transactions.created_at)=$now->month and
   year(transactions.created_at)=$now->year and
   transactions.status_order_id=2 and
   transaction_details.product_id=$this->dataId
-GROUP BY date(transactions.created_at)";
+GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
             $this->incomeThisMonth[$g1->dateList] = $g1->total;
@@ -59,8 +59,8 @@ GROUP BY date(transactions.created_at)";
         $period = new DatePeriod($start, $interval, $end);
         $category2 = [];
         foreach ($period as $dt) {
-            $this->incomePreviewMonth[$dt->format("Y-m-d")] = 0;
-            array_push($category2, $dt->format("Y-m-d"));
+            $this->incomePreviewMonth[$dt->format("d")] = 0;
+            array_push($category2, $dt->format("d"));
         }
         if (count($category1)<count($category2)){
             $this->category=$category2;
@@ -80,7 +80,7 @@ GROUP BY date(transactions.created_at)";
 
 
         $query = "
-SELECT date(transactions.created_at) as dateList,count(*) as counter,
+SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total ,
   SUM(transactions.visitors) as visitors
 FROM transactions
@@ -89,7 +89,7 @@ WHERE month(transactions.created_at)=$now->month and
   year(transactions.created_at)=$now->year and
   transactions.status_order_id=2 and
   transaction_details.product_id=$this->dataId
-GROUP BY date(transactions.created_at)";
+GROUP BY day(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         foreach ($g as $g1) {
             $this->incomePreviewMonth[$g1->dateList] = $g1->total;
