@@ -38,15 +38,9 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <x-data-income-outcome
+            <x-data-grafik
                 componentId="produk"
                 title="Jumlah Terjual"
-                btn1="Potongan karyawan"
-                btnColor1="btn-danger"
-                btn2="CSV"
-                btnColor2="btn-success"
-                link1=""
-                link2="#"
                 :data2="$salePreviousMonth"
                 dataTitle2="Bulan Lalu"
                 :data1="$saleThisMonth"
@@ -63,12 +57,6 @@
             <x-data-income-outcome
                 componentId="some"
                 title="Omzet"
-                btn1="Potongan karyawan"
-                btnColor1="btn-danger"
-                btn2="CSV"
-                btnColor2="btn-success"
-                link1=""
-                link2="#"
                 :data2="$incomePreviousMonth"
                 dataTitle2="Bulan Lalu"
                 :data1="$incomeThisMonth"
