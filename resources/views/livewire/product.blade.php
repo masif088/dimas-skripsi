@@ -40,7 +40,7 @@
         <div class="col-lg-12">
             <x-data-grafik
                 componentId="produk"
-                title="Jumlah Terjual"
+                title="Produk Terjual"
                 :data2="$salePreviousMonth"
                 dataTitle2="Bulan Lalu"
                 :data1="$saleThisMonth"
@@ -54,9 +54,9 @@
 
     <div class="row">
         <div class="col-lg-12">
-            <x-data-income-outcome
+            <x-data-grafik
                 componentId="some"
-                title="Omzet"
+                title="Omzet Produk"
                 :data2="$incomePreviousMonth"
                 dataTitle2="Bulan Lalu"
                 :data1="$incomeThisMonth"

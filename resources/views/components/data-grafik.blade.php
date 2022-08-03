@@ -11,8 +11,8 @@
 ])
 <div class="col-xl-12 xl-100 dashboard-sec box-col-12">
     <div class="card earning-card">
-        <div class="card-header">
-            {{ $title }}
+        <div class="card-header" style="padding: 10px">
+            <h4>{{ $title }}</h4>
         </div>
         <div class="card-body p-0">
             <div class="row m-0">
