@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-lg-12">
             <x-data-income-outcome
-                componentId="some"
+                componentId="produk"
                 :title="$product->title"
                 title1="Produk Terjual"
                 value1="{{ $data['amount'] }}"
