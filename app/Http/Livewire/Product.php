@@ -24,7 +24,7 @@ class Product extends Component
 
     public function mount()
     {
-        $now = Carbon::create(2022,3,1);
+        $now = Carbon::now();
         $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
         $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
 
