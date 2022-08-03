@@ -2,8 +2,11 @@
     <div class="col-lg-12">
         <x-data-income-outcome
             componentId="some"
-            title1="Total bulan ini"
-            :value1="0"
+            title="$product->title"
+            title1="Produk Terjual"
+            :value1="$data['amount']"
+            title2="Omzet Produk"
+            :value2="$data['total']"
             btn1="Potongan karyawan"
             btnColor1="btn-danger"
             btn2="CSV"

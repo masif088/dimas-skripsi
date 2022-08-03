@@ -1,5 +1,6 @@
 @props([
 'id' => 'some',
+'title'=> 'Pemasukan - Pengeluaran'
 'title1' => 'no title', 'value1'=>'0',
 'title2', 'value2'=>'0',
 'title3', 'value3'=>'0',
@@ -23,7 +24,7 @@
                     <div class="row m-0 chart-left">
                         <div class="col-xl-12 p-0 left_side_earning">
                             <h5>DATA</h5>
-                            <p class="font-roboto">Pemasukan - Pengeluaran</p>
+                            <p class="font-roboto">{{ $title }}</p>
                         </div>
                         @if($title1!=null)
                         <div class="col-xl-12 p-0 left_side_earning">
