@@ -4,7 +4,7 @@
             componentId="some"
             :title="$product->title"
             title1="Produk Terjual"
-            value1="Rp. {{ number_format($data['amount']) }}"
+            value1="{{ $data['amount'] }}"
             title2="Omzet Produk"
             value2="Rp. {{ number_format($data['total']) }}"
             btn1="Potongan karyawan"
