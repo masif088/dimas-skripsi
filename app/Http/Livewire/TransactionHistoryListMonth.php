@@ -52,8 +52,73 @@ class TransactionHistoryListMonth extends Component
     public $dayTimeItem;
     public $dayTimeTransaction;
 
+    public $visitorThisMonth;
+    public $visitorPreviousMonth;
+
+    public $newVisitor;
+    public $removeVisitor;
+
     public function mount()
     {
+        $query = "
+SELECT name, count(id) as jumlah FROM `transactions`
+WHERE MONTH(created_at)=$this->month AND
+YEAR(created_at)=$this->year
+GROUP BY name
+ORDER BY name";
+        $visitorThisMonth = DB::select(DB::raw($query));
+        $visitorThisMonthName=[];
+        foreach ($visitorThisMonth as $v){
+            array_push($visitorThisMonthName,trim(trim(trim(strtolower($v->name)," "),"-")," "));
+        }
+//        dd($visitorThisMonthName);
+
+        $query = "
+SELECT name, count(id) as jumlah FROM `transactions`
+WHERE created_at < '$this->year-$this->month-01 00:00:00'
+GROUP BY name
+ORDER BY name";
+        $visitorPreviousMonth = DB::select(DB::raw($query));
+        $visitorPreviousMonthName=[];
+        foreach ($visitorPreviousMonth as $v){
+            array_push($visitorPreviousMonthName,trim(trim(trim(strtolower($v->name)," "),"-")," "));
+        }
+        $this->visitorThisMonth=$visitorThisMonthName;
+        $this->newVisitor=[];
+        foreach ($visitorThisMonthName as $vi){
+            if (!in_array($vi,$visitorPreviousMonthName)){
+                array_push($this->newVisitor,$vi);
+            }
+        }
+
+//
+//        $query = "
+//SELECT name, count(id) as jumlah FROM `transactions`
+//WHERE MONTH(created_at)=$this->month-1 AND
+//YEAR(created_at)=$this->year
+//GROUP BY name
+//ORDER BY name";
+//        $visitorPreviousMonth = DB::select(DB::raw($query));
+//        $this->removeVisitor=[];
+//        $visitorPreviousMonthName=[];
+//
+//        foreach ($visitorPreviousMonth as $v){
+//            array_push($visitorPreviousMonthName,trim(trim(trim(strtolower($v->name)," "),"-")," "));
+//        }
+//        foreach ($visitorPreviousMonthName as $vi){
+//            if (!in_array($vi,$visitorThisMonthName)){
+//                array_push($this->removeVisitor,$vi);
+//                        array_push($this->visitorThisMonth,$vi);
+//            }
+//        }
+//        dd($this->removeVisitor);
+//        foreach ($visitorThisMonth as $v){
+//            array_push($this->visitorThisMonth,trim(trim(trim(strtolower($v->name)," "),"-")," "));
+//            array_push($this->visitorPreviousMonth,trim(trim(trim(strtolower($v->name)," "),"-")," "));
+//
+//        }
+
+//        array_push($this->visitorThisMonth,$this->removeVisitor);
 
         $time = [
             '00.00-04.00',

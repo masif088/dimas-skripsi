@@ -42,21 +42,24 @@
                         {{$d1}},
                     @endforeach
                 ]
-            }, {
+            }, @isset($dataTitle2)
+            {
                 name: '{{ $dataTitle2 }}',
                 data: [
                     @foreach($data2 as $d2)
                         {{$d2}},
                     @endforeach
                 ]
-            }, {
+            } @endif , @isset($dataTitle3)
+            {
                 name: '{{ $dataTitle3 }}',
                 data: [
                     @foreach($data3 as $d3)
                         {{$d3}},
                     @endforeach
                 ]
-            }],
+            }@endif
+            ],
             chart: {
                 height: 320,
                 type: 'area',
@@ -70,6 +73,7 @@
             stroke: {
                 curve: 'smooth'
             },
+
             xaxis: {
                 type: 'category',
                 low: 1,
@@ -140,7 +144,7 @@
             },
             tooltip: {
                 x: {
-                    format: 'MM'
+                    format: 'M'
                 },
             },
         };

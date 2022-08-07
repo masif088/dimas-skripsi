@@ -38,7 +38,7 @@
     <x-data-radar title="Transaksi Harian Bulan Ini" id="transaction1" :datas="$dayTransaction"/>
     <x-data-bar-group title="Transaksi Perjam Bulan ini" id="transaction2" :datas="$dayTimeTransaction"/>
 
-{{--    <x-data-radar title="Transaksi Minggu Ini" id="transaction1" :datas="$dayTransaction"/>--}}
+    {{--    <x-data-radar title="Transaksi Minggu Ini" id="transaction1" :datas="$dayTransaction"/>--}}
 
 
     <div>
@@ -143,6 +143,34 @@
                 <br>
             </div>
         </div>
+        <div class="card">
+            <div class="card-header" style="padding: 10px">
+                <h1>Nama Pengunjung Pengunjung</h1>
+            </div>
+            <div class="card-body table-responsive">
+                <div class="row">
+                    <table class="table">
+                        @foreach($visitorThisMonth as $index=>$visitor)
+                            @if($index%6==0)
+                                <tr>
+                                    @endif
+                                    <td @if(in_array($visitor,$newVisitor)) style="color: #00aa00" @endif
+{{--                                    @if(in_array($visitor,$removeVisitor)) style="color: #aa0000" @endif--}}
+                                    >
+                                        {{ $visitor }}
+                                    </td>
+                                    @if($index%6==5)
+                                </tr>
+                            @endif
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div>
+
     </div>
     <div>
         <div class="card">
@@ -230,5 +258,5 @@
                 </div>
             </div>
         @endforeach
-        @endif
+    @endif
 </div>
