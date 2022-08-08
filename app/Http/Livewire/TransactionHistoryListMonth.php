@@ -344,7 +344,7 @@ FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE MONTH(transactions.created_at) = $this->month or MONTH(transactions.created_at) = $this->month-1 and
 YEAR(transactions.created_at) = $this->year and
-  where transactions.status_order_id=2
+transactions.status_order_id=2
 GROUP BY month(transactions.created_at)
 
 ";
