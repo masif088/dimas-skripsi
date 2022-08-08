@@ -1,6 +1,18 @@
 <div class="row">
+    <div class="col-lg-6">
+        <x-simple-card color="bg-primary" title="Omzet bulan ini" value="{{ number_format($datas['revenueThisMonth'],0,'.','.') }}" icon="dollar-sign"/>
+    </div>
+        <div class="col-lg-6">
+        <x-simple-card color="bg-secondary" title="Omzet bulan ialu" value="{{ number_format($datas['revenuePreviousMonth'],0,'.','.') }}" icon="dollar-sign"/>
+        </div>
+    <div class="col-lg-6">
+        <x-simple-card color="bg-primary" title="Jumlah transaksi bulan ini" value="{{ number_format($datas['transactionThisMonth'],0,'.','.') }}" icon="dollar-sign"/>
+    </div>
+    <div class="col-lg-6">
+        <x-simple-card color="bg-secondary" title="Jumlah transaksi bulan lalu" value="{{ number_format($datas['transactionPreviousMonth'],0,'.','.') }}" icon="dollar-sign"/>
+    </div>
     <div class="col-lg-4 mb-3">
-        <button href="" wire:click="downlaod" class="btn btn-primary">Download rekap diskon karyawan</button>
+        <button href="" wire:click="download" class="btn btn-primary">Download rekap diskon karyawan</button>
         <br>
     </div>
     <div class="col-lg-12">

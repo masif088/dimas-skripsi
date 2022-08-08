@@ -2,36 +2,36 @@
     <h2>{{ $product->title }}</h2>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-lg-6">
             <x-simple-card color="bg-primary" title="Produk terjual" value="{{ $data['amount'] }}" icon="dollar-sign"/>
         </div>
-        <div class="col-6">
+        <div class="col-lg-6">
             <x-simple-card color="bg-secondary" title="Omzet Produk" value="Rp. {{ number_format($data['total']) }}" icon="dollar-sign"/>
         </div>
     </div>
 
     <h5>Omzet Produk</h5>
     <div class="row">
-        <div class="col-4">
+        <div class="col-lg-4">
             <x-simple-card color="bg-primary" title="Bulan ini" value="Rp. {{ number_format($revenueThisMonth) }}" icon="dollar-sign"/>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <x-simple-card color="bg-secondary" title="Bulan lalu" value="Rp. {{ number_format($revenuePreviousMonth) }}" icon="dollar-sign"/>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <x-simple-card color="bg-success" title="2 Bulan lalu" value="Rp. {{ number_format($revenue2PreviousMonth) }}" icon="dollar-sign"/>
         </div>
     </div>
 
     <h5>Produk Terjual</h5>
     <div class="row">
-        <div class="col-4">
+        <div class="col-lg-4">
             <x-simple-card color="bg-primary" title="Bulan ini" value="{{ $amountThisMonth }}" icon="dollar-sign"/>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <x-simple-card color="bg-secondary" title="Bulan lalu" value="{{ $amountPreviousMonth }}" icon="dollar-sign"/>
         </div>
-        <div class="col-4">
+        <div class="col-lg-4">
             <x-simple-card color="bg-success" title="2 Bulan lalu" value="{{ $amount2PreviousMonth }}" icon="dollar-sign"/>
         </div>
     </div>

@@ -26,7 +26,6 @@ class TransactionHistoryListMonth extends Component
     public $company;
     public $datas;
 
-    public $tdactions;
     public $productAmounts;
     public $productTotals;
     public $money;
@@ -35,7 +34,6 @@ class TransactionHistoryListMonth extends Component
     public $method;
 
     public $visitorCount;
-    public $tdactionCount;
 
     public $dayOfWeekMoney;
     public $dayOfWeekVisitor;
@@ -53,7 +51,7 @@ class TransactionHistoryListMonth extends Component
     public $dayTimeTransaction;
 
     public $visitorThisMonth;
-    public $visitorPreviousMonth;
+
 
     public $newVisitor;
     public $removeVisitor;
@@ -67,11 +65,10 @@ YEAR(created_at)=$this->year
 GROUP BY name
 ORDER BY name";
         $visitorThisMonth = DB::select(DB::raw($query));
-        $visitorThisMonthName=[];
-        foreach ($visitorThisMonth as $v){
-            array_push($visitorThisMonthName,trim(trim(trim(strtolower($v->name)," "),"-")," "));
+        $visitorThisMonthName = [];
+        foreach ($visitorThisMonth as $v) {
+            array_push($visitorThisMonthName, trim(trim(trim(strtolower($v->name), " "), "-"), " "));
         }
-//        dd($visitorThisMonthName);
 
         $query = "
 SELECT name, count(id) as jumlah FROM `transactions`
@@ -79,15 +76,15 @@ WHERE created_at < '$this->year-$this->month-01 00:00:00'
 GROUP BY name
 ORDER BY name";
         $visitorPreviousMonth = DB::select(DB::raw($query));
-        $visitorPreviousMonthName=[];
-        foreach ($visitorPreviousMonth as $v){
-            array_push($visitorPreviousMonthName,trim(trim(trim(strtolower($v->name)," "),"-")," "));
+        $visitorPreviousMonthName = [];
+        foreach ($visitorPreviousMonth as $v) {
+            array_push($visitorPreviousMonthName, trim(trim(trim(strtolower($v->name), " "), "-"), " "));
         }
-        $this->visitorThisMonth=$visitorThisMonthName;
-        $this->newVisitor=[];
-        foreach ($visitorThisMonthName as $vi){
-            if (!in_array($vi,$visitorPreviousMonthName)){
-                array_push($this->newVisitor,$vi);
+        $this->visitorThisMonth = $visitorThisMonthName;
+        $this->newVisitor = [];
+        foreach ($visitorThisMonthName as $vi) {
+            if (!in_array($vi, $visitorPreviousMonthName)) {
+                array_push($this->newVisitor, $vi);
             }
         }
 
@@ -120,46 +117,10 @@ ORDER BY name";
 
 //        array_push($this->visitorThisMonth,$this->removeVisitor);
 
-        $time = [
-            '00.00-04.00',
-            '04.00-08.00',
-            '08.00-12.00',
-            '12.00-16.00',
-            '16.00-20.00',
-            '20.00-00.00',
-        ];
-        $c = [
-            $time[0] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[1] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[2] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[3] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[4] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[5] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-        ];
+
         $a = 4;
         if (config('app.name', 'Laravel') == "Lekker Putar") {
             $a = 2;
-            $time = [
-                '00.00-02.00',
-                '02.00-04.00',
-                '04.00-06.00',
-                '06.00-08.00',
-                '08.00-10.00',
-                '10.00-12.00',
-                '12.00-14.00',
-                '14.00-16.00',
-                '16.00-18.00',
-                '18.00-20.00',
-                '20.00-22.00',
-                '22.00-24.00',
-            ];
-            $c = [
-                $time[7] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[8] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[9] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[10] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[11] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            ];
         }
 
         $this->method = PaymentMethod::get();
@@ -214,25 +175,16 @@ FROM `transactions` JOIN transaction_details ON transaction_details.transaction_
 WHERE transactions.status_order_id=2 and
 month(transactions.created_at)= $this->month
 group BY DAYOFWEEK(transactions.created_at)";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        foreach ($dow as $d) {
-            $b[$d->days] = $d->total;
-        }
-        $this->dayOfWeekMoney['Bulan ini'] = $b;
+        $this->dayOfWeekMoney['Bulan ini'] = $this->toWeek($query);
 
-        $query = "SELECT DAYOFWEEK(created_at) as days,
+        $query = "
+SELECT DAYOFWEEK(created_at) as days,
        sum(visitors) as total
 FROM `transactions`
 WHERE status_order_id=2 and
-month(created_at)= $this->month
+      month(created_at)= $this->month
 group BY DAYOFWEEK(created_at)";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        foreach ($dow as $d) {
-            $b[$d->days] = $d->total;
-        }
-        $this->dayOfWeekVisitor['Bulan ini'] = $b;
+        $this->dayOfWeekVisitor['Bulan ini'] = $this->toWeek($query);
 
         $query = "SELECT DAYOFWEEK(transactions.created_at) as days,
        sum(transaction_details.amount) as total
@@ -240,12 +192,7 @@ FROM `transactions` JOIN transaction_details ON transaction_details.transaction_
 WHERE transactions.status_order_id=2 and
 month(transactions.created_at)= $this->month
 group BY DAYOFWEEK(transactions.created_at)";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        foreach ($dow as $d) {
-            $b[$d->days] = $d->total;
-        }
-        $this->dayOfWeekItem['Bulan ini'] = $b;
+        $this->dayOfWeekItem['Bulan ini'] = $this->toWeek($query);
 
         $query = "SELECT DAYOFWEEK(created_at) as days,
        count(id) as total
@@ -253,12 +200,7 @@ FROM `transactions`
 WHERE status_order_id=2 and
 month(created_at)= $this->month
 group BY DAYOFWEEK(created_at)";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        foreach ($dow as $d) {
-            $b[$d->days] = $d->total;
-        }
-        $this->dayOfWeekTransaction['Bulan ini'] = $b;
+        $this->dayOfWeekTransaction['Bulan ini'] = $this->toWeek($query);
 
 
         $query = "
@@ -272,22 +214,7 @@ group BY DAYOFWEEK(created_at)";
               MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w = 0;
-        $w0 = 1;
-        foreach ($dow as $d) {
-            if ($w != $d->weeks) {
-                if ($w != 0) {
-                    $this->dayMoney['Minggu ke-' . $w0] = $b;
-                    $w0 += 1;
-                }
-                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w = $d->weeks;
-            }
-            $b[$d->days] = intval($d->total);
-        }
-        $this->dayMoney['Minggu ke-' . $w0] = $b;
+        $this->dayMoney = $this->toDayOfWeek($query);
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -300,22 +227,8 @@ group BY DAYOFWEEK(created_at)";
               MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w = 0;
-        $w0 = 1;
-        foreach ($dow as $d) {
-            if ($w != $d->weeks) {
-                if ($w != 0) {
-                    $this->dayItem['Minggu ke-' . $w0] = $b;
-                    $w0 += 1;
-                }
-                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w = $d->weeks;
-            }
-            $b[$d->days] = intval($d->total);
-        }
-        $this->dayItem['Minggu ke-' . $w0] = $b;
+
+        $this->dayItem = $this->toDayOfWeek($query);
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -327,22 +240,7 @@ group BY DAYOFWEEK(created_at)";
               MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w = 0;
-        $w0 = 1;
-        foreach ($dow as $d) {
-            if ($w != $d->weeks) {
-                if ($w != 0) {
-                    $this->dayVisitor['Minggu ke-' . $w0] = $b;
-                    $w0 += 1;
-                }
-                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w = $d->weeks;
-            }
-            $b[$d->days] = intval($d->total);
-        }
-        $this->dayVisitor['Minggu ke-' . $w0] = $b;
+        $this->dayVisitor = $this->toDayOfWeek($query);
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -354,38 +252,18 @@ group BY DAYOFWEEK(created_at)";
               MONTH(transactions.created_at) = $this->month
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
-        $dow = DB::select(DB::raw($query));
-        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-        $w = 0;
-        $w0 = 1;
-        foreach ($dow as $d) {
-            if ($w != $d->weeks) {
-                if ($w != 0) {
-                    $this->dayTransaction['Minggu ke-' . $w0] = $b;
-                    $w0 += 1;
-                }
-                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
-                $w = $d->weeks;
-            }
-            $b[$d->days] = intval($d->total);
-        }
-        $this->dayTransaction['Minggu ke-' . $w0] = $b;
+        $this->dayTransaction = $this->toDayOfWeek($query);
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
-FLOOR(hour(transactions.created_at) / $a) as hourgroup,
-COUNT(transactions.id) as total
+               FLOOR(hour(transactions.created_at) / $a) as hourgroup,
+               COUNT(transactions.id) as total
 FROM `transactions`
 WHERE transactions.status_order_id=2 and
 	MONTH(transactions.created_at) = 3
 GROUP BY days,hourgroup
 ORDER BY hourgroup, days ASC;";
-        $dow = DB::select(DB::raw($query));
-        $b = $c;
-        foreach ($dow as $d) {
-            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
-        }
-        $this->dayTimeTransaction = $b;
+        $this->dayTimeTransaction = $this->toTime($query);
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -396,12 +274,7 @@ ORDER BY hourgroup, days ASC;";
               MONTH(transactions.created_at) = $this->month
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
-        $dow = DB::select(DB::raw($query));
-        $b = $c;
-        foreach ($dow as $d) {
-            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
-        }
-        $this->dayTimeVisitor = $b;
+        $this->dayTimeVisitor = $this->toTime($query);
 
 
         $query = "
@@ -414,12 +287,7 @@ ORDER BY hourgroup, days ASC;";
               MONTH(transactions.created_at) = $this->month
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
-        $dow = DB::select(DB::raw($query));
-        $b = $c;
-        foreach ($dow as $d) {
-            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
-        }
-        $this->dayTimeMoney = $b;
+        $this->dayTimeMoney = $this->toTime($query);
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -431,12 +299,7 @@ ORDER BY hourgroup, days ASC;";
               MONTH(transactions.created_at) = $this->month
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
-        $dow = DB::select(DB::raw($query));
-        $b = $c;
-        foreach ($dow as $d) {
-            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
-        }
-        $this->dayTimeItem = $b;
+        $this->dayTimeItem = $this->toTime($query);
 
 
         foreach ($this->transactions as $tl) {
@@ -472,10 +335,109 @@ ORDER BY hourgroup, days ASC;";
         $this->datas['total'] = $total;
         $this->datas['amount'] = $amount;
         $this->datas['product'] = $product;
-//        $this->datas['visitor']=$transactions->sum('visitors');
+$query="
+SELECT
+MONTH(transactions.created_at) as bulan,
+COUNT(transactions.id) as tranc,
+SUM(transaction_details.price*transaction_details.amount) as revenue
+FROM transactions
+JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+WHERE MONTH(transactions.created_at) = $this->month or MONTH(transactions.created_at) = $this->month-1 and
+YEAR(transactions.created_at) = $this->year and
+  where transactions.status_order_id=2
+GROUP BY month(transactions.created_at)
+
+";
+        $dow = DB::select(DB::raw($query));
+        $this->datas['revenueThisMonth'] = intval($dow[1]->revenue);
+        $this->datas['revenuePreviousMonth'] = intval($dow[0]->revenue);
+        $this->datas['transactionThisMonth'] = intval($dow[1]->tranc);
+        $this->datas['transactionPreviousMonth'] = intval($dow[0]->tranc);
     }
 
-    public function downlaod()
+    public function toWeek($query){
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        foreach ($dow as $d) {
+            $b[$d->days] = $d->total;
+        }
+        return $b;
+    }
+
+    public function toDayOfWeek($query)
+    {
+        $dow = DB::select(DB::raw($query));
+        $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+        $w = 0;
+        $w0 = 1;
+        $data = [];
+        foreach ($dow as $d) {
+            if ($w != $d->weeks) {
+                if ($w != 0) {
+                    $data['Minggu ke-' . $w0] = $b;
+                    $w0 += 1;
+                }
+                $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
+                $w = $d->weeks;
+            }
+            $b[$d->days] = intval($d->total);
+        }
+        $data['Minggu ke-' . $w0] = $b;
+        return $data;
+    }
+
+    public function toTime($query)
+    {
+        $time = [
+            '00.00-04.00',
+            '04.00-08.00',
+            '08.00-12.00',
+            '12.00-16.00',
+            '16.00-20.00',
+            '20.00-00.00',
+        ];
+        $c = [
+            $time[0] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[1] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[2] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[3] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[4] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[5] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+        ];
+        $a = 4;
+        if (config('app.name', 'Laravel') == "Lekker Putar") {
+            $a = 2;
+            $time = [
+                '00.00-02.00',
+                '02.00-04.00',
+                '04.00-06.00',
+                '06.00-08.00',
+                '08.00-10.00',
+                '10.00-12.00',
+                '12.00-14.00',
+                '14.00-16.00',
+                '16.00-18.00',
+                '18.00-20.00',
+                '20.00-22.00',
+                '22.00-24.00',
+            ];
+            $c = [
+                $time[7] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[8] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[9] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[10] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[11] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            ];
+        }
+        $dow = DB::select(DB::raw($query));
+        $b = $c;
+        foreach ($dow as $d) {
+            $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
+        }
+        return $b;
+    }
+
+    public function download()
     {
         $fileName = "Rekap-kas_$this->month-$this->year" . ".csv";
         $headers = array(
