@@ -160,6 +160,30 @@ class Transaction extends Component
             'text' => 'pesanan atas nama : ' . $this->name . '<br>total : Rp.' . number_format($total) . '<br>total potongan : Rp.' . number_format($discount) . '<br>jumlah pengunjung : ' . $this->visitors,
             'method' => 'paymentIm']);
     }
+    public function prosesRed()
+    {
+        if ($this->name == null) {
+            $this->name = 'guest';
+        }
+        if ($this->donate == null) {
+            $this->donate = 0;
+        }
+        if ($this->visitors == null or $this->visitors == 0) {
+            $this->visitors = 1;
+        }
+        $total = 0;
+        $discount = 0;
+        foreach ($this->orderList as $order => $value) {
+            $total += $this->roundUpToAny($this->products->find($order)->price * 90 / 100) * $value;
+            $discount += ($this->products->find($order)->price - $this->roundUpToAny($this->products->find($order)->price / 130) * 100) * $value;
+        }
+
+        $this->emit('swal:confirm', ['title' => 'Periksa kembali',
+            'icon' => 'info',
+            'confirmText' => 'Proses',
+            'text' => 'pesanan atas nama : ' . $this->name . '<br>total : Rp.' . number_format($total) . '<br>total potongan : Rp.' . number_format($discount) . '<br>jumlah pengunjung : ' . $this->visitors,
+            'method' => 'paymentRed']);
+    }
 
     public function roundUpToAny($n, $x = 5)
     {
@@ -187,7 +211,7 @@ class Transaction extends Component
             TransactionDetail::create([
                 'product_id' => $order,
                 'transaction_id' => $transaction->id,
-                'price' => $this->roundUpToAny($price / 130) * 100,
+                'price' => $this->roundUpToAny($price * 90 / 100),
                 'amount' => $value
             ]);
             EmployeePayment::create([
@@ -195,7 +219,7 @@ class Transaction extends Component
                 'name' => $this->name,
                 'transaction_id' => $transaction->id,
                 'amount'=>$value,
-                'discount' => ($price - $this->roundUpToAny($price / 130) * 100),
+                'discount' => ($price - $this->roundUpToAny($price * 90 / 100)),
             ]);
         }
         $this->orderList = [];
