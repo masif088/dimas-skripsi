@@ -215,6 +215,11 @@
                     Proses Karyawan
                 </button>
             </div>
+            <div class="col-lg-12 p-1">
+                <button class="btn btn-danger" style="width: 100%" wire:click="prosesRed()">
+                    Proses diskon 10% RED
+                </button>
+            </div>
 
         </div>
         <br>

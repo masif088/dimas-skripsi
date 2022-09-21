@@ -13,6 +13,7 @@ use DatePeriod;
 use DateTime;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
+use function GuzzleHttp\Promise\some;
 
 class TransactionHistoryListMonth extends Component
 {
@@ -301,6 +302,16 @@ ORDER BY hourgroup, days ASC;";
         ORDER BY hourgroup, days ASC;";
         $this->dayTimeItem = $this->toTime($query);
 
+        $product=Product::get();
+$some=0;
+$date=Carbon::create($this->year,$this->month);
+        foreach ($product as $p){
+            foreach ($p->transactionDetails->where('created_at','<',$date->firstOfMonth())->where('created_at','<',$date->endOfMonth()) as $c){
+                $some+=1;
+            }
+        }
+        dd($some);
+
 
         foreach ($this->transactions as $tl) {
             foreach ($tl->transactionDetails as $td) {
@@ -335,27 +346,45 @@ ORDER BY hourgroup, days ASC;";
         $this->datas['total'] = $total;
         $this->datas['amount'] = $amount;
         $this->datas['product'] = $product;
-$query="
+        $query = "
 SELECT
 MONTH(transactions.created_at) as bulan,
 COUNT(transactions.id) as tranc,
 SUM(transaction_details.price*transaction_details.amount) as revenue
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
-WHERE MONTH(transactions.created_at) = $this->month or MONTH(transactions.created_at) = $this->month-1 and
-YEAR(transactions.created_at) = $this->year and
-transactions.status_order_id=2
+WHERE MONTH(transactions.created_at) = $this->month
+and YEAR(transactions.created_at) = $this->year
+and transactions.status_order_id=2
 GROUP BY month(transactions.created_at)
 
 ";
         $dow = DB::select(DB::raw($query));
-        $this->datas['revenueThisMonth'] = intval($dow[1]->revenue);
+
+        $this->datas['transactionThisMonth'] = intval($dow[0]->tranc);
+        $this->datas['revenueThisMonth'] = intval($dow[0]->revenue);
+
+        $query = "
+SELECT
+MONTH(transactions.created_at) as bulan,
+COUNT(transactions.id) as tranc,
+SUM(transaction_details.price*transaction_details.amount) as revenue
+FROM transactions
+JOIN transaction_details ON transaction_details.transaction_id=transactions.id
+WHERE MONTH(transactions.created_at) = $this->month-1
+and YEAR(transactions.created_at) = $this->year
+and transactions.status_order_id=2
+GROUP BY month(transactions.created_at)
+
+";
+        $dow = DB::select(DB::raw($query));
         $this->datas['revenuePreviousMonth'] = intval($dow[0]->revenue);
-        $this->datas['transactionThisMonth'] = intval($dow[1]->tranc);
+
         $this->datas['transactionPreviousMonth'] = intval($dow[0]->tranc);
     }
 
-    public function toWeek($query){
+    public function toWeek($query)
+    {
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
         foreach ($dow as $d) {
@@ -482,3 +511,9 @@ GROUP BY month(transactions.created_at)
     }
 
 }
+
+
+
+//SELECT products.title, td.amount FROM products LEFT JOIN (SELECT product_id, SUM(amount) amount FROM transaction_details WHERE MONTH(transaction_details.created_at) = 8 and YEAR(transaction_details.created_at) = 2022 GROUP BY product_id) as td on td.product_id=products.id
+//
+//GROUP BY products.title,td.product_id;

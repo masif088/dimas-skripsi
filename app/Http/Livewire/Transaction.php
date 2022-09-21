@@ -214,6 +214,54 @@ class Transaction extends Component
         $this->emit('redirect:new', $url);
     }
 
+    public function paymentRed()
+    {
+        if ($this->fee == null) {
+            $this->fee = $this->t;
+        }
+        $transaction = \App\Models\Transaction::create([
+            'name' => $this->name,
+            'transaction_code' => \App\Models\Transaction::getCode(),
+            'user_id' => auth()->id(),
+            'status_order_id' => 1,
+            'payment_method_id' => $this->paymentMethod,
+            'reservation' => $this->reservation,
+            'visitors' => $this->visitors,
+            'fee' => $this->fee,
+            'donate' => $this->donate
+        ]);
+        foreach ($this->orderList as $order => $value) {
+            $price = $this->products->find($order)->price;
+            TransactionDetail::create([
+                'product_id' => $order,
+                'transaction_id' => $transaction->id,
+                'price' => $this->roundUpToAny($price / 90) * 100,
+                'amount' => $value
+            ]);
+            EmployeePayment::create([
+                'product_id' => $order,
+                'name' => $this->name. "RED edition",
+                'transaction_id' => $transaction->id,
+                'amount'=>$value,
+                'discount' => ($price - $this->roundUpToAny($price / 90) * 100),
+            ]);
+        }
+        $this->orderList = [];
+        $this->name = '';
+        $this->reservation = 'take away';
+        $this->paymentMethod = 1;
+        $this->visitors = null;
+        $this->fee = null;
+        $this->donate = null;
+        $this->emit('notify', [
+            'type' => 'primary',
+            'title' => $transaction->transaction_code . " dalam waiting list",
+        ]);
+        $this->emitTo('transaction-active-notification', 'refresh');
+        $url = route('admin.transaction.struck', $transaction->id);
+        $this->emit('redirect:new', $url);
+    }
+
     public function payment()
     {
         if ($this->fee == null) {
