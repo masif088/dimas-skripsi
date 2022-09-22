@@ -211,7 +211,7 @@ class Transaction extends Component
             TransactionDetail::create([
                 'product_id' => $order,
                 'transaction_id' => $transaction->id,
-                'price' => $this->roundUpToAny($price * 90 / 100),
+                'price' => $this->roundUpToAny($price /130 )*100,
                 'amount' => $value
             ]);
             EmployeePayment::create([
@@ -219,7 +219,7 @@ class Transaction extends Component
                 'name' => $this->name,
                 'transaction_id' => $transaction->id,
                 'amount'=>$value,
-                'discount' => ($price - $this->roundUpToAny($price * 90 / 100)),
+                'discount' => ($price - $this->roundUpToAny($price /130 )*100),
             ]);
         }
         $this->orderList = [];
