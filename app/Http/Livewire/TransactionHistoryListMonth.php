@@ -294,6 +294,7 @@ group BY DAYOFWEEK(created_at)";
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
         $w = 0;
         $w0 = 1;
+        $this->transactionCount=0;
         foreach ($dow as $d) {
             if ($w != $d->weeks) {
                 if ($w != 0) {
@@ -304,6 +305,7 @@ group BY DAYOFWEEK(created_at)";
                 $w = $d->weeks;
             }
             $b[$d->days] = intval($d->total);
+            $this->transactionCount+=intval($d->total);
         }
         $this->dayTransaction['Minggu ke-' . $w0] = $b;
 
@@ -318,6 +320,7 @@ GROUP BY days,hourgroup
 ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
         $b = $c;
+
         foreach ($dow as $d) {
             $b[$time[$d->hourgroup]][$d->days] = intval($d->total);
         }
