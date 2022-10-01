@@ -321,7 +321,7 @@ $date=Carbon::create($this->year,$this->month);
                     $product['type'][$td->product->product_type_id][$td->product_id] += $td->amount;
                     $product['company'][$td->product->product_company_id][$td->product_id] += $td->amount;
                 } else {
-                    $product['type'][$td->product->product_type_id][$td->product_id] = $td->amount;
+                    $product["type"][$td->product->product_type_id][$td->product_id] = $td->amount;
                     $product['company'][$td->product->product_company_id][$td->product_id] = $td->amount;
                 }
                 if (isset($product['payment_method'][$td->transaction->payment_method_id])) {
