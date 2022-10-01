@@ -34,7 +34,8 @@ class TransactionHistoryListMonth extends Component
     public $product;
     public $method;
 
-    public $visitorCount;
+    public $visitorCount=0;
+    public $transactionCount=0;
     public $tdactionCount;
 
     public $dayOfWeekMoney;
@@ -132,8 +133,8 @@ GROUP BY date(transactions.created_at)";
         }
         foreach ($g as $g1) {
             $this->income[$g1->dateList] = $g1->total;
-            $this->visitorCount = $g1->visitors;
-            $this->transactionCount = $g1->counter;
+            $this->visitorCount += $g1->visitors;
+            $this->transactionCount += $g1->counter;
         }
         $this->transactions = \App\Models\Transaction::where('status_order_id', 2)->whereBetween('created_at', [$start->format('Y-m-d'), $end->format('Y-m-d')])->get();
         $this->productAmounts = [];
