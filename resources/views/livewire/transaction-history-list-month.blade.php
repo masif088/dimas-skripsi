@@ -1,27 +1,15 @@
+
+text/x-generic transaction-history-list-month.blade.php ( ASCII text )
 <div class="row">
-{{--    <div class="col-lg-6">--}}
-{{--        <x-simple-card color="bg-primary" title="Omzet bulan ini" value="{{ number_format($datas['revenueThisMonth'],0,'.','.') }}" icon="dollar-sign"/>--}}
-{{--    </div>--}}
-{{--        <div class="col-lg-6">--}}
-{{--        <x-simple-card color="bg-secondary" title="Omzet bulan ialu" value="{{ number_format($datas['revenuePreviousMonth'],0,'.','.') }}" icon="dollar-sign"/>--}}
-{{--        </div>--}}
-{{--    <div class="col-lg-6">--}}
-{{--        <x-simple-card color="bg-primary" title="Jumlah transaksi bulan ini" value="{{ number_format($datas['transactionThisMonth'],0,'.','.') }}" icon="dollar-sign"/>--}}
-{{--    </div>--}}
-{{--    <div class="col-lg-6">--}}
-{{--        <x-simple-card color="bg-secondary" title="Jumlah transaksi bulan lalu" value="{{ number_format($datas['transactionPreviousMonth'],0,'.','.') }}" icon="dollar-sign"/>--}}
-{{--    </div>--}}
     <div class="col-lg-4 mb-3">
-        <button href="" wire:click="download" class="btn btn-primary">Download rekap diskon karyawan</button>
+        <button href="" wire:click="downlaod" class="btn btn-primary">Download rekap diskon karyawan</button>
         <br>
     </div>
     <div class="col-lg-12">
         <x-data-income-outcome
             componentId="some"
             title1="Pemasukan bulan ini"
-            value1="Rp. {{ number_format($totalMonth,0,',','.') }}"
-            title2="Pemasukan bulan ini"
-            value1="Rp. {{ number_format($totalMonth,0,',','.') }}"
+            :value1="$totalMonth"
             btn1="Potongan karyawan"
             btnColor1="btn-danger"
             btn2="CSV"
@@ -155,34 +143,6 @@
                 <br>
             </div>
         </div>
-        <div class="card">
-            <div class="card-header" style="padding: 10px">
-                <h1>Nama Pengunjung Pengunjung</h1>
-            </div>
-            <div class="card-body table-responsive">
-                <div class="row">
-                    <table class="table">
-                        @foreach($visitorThisMonth as $index=>$visitor)
-                            @if($index%6==0)
-                                <tr>
-                                    @endif
-                                    <td @if(in_array($visitor,$newVisitor)) style="color: #00aa00" @endif
-{{--                                    @if(in_array($visitor,$removeVisitor)) style="color: #aa0000" @endif--}}
-                                    >
-                                        {{ $visitor }}
-                                    </td>
-                                    @if($index%6==5)
-                                </tr>
-                            @endif
-                        @endforeach
-                    </table>
-                </div>
-            </div>
-        </div>
-
-    </div>
-    <div>
-
     </div>
     <div>
         <div class="card">
