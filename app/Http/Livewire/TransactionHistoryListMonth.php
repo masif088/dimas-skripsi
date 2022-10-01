@@ -310,7 +310,7 @@ $date=Carbon::create($this->year,$this->month);
                 $some+=1;
             }
         }
-        dd($some);
+//        dd($some);
 
 
         foreach ($this->transactions as $tl) {
