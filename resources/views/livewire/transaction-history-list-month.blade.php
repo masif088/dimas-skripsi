@@ -207,6 +207,7 @@ text/x-generic transaction-history-list-month.blade.php ( ASCII text )
                             <tbody>
                             @php($total=0)
                             @php($count=1)
+                            @php($c=0)
                             @foreach($productAmounts as $key=>$pa)
                                 @if($products->find($key)->product_company_id==$pc->id)
                                     <tr>
@@ -217,11 +218,14 @@ text/x-generic transaction-history-list-month.blade.php ( ASCII text )
                                         <td>Rp. {{ number_format($productTotals[$key]/$pa) }}</td>
                                         <td>Rp. {{ number_format($productTotals[$key]) }}</td>
                                         @php($total+=$productTotals[$key])
+                                        @php($c+=$pa)
                                     </tr>
                                 @endif
                             @endforeach
                             <tr>
-                                <td colspan="5">Total :</td>
+                                <td colspan="3">Total :</td>
+                                <td>Rp. {{ number_format($c) }}</td>
+                                <td></td>
                                 <td>Rp. {{ number_format($total) }}</td>
                             </tr>
                             </tbody>
