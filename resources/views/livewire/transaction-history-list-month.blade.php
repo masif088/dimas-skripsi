@@ -164,6 +164,7 @@ text/x-generic transaction-history-list-month.blade.php ( ASCII text )
                     <tbody>
 
                     @php($count=1)
+                    @php($c=0)
                     @foreach($productAmounts as $key=>$pa)
                         <tr>
                             <td>{{ $count++ }}</td>
@@ -172,11 +173,13 @@ text/x-generic transaction-history-list-month.blade.php ( ASCII text )
                             <td>{{ number_format($pa,0,',','.') }}</td>
                             <td>Rp. {{ number_format($productTotals[$key]/$pa,0,',','.') }}</td>
                             <td>Rp. {{ number_format($productTotals[$key],0,',','.') }}</td>
-
+                            @php($c+=$pa)
                         </tr>
                     @endforeach
                     <tr>
-                        <td colspan="5">Total :</td>
+                        <td colspan="3">Total :</td>
+                        <td>{{ number_format(array_sum($c)) }}</td>
+                        <td></td>
                         <td>Rp. {{ number_format(array_sum($productTotals)) }}</td>
                     </tr>
                     </tbody>
