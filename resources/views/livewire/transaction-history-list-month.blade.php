@@ -178,7 +178,7 @@ text/x-generic transaction-history-list-month.blade.php ( ASCII text )
                     @endforeach
                     <tr>
                         <td colspan="3">Total :</td>
-                        <td>{{ number_format(array_sum($c)) }}</td>
+                        <td>{{ number_format($c) }}</td>
                         <td></td>
                         <td>Rp. {{ number_format(array_sum($productTotals)) }}</td>
                     </tr>
