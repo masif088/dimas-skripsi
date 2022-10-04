@@ -1,5 +1,5 @@
 
-text/x-generic transaction-history-list-month.blade.php ( ASCII text )
+{{--text/x-generic transaction-history-list-month.blade.php ( ASCII text )--}}
 <div class="row">
     <div class="col-lg-4 mb-3">
         <button href="" wire:click="downlaod" class="btn btn-primary">Download rekap diskon karyawan</button>

@@ -19,10 +19,10 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/product',function (){
-    return Product::with('productCompany','productStatus','productType',)->get();
+Route::get('/product', function () {
+    return Product::where('product_status_id', 1)->orderBy('product_type_id')->with('productCompany', 'productStatus', 'productType',)->get();
 });
 
-Route::post('/store-transaction',function (Request $request){
+Route::post('/store-transaction', function (Request $request) {
 
 });
