@@ -26,3 +26,7 @@ Route::get('/product', function () {
 Route::post('/store-transaction', function (Request $request) {
 
 });
+
+Route::post('/cek-api',function (Request $request){
+    \App\Models\Log::create(['log'=>json_encode($request->all())]);
+});
