@@ -69,7 +69,7 @@ Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')->group(func
         }
         $month = date('n');
         $query = "
-SELECT day(transactions.created_at) as dateList,count(*) as counter,
+SELECT day(transactions.created_at) as dateList, sum(amount) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id

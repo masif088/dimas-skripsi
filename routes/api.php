@@ -28,5 +28,13 @@ Route::post('/store-transaction', function (Request $request) {
 });
 
 Route::post('/cek-api',function (Request $request){
-    \App\Models\Log::create(['log'=>json_encode($request->all())]);
+    $re='{"arrKey":[{"amount":1,"description":null,"discount_price":7200,"discount_state":0,"id":99,"price":9000,"product_code":"Kopi Tubruk Arabika","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Tubruk Arabika","updated_at":"2022-05-08T13:49:04.000000Z"},{"amount":1,"description":null,"discount_price":5400,"discount_state":0,"id":100,"price":6000,"product_code":"Kopi Tubruk Robusta","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Tubruk Robusta","updated_at":"2022-03-04T23:40:26.000000Z"},{"amount":1,"description":null,"discount_price":9000,"discount_state":0,"id":101,"price":10000,"product_code":"Kopi Susu Tubruk Arabica","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Susu Tubruk Arabica","updated_at":"2022-03-04T23:40:13.000000Z"},{"amount":1,"description":null,"discount_price":7200,"discount_state":0,"id":102,"price":8000,"product_code":"Kopi Tubruk Susu Robusta","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Tubruk Susu Robusta","updated_at":"2022-03-04T23:40:03.000000Z"}]}';
+    dd(json_decode($re));
+//    \App\Models\Log::create(['log'=>json_encode($request->all())]);
+});
+
+Route::get('/cek-api-a',function (Request $request){
+    $re='{"arrKey":[{"amount":1,"description":null,"discount_price":7200,"discount_state":0,"id":99,"price":9000,"product_code":"Kopi Tubruk Arabika","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Tubruk Arabika","updated_at":"2022-05-08T13:49:04.000000Z"},{"amount":1,"description":null,"discount_price":5400,"discount_state":0,"id":100,"price":6000,"product_code":"Kopi Tubruk Robusta","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Tubruk Robusta","updated_at":"2022-03-04T23:40:26.000000Z"},{"amount":1,"description":null,"discount_price":9000,"discount_state":0,"id":101,"price":10000,"product_code":"Kopi Susu Tubruk Arabica","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Susu Tubruk Arabica","updated_at":"2022-03-04T23:40:13.000000Z"},{"amount":1,"description":null,"discount_price":7200,"discount_state":0,"id":102,"price":8000,"product_code":"Kopi Tubruk Susu Robusta","product_company_id":5,"product_status_id":1,"product_type_id":8,"thumbnail":"null","title":"Kopi Tubruk Susu Robusta","updated_at":"2022-03-04T23:40:03.000000Z"}]}';
+    $a=json_decode($re);
+//    \App\Models\Log::create(['log'=>json_encode($request->all())]);
 });
