@@ -3,7 +3,7 @@
         <b>Pemesanan Mandiri</b>
     </h1>
     <h2 style="text-align: center"> Imaji Creative Space</h2>
-    <a href="#payment" style="position:fixed; bottom: 100px; right: 20px; z-index: 10; width: 55px;height: 55px"
+    <a href="#menu" style="position:fixed; bottom: 100px; right: 20px; z-index: 10; width: 55px;height: 55px"
        class="btn btn-sm btn-danger">
         <i style="font-size: 30px" class="p-1 fa fa-arrow-up"></i>
     </a>
@@ -12,7 +12,7 @@
         Bayar
         <i style="font-size: 30px" class="p-1 fa fa-cash-register"></i>
     </a>
-    <div class="col-lg-12 col-sm-12">
+    <div class="col-lg-12 col-sm-12" id="menu">
         <x-form.input title="" placeholder="Pencarian" model="query"/>
         <div class="">
             <div class="row">
