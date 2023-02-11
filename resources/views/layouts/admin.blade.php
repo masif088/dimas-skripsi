@@ -98,9 +98,11 @@
 </div>
 <!-- tap on top starts-->
 <div class="tap-top"><i data-feather="chevrons-up"></i></div>
+
 <!-- tap on tap ends-->
 <!-- page-wrapper Start-->
 <div class="page-wrapper compact-wrapper" id="pageWrapper">
+
     <!-- Page Header Start-->
     <div class="page-header">
         @include('components.admin.navbar')
@@ -133,6 +135,7 @@
                 </div>
             </div>
             {{ $slot }}
+
         </div>
         <!-- footer start-->
         {{--        <footer class="footer">--}}

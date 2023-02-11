@@ -14,7 +14,6 @@ class TransactionActive extends Component
     public function mount()
     {
         $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)
-
             ->get();
     }
 
@@ -27,26 +26,30 @@ class TransactionActive extends Component
     {
         $this->transactionDetail->update(['status_order_id' => 2]);
         $this->emit('notify', [
-            'type' => 'success',
+            'type'  => 'success',
             'title' => $this->transactionDetail->transaction_code." selesai",
         ]);
-        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->get();
-        $this->transactionDetail=null;
+        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)
+            ->get();
+        $this->transactionDetail = null;
     }
 
     public function cancel()
     {
         $this->transactionDetail->update(['status_order_id' => 3]);
         $this->emit('notify', [
-            'type' => 'danger',
+            'type'  => 'danger',
             'title' => $this->transactionDetail->transaction_code." dibatalkan",
         ]);
-        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)->get();
-        $this->transactionDetail=null;
+        $this->transactionList = \App\Models\Transaction::whereStatusOrderId(1)
+            ->get();
+        $this->transactionDetail = null;
     }
-    public function print(){
-        $url=route('admin.transaction.struck',$this->transactionDetail->id);
-        $this->emit('redirect:new',$url );
+
+    public function print()
+    {
+        $url = route('admin.transaction.struck', $this->transactionDetail->id);
+        $this->emit('redirect:new', $url);
     }
 
     public function render()

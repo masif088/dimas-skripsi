@@ -32,6 +32,11 @@ use Laravel\Jetstream\Jetstream;
 Route::get('/', function () {
     return redirect(route('login'));
 });
+
+Route::get('/transaction', function () {
+    return view('layouts.home');
+});
+
 Route::get('/dashboard', function () {
     return redirect(route('admin.dashboard'));
 });

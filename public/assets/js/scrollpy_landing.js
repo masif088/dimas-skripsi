@@ -58,20 +58,32 @@ window.addEventListener("scroll", event => {
 
 
 // bottom to top
-$(window).on('scroll', function() {
+$(window).on('scroll', function () {
     if ($(this).scrollTop() > 600) {
         $('.tap-top').fadeIn();
+        $('.tap-down').fadeIn();
     } else {
         $('.tap-top').fadeOut();
+        $('.tap-down').fadeOut();
     }
 });
 
-$('.tap-top').click( function() {
+
+
+$('.tap-top').click(function () {
     $("html, body").animate({
         scrollTop: 0
     }, 600);
     return false;
 });
+
+$('.tap-down').click(function () {
+    $("html, body").animate({
+        scrollTop: 100
+    }, 600);
+    return false;
+});
+
 
 // navbar
 $(document).ready(function(){
