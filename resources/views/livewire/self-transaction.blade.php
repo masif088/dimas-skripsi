@@ -4,7 +4,7 @@
     </h1>
     <h2 style="text-align: center"> Imaji Creative Space</h2>
     <a href="#menu" style="position:fixed; bottom: 100px; right: 20px; z-index: 10; width: 55px;height: 55px"
-       class="btn btn-sm btn-danger">
+       class="btn btn-sm btn-primary">
         <i style="font-size: 30px" class="p-1 fa fa-arrow-up"></i>
     </a>
     <a href="#payment" style="position:fixed; bottom: 20px; right: 20px; z-index: 10; width: 55px;height: 70px"
@@ -12,6 +12,7 @@
         Bayar
         <i style="font-size: 30px" class="p-1 fa fa-cash-register"></i>
     </a>
+
     <div class="col-lg-12 col-sm-12" id="menu">
         <x-form.input title="" placeholder="Pencarian" model="query"/>
         <div class="">
@@ -25,13 +26,14 @@
                             {!! '<div class="row">' !!}
                         @endif
                         @php($productType=$product->product_type_id)
-                        <h4>{{ $product->productType->title }}</h4>
+                        <h4>{{ $product->productType->title }} ({{ $product->productType->products->count() }})</h4>
                     @endif
-                    <div class="col-xl-12 col-sm-12 xl-12 " wire:click="add({{$product->id}})">
+                    <div class="col-xl-12 col-sm-12 xl-12 ">
                         <div class="card mb-1 @isset($orderList[$product->id]) bg-success border-success @endisset ">
                             <div class="row">
-                                <img src="{{ asset('assets/images/blog/img.png') }}" alt="" class="col-3">
-                                <div class="col-9 p-1">
+                                <img src="{{ asset('assets/images/blog/img.png') }}" alt="" class="col-3"
+                                     wire:click="add({{$product->id}})">
+                                <div class="col-6 p-1" wire:click="add({{$product->id}})">
                                     <div class="product-details text-left" style="margin: 0;padding: 0">
                                         <h5 style="margin: 0">{{ $product->title }}</h5>
                                         <p>{{ $product->description }}</p>
@@ -44,11 +46,37 @@
                                             Rp. {{ number_format($product->price) }}
                                         @endif
                                     </div>
+                                </div>
+                                <div class="col-3 row p-1">
+                                    @isset($orderList[$product->id])
+                                        <button style="height: 50px" class="btn btn-danger col-4"
+                                                wire:click="decreaseOrderList({{$product->id}})">
+                                            -
+                                        </button>
+                                        <div class="col-4 pt-2" style="text-align: center">
+                                            {{ $orderList[$product->id] }}
+                                        </div>
+                                        <button style="height: 50px" class="col-4 btn btn-primary"
+                                                wire:click="increaseOrderList({{$product->id}})">
+                                            +
+                                        </button>
+                                        <div class="col-12" style="font-weight: bold">
+                                            @if($products->find($product->id)->discount_state)
+                                                <div>
+                                                    Rp. {{ number_format($products->find($product->id)->discount_price*$orderList[$product->id]) }}</div>
+                                                <del>
+                                                    Rp. {{ number_format($products->find($product->id)->price*$orderList[$product->id]) }}</del>
+
+                                            @else
+                                                <div>
+                                                    Rp. {{ number_format($products->find($product->id)->price*$orderList[$product->id]) }}</div>
+                                            @endif
+                                        </div>
+                                    @endisset
 
                                 </div>
                             </div>
                         </div>
-
                     </div>
                 @endforeach
             </div>
@@ -225,5 +253,14 @@
         </div>
         <br><br>
     </div>
-
+    <div class="btn btn-primary" wire:click="setOpen"
+         style="position:fixed; bottom: 20px; left: 20px; z-index: 10; width: 200px;">
+        Total Pembelanjaan <br>
+        {{ number_format($total,0,'.','.') }} <br>
+        @if($open)
+            @foreach($orderList as $order=>$value)
+                {{ $products->find($order)->title }} ({{$value}}) <br>
+            @endforeach
+        @endif
+    </div>
 </div>

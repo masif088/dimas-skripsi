@@ -26,7 +26,13 @@ class SelfTransaction extends Component
     public $t;
     public $donate;
 
+    public $open = false;
     protected $listeners = ["payment" => "payment", "paymentIm" => "paymentIm"];
+
+    public function setOpen()
+    {
+        $this->open = !$this->open;
+    }
 
     public function mount()
     {
@@ -53,6 +59,7 @@ class SelfTransaction extends Component
             $this->orderList[$product] += 1;
 //            dd($this->orderList);
         } else {
+
             $this->orderList[$product] = 1;
         }
     }
@@ -69,7 +76,9 @@ class SelfTransaction extends Component
 
     public function increaseOrderList($id)
     {
+
         $this->orderList[$id] += 1;
+
     }
 
     public function render()
