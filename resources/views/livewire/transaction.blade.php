@@ -1,7 +1,7 @@
 <div class="row second-chart-list third-news-update">
     <div class="col-lg-8 col-sm-8 product-list">
         <x-form.input title="" placeholder="Pencarian" model="query"/>
-        <div class="product-wrapper-grid" wire:ignore>
+        <div class="product-wrapper-grid">
             <div class="row">
                 @php($productType=0)
                 @foreach($productSearch as $product)
