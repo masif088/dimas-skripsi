@@ -219,7 +219,7 @@
             </button>
         </div>
         <div class="col-lg-12 mt-1">
-            <button class="btn btn-primary" style="width: 100%" wire:click="proses()">
+            <button class="btn btn-primary" style="width: 100%" wire:click="cancel()">
                 Proses
             </button>
         </div>
