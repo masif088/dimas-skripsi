@@ -190,6 +190,7 @@
                             <br>
                         </div>
                         <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee"/>
+                        <x-form.textarea  title="" placeholder="Catatan" model=""/>
                         <x-form.select :options="$optionMethod" :selected="$paymentMethod" model="paymentMethod"
                                        title="" defer="true"/>
                         <x-form.select :options="$optionReservation" :selected="$reservation" model="reservation"
