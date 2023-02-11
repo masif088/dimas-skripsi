@@ -29,7 +29,7 @@
                         <h4>{{ $product->productType->title }} ({{ $product->productType->products->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12 ">
-                        <div class="card mb-1 @isset($orderList[$product->id]) bg-success border-success @endisset ">
+                        <div class="card mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
                                 <img src="{{ asset('assets/images/blog/img.png') }}" alt="" class="col-3"
                                      wire:click="add({{$product->id}})">
@@ -60,18 +60,6 @@
                                                 wire:click="increaseOrderList({{$product->id}})">
                                             +
                                         </button>
-                                        <div class="col-12" style="font-weight: bold">
-                                            @if($products->find($product->id)->discount_state)
-                                                <div>
-                                                    Rp. {{ number_format($products->find($product->id)->discount_price*$orderList[$product->id]) }}</div>
-                                                <del>
-                                                    Rp. {{ number_format($products->find($product->id)->price*$orderList[$product->id]) }}</del>
-
-                                            @else
-                                                <div>
-                                                    Rp. {{ number_format($products->find($product->id)->price*$orderList[$product->id]) }}</div>
-                                            @endif
-                                        </div>
                                     @endisset
 
                                 </div>
