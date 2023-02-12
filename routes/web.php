@@ -10,6 +10,7 @@ use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\SupportController;
 use App\Models\Transaction;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
@@ -33,8 +34,14 @@ Route::get('/', function () {
     return redirect(route('login'));
 });
 
-Route::get('/transaction', function () {
-    return view('layouts.home');
+
+Route::get('/self-transaction/{tableCode}', function ($tableCode) {
+    try {
+        $decrypted_string = Crypt::decrypt($tableCode);
+    }catch (Exception $exception){
+        abort(403,'Kode meja tidak sesuai');
+    }
+    return view('layouts.home',compact('decrypted_string'));
 });
 
 Route::get('/dashboard', function () {

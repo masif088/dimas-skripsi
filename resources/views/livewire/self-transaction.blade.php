@@ -3,15 +3,7 @@
         <b>Pemesanan Mandiri</b>
     </h1>
     <h2 style="text-align: center"> Imaji Creative Space</h2>
-    <a href="#menu" style="position:fixed; bottom: 100px; right: 20px; z-index: 10; width: 55px;height: 55px"
-       class="btn btn-sm btn-primary">
-        <i style="font-size: 30px" class="p-1 fa fa-arrow-up"></i>
-    </a>
-    <a href="#payment" style="position:fixed; bottom: 20px; right: 20px; z-index: 10; width: 55px;height: 70px"
-       class="btn btn-sm btn-danger">
-        Bayar
-        <i style="font-size: 30px" class="p-1 fa fa-cash-register"></i>
-    </a>
+
 
     <div class="col-lg-12 col-sm-12" id="menu">
         <x-form.input title="" placeholder="Pencarian" model="query"/>
@@ -189,14 +181,12 @@
 
                             <br>
                         </div>
-                        <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee"/>
+                        <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee" style="margin-bottom: 0"/>
                         <x-form.textarea  title="" placeholder="Catatan" model=""/>
                         <x-form.select :options="$optionMethod" :selected="$paymentMethod" model="paymentMethod"
                                        title="" defer="true"/>
                         <x-form.select :options="$optionReservation" :selected="$reservation" model="reservation"
                                        title="" defer="true"/>
-
-
                         Total Pembelian
                         @if($discount!=0)
                             <h6>
@@ -205,12 +195,12 @@
                         @endif
                         <h6>Rp. {{ number_format($total) }} </h6>
 
-                        Total Keseluruhan :
-                        @if(is_numeric($donate))
-                            <h4>Rp. {{ number_format($total+$donate) }}</h4>
-                        @else
-                            <h4>Rp. {{ number_format($total)}}</h4>
-                        @endif
+{{--                        Total Keseluruhan :--}}
+{{--                        @if(is_numeric($donate))--}}
+{{--                            <h4>Rp. {{ number_format($total+$donate) }}</h4>--}}
+{{--                        @else--}}
+{{--                            <h4>Rp. {{ number_format($total)}}</h4>--}}
+{{--                        @endif--}}
 
 
                         @if($discount!=0)
@@ -243,8 +233,10 @@
         <br><br>
     </div>
     <div class="btn btn-primary" wire:click="setOpen"
-         style="position:fixed; bottom: 20px; left: 20px; z-index: 10; width: 200px;">
-        Total Pembelanjaan <br>
+         style="position:fixed; text-align: center; font-size: 12px; padding-right: 0; padding-left: 0; bottom: 355px; right: 20px; z-index: 10; @if($open) width: 155px; @else width: 55px; @endif">
+{{--        <i style="font-size: 30px" class="p-1 fa fa-cart-shopping"></i> <br>--}}
+{{--        <i class="fa-solid fa-cart-shopping"></i>--}}
+        <i  style="font-size: 20px" class="fa fa-shopping-basket"></i> <br>
         {{ number_format($total,0,'.','.') }} <br>
         @if($open)
             @foreach($orderList as $order=>$value)
@@ -252,4 +244,19 @@
             @endforeach
         @endif
     </div>
+
+    <a href="#menu" wire:click="cancel()" style="position:fixed; bottom: 285px; right: 20px; z-index: 10; width: 55px;height: 55px"
+       class="btn btn-sm btn-danger">
+        <i style="font-size: 30px" class="p-1 fa fa-trash-o"></i>
+    </a>
+
+    <a href="#menu" style="position:fixed; bottom: 220px; right: 20px; z-index: 10; width: 55px;height: 55px"
+       class="btn btn-sm btn-primary">
+        <i style="font-size: 30px" class="p-1 fa fa-arrow-up"></i>
+    </a>
+    <a href="#payment" style="position:fixed; bottom: 140px; right: 20px; z-index: 10; width: 55px;height: 70px"
+       class="btn btn-sm btn-success">
+        Bayar
+        <i style="font-size: 30px" class="p-1 fa fa-cash-register"></i>
+    </a>
 </div>

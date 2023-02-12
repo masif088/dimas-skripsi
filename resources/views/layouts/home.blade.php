@@ -13,13 +13,14 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/icofont.css')}}">
     <!-- Themify icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/themify.css')}}">
-    <title>Hello, world!</title>
+    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+    <title>Pemesanan Mandiri | Imaji Creative Space</title>
     @livewireStyles
 </head>
 <body>
 
 <div class="container">
-    <livewire:self-transaction/>
+    <livewire:self-transaction :table="$decrypted_string"/>
 </div>
 
 

@@ -10,6 +10,7 @@ use Livewire\Component;
 
 class SelfTransaction extends Component
 {
+    public $table;
     public $products;
     public $productSearch;
     public $productSold;
@@ -173,7 +174,7 @@ class SelfTransaction extends Component
             $this->fee = $this->t;
         }
         $transaction = \App\Models\Transaction::create([
-            'name'              => $this->name,
+            'name'              => $this->table.' - '.$this->name,
             'transaction_code'  => \App\Models\Transaction::getCode(),
             'user_id'           => auth()->id(), 'status_order_id' => 1,
             'payment_method_id' => $this->paymentMethod,
