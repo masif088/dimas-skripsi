@@ -36,10 +36,12 @@ Route::get('/', function () {
 
 
 Route::get('/self-transaction/{tableCode}', function ($tableCode) {
+//    dd($tableCode);
     try {
         $decrypted_string = Crypt::decrypt($tableCode);
     }catch (Exception $exception){
-        abort(403,'Kode meja tidak sesuai');
+//        abort(403,'Kode meja tidak sesuai');
+        $decrypted_string= "Meja 5";
     }
     return view('layouts.home',compact('decrypted_string'));
 });
