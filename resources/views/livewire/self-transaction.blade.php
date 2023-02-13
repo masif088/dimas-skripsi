@@ -112,15 +112,16 @@
                 @php($total=0)
                 @php($discount=0)
                 @foreach($orderList as $order=>$value)
+                    @php($p=$products->find($order))
                     <div class="news-update" style="padding: 10px">
                         <div class="row">
                             <div class="col-4">
-                                <h6>{{ $products->find($order)->title }}</h6>
-                                @if($products->find($order)->discount_state)
-                                    <div>Rp. {{ number_format($products->find($order)->discount_price) }}</div>
-                                    <del>Rp. {{ number_format($products->find($order)->price) }}</del>
+                                <h6>{{ $p->title }}</h6>
+                                @if($p->discount_state)
+                                    <div>Rp. {{ number_format($p->discount_price) }}</div>
+                                    <del>Rp. {{ number_format($p->price) }}</del>
                                 @else
-                                    <div>Rp. {{ number_format($products->find($order)->price) }}</div>
+                                    <div>Rp. {{ number_format($p->price) }}</div>
                                 @endif
                             </div>
                             <div class="col-4 text-center">
@@ -138,14 +139,14 @@
                             </div>
                             <div class="col-4" style="text-align: right; padding-right: 20px; font-weight: bold">
                                 <br>
-                                @if($products->find($order)->discount_state)
-                                    <div>Rp. {{ number_format($products->find($order)->discount_price*$value) }}</div>
-                                    <del>Rp. {{ number_format($products->find($order)->price*$value) }}</del>
-                                    @php($total+=$products->find($order)->discount_price*$value)
-                                    @php($discount+=($products->find($order)->price - $products->find($order)->discount_price)*$value)
+                                @if($p->discount_state)
+                                    <div>Rp. {{ number_format($p->discount_price*$value) }}</div>
+                                    <del>Rp. {{ number_format($p->price*$value) }}</del>
+                                    @php($total+=$p->discount_price*$value)
+                                    @php($discount+=($p->price - $p->discount_price)*$value)
                                 @else
-                                    <div>Rp. {{ number_format($products->find($order)->price*$value) }}</div>
-                                    @php($total+=$products->find($order)->price*$value)
+                                    <div>Rp. {{ number_format($p->price*$value) }}</div>
+                                    @php($total+=$p->price*$value)
                                 @endif
                             </div>
                         </div>
