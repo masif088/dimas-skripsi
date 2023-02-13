@@ -25,7 +25,6 @@
                         <h4 wire:ignore.self>
                             @php($type=\App\Models\ProductType::find($product->product_type_id))
                             {!! $type->photo_path !!}
-                            <i class="fa-solid fa-mug-hot text-success" style="font-size: 40px"></i>
                             {{ $type->title }} ({{ $type->products->where('product_status_id',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
