@@ -30,7 +30,7 @@
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
                                 <div class="col-2 " wire:click="add({{$product->id}})">
-                                    {{ $product->productType->photo_path }}
+                                    {!! $product->productType->photo_path !!}
                                 </div>
                                 <div class="col-6 " wire:click="add({{$product->id}})">
 
