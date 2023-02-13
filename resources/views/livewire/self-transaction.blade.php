@@ -23,17 +23,17 @@
                         @php($productType=$product->product_type_id)
                         <h4>{{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
                     @endif
-                    <div class="col-xl-12 col-sm-12 xl-12 ">
+                    <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                <img src="{{ asset('storage/'.$product->productType->photo_path) }}"style="height: 100px; width: 120px" alt="" class="col-3"
+                                <img src="{{ asset('storage/'.$product->productType->photo_path) }}" style="height: 9px; width: 9px" alt="" class="col-3"
                                      wire:click="add({{$product->id}})">
                                 <div class="col-6 p-1" wire:click="add({{$product->id}})">
                                     <div class="product-details text-left" style="margin: 0;padding: 0">
-                                        <h5 style="margin: 0">{{ $product->title }}</h5>
-                                        <p>{{ $product->description }}</p>
+                                        <h5 style="margin: 0; font-size: 12px">{{ $product->title }}</h5>
+                                        <p style=" font-size: 10px">{{ $product->description }}</p>
                                     </div>
-                                    <div class="product-price text-left">
+                                    <div class="product-price text-left" style=" font-size: 10px">
                                         @if($product->discount_state)
                                             Rp. {{ number_format($product->discount_price) }}
                                             <del>Rp. {{ number_format($product->price) }}</del>
