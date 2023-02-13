@@ -27,8 +27,8 @@
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                     wire:click="add({{$product->id}})">
-                                <div class="col-6 p-1" wire:click="add({{$product->id}})">
+{{--                                     wire:click="add({{$product->id}})">--}}
+                                <div class="col-8 p-1" wire:click="add({{$product->id}})">
                                     <div class="product-details text-left" style="margin: 0;padding: 0">
                                         <h5 style="margin: 0; font-size: 12px">{{ $product->title }}</h5>
                                         <p style=" font-size: 10px">{{ $product->description }}</p>
@@ -42,7 +42,7 @@
                                         @endif
                                     </div>
                                 </div>
-                                <div class="col-3 row p-1">
+                                <div class="col-4 row p-1">
                                     @isset($orderList[$product->id])
                                         <button style="height: 50px" class="btn btn-danger col-4"
                                                 wire:click="decreaseOrderList({{$product->id}})">
