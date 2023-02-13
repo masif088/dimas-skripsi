@@ -23,7 +23,7 @@ class ProductType extends Model
     /**
      * @var array
      */
-    protected $fillable = ['title', 'created_at', 'updated_at'];
+    protected $fillable = ['title', 'photo_path','status','created_at', 'updated_at'];
 
     /**
      * @return \Illuminate\Database\Eloquent\Relations\HasMany

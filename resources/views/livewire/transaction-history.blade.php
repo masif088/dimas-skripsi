@@ -224,7 +224,21 @@
                         </div>
 
                     @endforeach
-                    <div class="news-update" style="padding: 10px">
+                    <div style="padding: 10px">
+                        <form action="">
+{{--                            <select name="" id="" wire:model="" class="form-control">--}}
+
+{{--                            </select>--}}
+                            <select wire:change="statusOnChange({{$transactionDetail->id}},$event.target.value)" class="form-control">
+                                @foreach($paymentMethod as $payment)
+                                <option value="{{ $payment->id }}" {{ $transactionDetail->payment_method_id== $payment->id ?'selected=selected':'' }}>{{ $payment->title }}</option>
+                                @endforeach
+{{--                                <option value="2" {{$product->product_status_id==2?'selected=selected':''}}>Non Active</option>--}}
+{{--                                <option value="3" {{$product->product_status_id==3?'selected=selected':''}}>Sold Out</option>--}}
+                            </select>
+{{--                            <input type="button" value="submit" class="btn btn-success mt-3">--}}
+                        </form>
+
                     </div>
                 @endif
             </div>

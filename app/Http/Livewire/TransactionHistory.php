@@ -25,8 +25,9 @@ class TransactionHistory extends Component
         $this->productAmounts = [];
         $this->productTotals = [];
         $this->productMethod = [];
-//        dd($this->productMethod);
+
         $this->paymentMethod = PaymentMethod::get();
+
         $this->money = [];
         $this->transactionList = \App\Models\Transaction::whereIn('status_order_id', [2, 3])
             ->whereDate('created_at', $this->date)
@@ -73,6 +74,13 @@ class TransactionHistory extends Component
     public function detail($id)
     {
         $this->transactionDetail = $this->transactionList->find($id);
+    }
+
+    public function statusOnChange($id,$status){
+
+        $t=\App\Models\Transaction::find($id);
+            $t->update(['payment_method_id'=>$status]);
+
     }
 
     public function render()

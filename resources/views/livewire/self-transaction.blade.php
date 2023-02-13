@@ -1,3 +1,4 @@
+@php use App\Models\ProductType; @endphp
 <div class="row">
     <h1 style="text-align: center">
         <b>Pemesanan Mandiri</b>
@@ -11,9 +12,13 @@
             <div class="row">
                 @php($productType=0)
                 @foreach($productSearch as $product)
-{{--                    @if($product->productType->status==0)--}}
-{{--@continue--}}
-{{--                    @endif--}}
+                    @if($product->self_transaction_status==0)
+                        @continue
+                    @endif
+                    @if($product->productType->status==0)
+                        @continue
+                    @endif
+
                     @if($productType!=$product->product_type_id)
                         @if($productType!=0)
                             {!! '</div>' !!}
@@ -23,23 +28,23 @@
                         @php($productType=$product->product_type_id)
 
                         <h4 wire:ignore.self>
-                            @php($type=\App\Models\ProductType::find($product->product_type_id))
+                            @php($type=ProductType::find($product->product_type_id))
                             {!! $type->photo_path !!}
                             {{ $type->title }} ({{ $type->products->where('product_status_id',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-{{--                                <div class="col-2 " wire:click="add({{$product->id}})" style="padding-top:5px;text-align: center;vertical-align: center">--}}
+                                {{--                                <div class="col-2 " wire:click="add({{$product->id}})" style="padding-top:5px;text-align: center;vertical-align: center">--}}
 
 
-{{--                                </div>--}}
+                                {{--                                </div>--}}
                                 <div class="col-8 " wire:click="add({{$product->id}})">
 
-                                        <h5>{{ $product->title }}</h5>
-                                        <p>{{ $product->description }}</p>
+                                    <h5>{{ $product->title }}</h5>
+                                    <p>{{ $product->description }}</p>
 
-                                    <div class="text-left" >
+                                    <div class="text-left">
                                         @if($product->discount_state)
                                             Rp. {{ number_format($product->discount_price) }}
                                             <del>Rp. {{ number_format($product->price) }}</del>
@@ -191,8 +196,9 @@
 
                             <br>
                         </div>
-                        <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee" style="margin-bottom: 0"/>
-                        <x-form.textarea  title="" placeholder="Catatan" model=""/>
+                        <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee"
+                                      style="margin-bottom: 0"/>
+                        <x-form.textarea title="" placeholder="Catatan" model=""/>
                         <x-form.select :options="$optionMethod" :selected="$paymentMethod" model="paymentMethod"
                                        title="" defer="true"/>
                         <x-form.select :options="$optionReservation" :selected="$reservation" model="reservation"
@@ -205,12 +211,12 @@
                         @endif
                         <h6>Rp. {{ number_format($total) }} </h6>
 
-{{--                        Total Keseluruhan :--}}
-{{--                        @if(is_numeric($donate))--}}
-{{--                            <h4>Rp. {{ number_format($total+$donate) }}</h4>--}}
-{{--                        @else--}}
-{{--                            <h4>Rp. {{ number_format($total)}}</h4>--}}
-{{--                        @endif--}}
+                        {{--                        Total Keseluruhan :--}}
+                        {{--                        @if(is_numeric($donate))--}}
+                        {{--                            <h4>Rp. {{ number_format($total+$donate) }}</h4>--}}
+                        {{--                        @else--}}
+                        {{--                            <h4>Rp. {{ number_format($total)}}</h4>--}}
+                        {{--                        @endif--}}
 
 
                         @if($discount!=0)
@@ -244,9 +250,9 @@
     </div>
     <div class="btn btn-primary" wire:click="setOpen"
          style="position:fixed; text-align: center; font-size: 12px; padding-right: 0; padding-left: 0; bottom: 355px; right: 20px; z-index: 10; @if($open) width: 155px; @else width: 55px; @endif">
-{{--        <i style="font-size: 30px" class="p-1 fa fa-cart-shopping"></i> <br>--}}
-{{--        <i class="fa-solid fa-cart-shopping"></i>--}}
-        <i  style="font-size: 20px" class="fa fa-shopping-basket"></i> <br>
+        {{--        <i style="font-size: 30px" class="p-1 fa fa-cart-shopping"></i> <br>--}}
+        {{--        <i class="fa-solid fa-cart-shopping"></i>--}}
+        <i style="font-size: 20px" class="fa fa-shopping-basket"></i> <br>
         {{ number_format($total,0,'.','.') }} <br>
         @if($open)
             @foreach($orderList as $order=>$value)
@@ -255,7 +261,8 @@
         @endif
     </div>
 
-    <a href="#menu" wire:click="cancel()" style="position:fixed; bottom: 285px; right: 20px; z-index: 10; width: 55px;height: 55px"
+    <a href="#menu" wire:click="cancel()"
+       style="position:fixed; bottom: 285px; right: 20px; z-index: 10; width: 55px;height: 55px"
        class="btn btn-sm btn-danger">
         <i style="font-size: 30px" class="p-1 fa fa-trash-o"></i>
     </a>
