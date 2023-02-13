@@ -21,12 +21,12 @@
                             {!! '<div class="row">' !!}
                         @endif
                         @php($productType=$product->product_type_id)
+                            <img src="{{ asset('storage/'.$product->productType->photo_path) }}" style="height: 90px; width: 90px" alt="" class="col-3"
                         <h4>{{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                <img src="{{ asset('storage/'.$product->productType->photo_path) }}" style="height: 90px; width: 90px" alt="" class="col-3"
                                      wire:click="add({{$product->id}})">
                                 <div class="col-6 p-1" wire:click="add({{$product->id}})">
                                     <div class="product-details text-left" style="margin: 0;padding: 0">
