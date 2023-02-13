@@ -23,7 +23,7 @@
                         @php($productType=$product->product_type_id)
 
                         <h4 wire:ignore.self>
-                            {!! $product->productType->photo_path !!}
+{{--                            {!! $product->productType->photo_path !!}--}}
 {{--                            <i class="fa-solid fa-mug-hot text-success" style="font-size: 40px"></i>--}}
                             {{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
                     @endif
