@@ -21,7 +21,7 @@
                             {!! '<div class="row">' !!}
                         @endif
                         @php($productType=$product->product_type_id)
-                        <h4>{{ $product->productType->title }} ({{ $product->productType->products->count() }})</h4>
+                        <h4>{{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12 ">
                         <div class="card mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
