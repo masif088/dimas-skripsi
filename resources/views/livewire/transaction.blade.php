@@ -72,12 +72,12 @@
                     <h5 class="m-0">Menu Pesanan</h5>
                 </div>
             </div>
-            <div class="card-body p-0 transaction-list">
+            <div class="card-body p-0 " >
                 @php($total=0)
                 @php($discount=0)
                 @foreach($orderList as $order=>$value)
                     @php($p=$products->find($order))
-                    <div class="news-update" style="padding: 10px">
+                    <div class="news-update" style="padding: 5px; font-size: 12px">
                         <div class="row">
                             <div class="col-md-4">
                                 <h6>{{ $p->title }}</h6>
@@ -88,20 +88,20 @@
                                     <div>Rp. {{ number_format($p->price) }}</div>
                                 @endif
                             </div>
-                            <div class="col-md-4 text-center">
+                            <div class="col-md-5 text-center row">
                                 <div class="row">
-                                    <button class="btn btn-sm btn-danger col-4 float-start" type="button"
-                                            style="padding: 5px" wire:click="decreaseOrderList({{$order}})">
+                                    <button class=" btn-sm btn-danger col-4" style="height: 50px"  type="button"
+                                             wire:click="decreaseOrderList({{$order}})">
                                         <i class="icon-minus"></i>
                                     </button>
                                     <h6 class="col-4">{{ number_format($value) }}</h6>
-                                    <button class="btn btn-sm btn-primary col-4 float-end" type="button"
-                                            style="padding: 5px" wire:click="increaseOrderList({{$order}})">
+                                    <button class="btn-sm btn-primary col-4" style="height: 50px" type="button"
+                                             wire:click="increaseOrderList({{$order}})">
                                         <i class="icon-plus"></i>
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-md-4">
+                            <div class="col-md-3">
                                 @if($p->discount_state)
                                     <div>Rp. {{ number_format($p->discount_price*$value) }}</div>
                                     <del>Rp. {{ number_format($p->price*$value) }}</del>
