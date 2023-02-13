@@ -36,8 +36,8 @@
 {{--                                </div>--}}
                                 <div class="col-8 " wire:click="add({{$product->id}})">
 
-                                        <h5 style=" font-size: 12px">{{ $product->title }}</h5>
-                                        <p style=" font-size: 10px">{{ $product->description }}</p>
+                                        <h5>{{ $product->title }}</h5>
+                                        <p>{{ $product->description }}</p>
 
                                     <div class="text-left" >
                                         @if($product->discount_state)
