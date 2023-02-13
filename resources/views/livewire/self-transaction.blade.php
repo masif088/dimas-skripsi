@@ -11,6 +11,9 @@
             <div class="row">
                 @php($productType=0)
                 @foreach($productSearch as $product)
+                    @if($product->productType->status==0)
+@continue
+                    @endif
                     @if($productType!=$product->product_type_id)
                         @if($productType!=0)
                             {!! '</div>' !!}
@@ -23,7 +26,7 @@
                     <div class="col-xl-12 col-sm-12 xl-12 ">
                         <div class="card mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                <img src="{{ asset('assets/images/blog/img.png') }}" alt="" class="col-3"
+                                <img src="{{ asset('storage/'.$product->productType->photo_path) }}"style="height: 100px; width: 120px" alt="" class="col-3"
                                      wire:click="add({{$product->id}})">
                                 <div class="col-6 p-1" wire:click="add({{$product->id}})">
                                     <div class="product-details text-left" style="margin: 0;padding: 0">
