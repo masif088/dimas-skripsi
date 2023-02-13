@@ -79,7 +79,7 @@
                     @php($p=$products->find($order))
                     <div class="news-update" style="padding: 10px">
                         <div class="row">
-                            <div class="col-4">
+                            <div class="col-md-4">
                                 <h6>{{ $p->title }}</h6>
                                 @if($p->discount_state)
                                     <div>Rp. {{ number_format($p->discount_price) }}</div>
@@ -88,21 +88,20 @@
                                     <div>Rp. {{ number_format($p->price) }}</div>
                                 @endif
                             </div>
-                            <div class="col-4 text-center">
+                            <div class="col-md-4 text-center">
                                 <div class="row">
                                     <button class="btn btn-sm btn-danger col-4 float-start" type="button"
-                                            wire:click="decreaseOrderList({{$order}})">
-                                        -
+                                            style="padding: 5px" wire:click="decreaseOrderList({{$order}})">
+                                        <i class="icon-minus"></i>
                                     </button>
                                     <h6 class="col-4">{{ number_format($value) }}</h6>
                                     <button class="btn btn-sm btn-primary col-4 float-end" type="button"
-                                            wire:click="increaseOrderList({{$order}})">
-                                        +
+                                            style="padding: 5px" wire:click="increaseOrderList({{$order}})">
+                                        <i class="icon-plus"></i>
                                     </button>
                                 </div>
                             </div>
-                            <div class="col-4" style="text-align: right; padding-right: 20px; font-weight: bold">
-                                <br>
+                            <div class="col-md-4">
                                 @if($p->discount_state)
                                     <div>Rp. {{ number_format($p->discount_price*$value) }}</div>
                                     <del>Rp. {{ number_format($p->price*$value) }}</del>
