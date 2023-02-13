@@ -29,8 +29,9 @@
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                <div class="col-2 " wire:click="add({{$product->id}})">
+                                <div class="col-2 " wire:click="add({{$product->id}})" style="padding-top:5px;text-align: center;vertical-align: center">
                                     {!! $product->productType->photo_path !!}
+{{--                                        <i class="fa-solid fa-mug-hot text-success" style="font-size: 40px"></i>--}}
                                 </div>
                                 <div class="col-6 " wire:click="add({{$product->id}})">
 
