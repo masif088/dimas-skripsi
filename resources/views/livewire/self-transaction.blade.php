@@ -23,17 +23,18 @@
                         @php($productType=$product->product_type_id)
 
                         <h4>
-
+{{--                            {!! $product->productType->photo_path !!}--}}
+                            <i class="fa-solid fa-mug-hot text-success" style="font-size: 40px"></i>
                             {{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                <div class="col-2 " wire:click="add({{$product->id}})" style="padding-top:5px;text-align: center;vertical-align: center">
-                                    {!! $product->productType->photo_path !!}
-{{--                                        <i class="fa-solid fa-mug-hot text-success" style="font-size: 40px"></i>--}}
-                                </div>
-                                <div class="col-6 " wire:click="add({{$product->id}})">
+{{--                                <div class="col-2 " wire:click="add({{$product->id}})" style="padding-top:5px;text-align: center;vertical-align: center">--}}
+
+
+{{--                                </div>--}}
+                                <div class="col-8 " wire:click="add({{$product->id}})">
 
                                         <h5 style=" font-size: 12px">{{ $product->title }}</h5>
                                         <p style=" font-size: 10px">{{ $product->description }}</p>
