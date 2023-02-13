@@ -23,9 +23,10 @@
                         @php($productType=$product->product_type_id)
 
                         <h4 wire:ignore.self>
-{{--                            {!! $product->productType->photo_path !!}--}}
+                            @php($type=\App\Models\ProductType::find($product->product_type_id))
+                            {!! $type->photo_path !!}
                             <i class="fa-solid fa-mug-hot text-success" style="font-size: 40px"></i>
-                            {{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
+                            {{ $type->title }} ({{ $type->products->where('product_status_id',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
