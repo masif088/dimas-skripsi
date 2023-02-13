@@ -13,7 +13,8 @@
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/icofont.css')}}">
     <!-- Themify icon-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/css/vendors/themify.css')}}">
-    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">
+{{--    <link rel="stylesheet" href="{{ asset('assets/css/font-awesome.css') }}">--}}
+    <link rel="stylesheet" href="{{ asset('assets/fontawesome-free-6.3.0-web/css/all.css') }}">
     <title>Pemesanan Mandiri | Imaji Creative Space</title>
     @livewireStyles
 </head>

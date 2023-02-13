@@ -11,9 +11,9 @@
             <div class="row">
                 @php($productType=0)
                 @foreach($productSearch as $product)
-                    @if($product->productType->status==0)
-@continue
-                    @endif
+{{--                    @if($product->productType->status==0)--}}
+{{--@continue--}}
+{{--                    @endif--}}
                     @if($productType!=$product->product_type_id)
                         @if($productType!=0)
                             {!! '</div>' !!}
@@ -21,19 +21,23 @@
                             {!! '<div class="row">' !!}
                         @endif
                         @php($productType=$product->product_type_id)
-                            <img src="{{ asset('storage/'.$product->productType->photo_path) }}" style="height: 90px; width: 90px" alt="" class="col-3"
-                        <h4>{{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
+
+                        <h4>
+
+                            {{ $product->productType->title }} ({{ $product->productType->products->where('product_status_id',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
-                        <div class="card mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
+                        <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-{{--                                     wire:click="add({{$product->id}})">--}}
-                                <div class="col-8 p-1" wire:click="add({{$product->id}})">
-                                    <div class="product-details text-left" style="margin: 0;padding: 0">
-                                        <h5 style="margin: 0; font-size: 12px">{{ $product->title }}</h5>
+                                <div class="col-2 " wire:click="add({{$product->id}})">
+                                    {{ $product->productType->photo_path }}
+                                </div>
+                                <div class="col-6 " wire:click="add({{$product->id}})">
+
+                                        <h5 style=" font-size: 12px">{{ $product->title }}</h5>
                                         <p style=" font-size: 10px">{{ $product->description }}</p>
-                                    </div>
-                                    <div class="product-price text-left" style=" font-size: 10px">
+
+                                    <div class="text-left" >
                                         @if($product->discount_state)
                                             Rp. {{ number_format($product->discount_price) }}
                                             <del>Rp. {{ number_format($product->price) }}</del>
