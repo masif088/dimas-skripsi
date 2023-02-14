@@ -49,7 +49,7 @@ class SelfTransaction extends Component
         $this->optionMethod = eloquent_to_options(PaymentMethod::get(), 'id',
             'title',);
         $this->products = Product::where('product_status_id', 1)
-            ->orderByRaw("FIELD(product_type_id,17,19,18,21,14,13,12,9,8,11,10,5,15) desc")
+            ->orderByRaw("FIELD(product_type_id,17,6,19,18,20,21,14,13,12,9,8,11,10,5,15) desc")
             ->get();
         $this->productSold = Product::where('product_status_id', 3)
             ->orderBy('product_type_id',)->get();
