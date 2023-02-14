@@ -30,7 +30,7 @@
                         <h4 wire:ignore.self>
                             @php($type=ProductType::find($product->product_type_id))
                             {!! $type->photo_path !!}
-                            {{ $type->title }} ({{ $type->products->where('product_status_id',1)->count() }})</h4>
+                            {{ $type->title }} ({{ $type->products->where('product_status_id',1)->where('self_transaction_status',1)->count() }})</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
