@@ -8,9 +8,9 @@
                 Nama @include('components.sort-icon',['field'=>"title"])
             </th>
 
-            <th scope="col" wire:click.prevent="sortBy('description')">
-                Deskripsi @include('components.sort-icon',['field'=>"description"])
-            </th>
+{{--            <th scope="col" wire:click.prevent="sortBy('description')">--}}
+{{--                Deskripsi @include('components.sort-icon',['field'=>"description"])--}}
+{{--            </th>--}}
             <th scope="col" wire:click.prevent="sortBy('price')">
                 Harga @include('components.sort-icon',['field'=>"price"])
             </th>
@@ -22,6 +22,9 @@
             </th>
             <th scope="col" wire:click.prevent="sortBy('product_status_id')">
                 Status @include('components.sort-icon',['field'=>"product_status_id"])
+            </th>
+            <th scope="col" wire:click.prevent="sortBy('self_transaction_status')">
+                Self transaction Status @include('components.sort-icon',['field'=>"self_transaction_status"])
             </th>
             <th scope="col" wire:click.prevent="sortBy('product_company_id')">
                 Usaha @include('components.sort-icon',['field'=>"product_company_id"])
@@ -37,8 +40,11 @@
         @foreach($products as $index=>$product)
             <tr>
                 <td scope="row">{{ ($page-1)*$perPage+$index+1 }}</td>
-                <td>{{$product->title}}</td>
-                <td><p style="width: 200px">{{$product->description}}</p></td>
+                <td>
+                    {{$product->title}}
+                    <br>
+                    <span style="font-size: 9px">{{  $product->description }}</span>
+                </td>
                 <td style="{{ ($product->discount_state)?'opacity: 0.5':'' }}">{{number_format($product->price)}}</td>
                 <td style="{{ !($product->discount_state)?'opacity: 0.5':'' }}">{{number_format($product->discount_price)}}</td>
                 <td>
@@ -54,6 +60,12 @@
                         <option value="1" {{$product->product_status_id==1?'selected=selected':''}}>Active</option>
                         <option value="2" {{$product->product_status_id==2?'selected=selected':''}}>Non Active</option>
                         <option value="3" {{$product->product_status_id==3?'selected=selected':''}}>Sold Out</option>
+                    </select>
+                </td>
+                <td>
+                    <select wire:change="statusOnChangeSelfTransaction({{$product->id}},$event.target.value)" class="form-control">
+                        <option value="1" {{$product->self_transaction_status==1?'selected=selected':''}}>Tampil</option>
+                        <option value="0" {{$product->self_transaction_status==0?'selected=selected':''}}>Tidak tampil</option>
                     </select>
                 </td>
                 <td>{{$product->productCompany->title}}</td>
