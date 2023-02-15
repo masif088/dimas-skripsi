@@ -7,7 +7,7 @@
 
 
     {{--        <x-form.input title="" placeholder="Pencarian" model="query"/>--}}
-    <div class="col-lg-12 col-sm-12" id="menu" >
+    <div class="col-lg-12 col-sm-12" id="menu">
         <div class="row">
             @php($productType=0)
             @foreach($products as $product)
@@ -19,9 +19,10 @@
                 @if($productType!=$product->product_type_id)
                     @php($productType=$product->product_type_id)
 
-                    <div class="col-4 p-1" >
+                    <div class="col-4 p-1">
                         <a href="#type{{$productType}}" wire:click="setQuery({{ $productType }})"
-                           class=" btn " style="width: 100%;font-size: 10px !important;background: #277f79; color: white!important;">
+                           class=" btn "
+                           style="width: 100%;font-size: 10px !important;background: #277f79; color: white!important;">
                             {!! $type->photo_path !!} <br>
                             {{ ProductType::find($product->product_type_id)->title }}
                         </a>
@@ -61,39 +62,41 @@
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                <div class="col-2 " wire:click="add({{$product->id}})"
+                                <div class="col-4" wire:click="add({{$product->id}})"
                                      style="padding-top:5px;text-align: center;vertical-align: center">
                                     <img src="https://unsplash.it/600.jpg?image={{$product->id}}" style="width: 100%;"
                                          alt="">
                                 </div>
-                                <div class="col-6 " wire:click="add({{$product->id}})">
-                                    <h5>{{ $product->title }}</h5>
-                                    <p>{{ $product->description }}</p>
-
-                                    <div class="text-left">
-                                        @if($product->discount_state)
-                                            Rp. {{ number_format($product->discount_price) }}
-                                            <del>Rp. {{ number_format($product->price) }}</del>
-                                        @else
-                                            Rp. {{ number_format($product->price) }}
+                                <div class="col-7">
+                                    <div wire:click="add({{$product->id}})">
+                                        <h5>{{ $product->title }}</h5>
+                                        @if($product->description!=null)
+                                            <p>{{ $product->description }}</p>
                                         @endif
-                                    </div>
-                                </div>
-                                <div class="col-4 row p-1">
-                                    @isset($orderList[$product->id])
-                                        <button style="height: 50px" class="btn btn-danger col-4"
-                                                wire:click="decreaseOrderList({{$product->id}})">
-                                            -
-                                        </button>
-                                        <div class="col-4 pt-2" style="text-align: center">
-                                            {{ $orderList[$product->id] }}
+                                        <div class="text-left">
+                                            @if($product->discount_state)
+                                                Rp. {{ number_format($product->discount_price) }}
+                                                <del>Rp. {{ number_format($product->price) }}</del>
+                                            @else
+                                                Rp. {{ number_format($product->price) }}
+                                            @endif
                                         </div>
-                                        <button style="height: 50px" class="col-4 btn btn-primary"
-                                                wire:click="increaseOrderList({{$product->id}})">
-                                            +
-                                        </button>
+                                    </div>
+                                    @isset($orderList[$product->id])
+                                        <div class="row">
+                                            <button style="height: 40px; width: 40px" class="btn btn-danger col-4"
+                                                    wire:click="decreaseOrderList({{$product->id}})">
+                                                -
+                                            </button>
+                                            <div class="col-4 pt-2" style="text-align: center">
+                                                {{ $orderList[$product->id] }}
+                                            </div>
+                                            <button style="height: 40px; width: 40px" class="col-4 btn btn-primary"
+                                                    wire:click="increaseOrderList({{$product->id}})">
+                                                +
+                                            </button>
+                                        </div>
                                     @endisset
-
                                 </div>
                             </div>
                         </div>
