@@ -8,6 +8,34 @@
 
     <div class="col-lg-12 col-sm-12" id="menu">
         <x-form.input title="" placeholder="Pencarian" model="query"/>
+        <div class="row">
+            <div class="col-3">
+                <a href="#type13" class=" btn btn-warning" style="width: 100%">
+                    <i class="fa-solid fa-blender text-success" style="font-size: 40px"></i> <br>
+                    Milkshake
+                </a>
+            </div>
+            <div class="col-3">
+                <a href="#type18" class=" btn btn-warning" style="width: 100%">
+                    <i class="fa-solid fa-bread-slice text-success" style="font-size: 40px"></i> <br>
+                    Toast
+                </a>
+            </div>
+            <div class="col-3">
+                <a href="#type13" class="btn btn-warning" style="width: 100%">
+                    <i class="fa-solid fa-bowl-food text-success" style="font-size: 40px"></i> <br>
+                    Mie Imaji
+                </a>
+            </div>
+            <div class="col-3">
+                <a href="#type13" class="btn btn-warning" style="width: 100%">
+                    <i class="fa-solid fa-bowl-food text-success" style="font-size: 40px"></i> <br>
+                    Mie Imaji
+                </a>
+            </div>
+        </div>
+        <br>
+
         <div class="">
             <div class="row">
                 @php($productType=0)
@@ -27,7 +55,7 @@
                         @endif
                         @php($productType=$product->product_type_id)
 
-                        <h4 wire:ignore.self>
+                        <h4 wire:ignore.self id="type{{$product->product_type_id}}">
                             @php($type=ProductType::find($product->product_type_id))
                             {!! $type->photo_path !!}
                             {{ $type->title }}
@@ -39,10 +67,10 @@
                             <div class="row">
                                 <div class="col-2 " wire:click="add({{$product->id}})"
                                      style="padding-top:5px;text-align: center;vertical-align: center">
-                                    <img src="https://unsplash.it/600.jpg?image={{$product->id}}" style="width: 100%;" alt="">
+                                    <img src="https://unsplash.it/600.jpg?image={{$product->id}}" style="width: 100%;"
+                                         alt="">
                                 </div>
-                                <div class="col-8 " wire:click="add({{$product->id}})">
-
+                                <div class="col-6 " wire:click="add({{$product->id}})">
                                     <h5>{{ $product->title }}</h5>
                                     <p>{{ $product->description }}</p>
 
