@@ -39,7 +39,7 @@
                             <div class="row">
                                 <div class="col-2 " wire:click="add({{$product->id}})"
                                      style="padding-top:5px;text-align: center;vertical-align: center">
-                                    <img src="https://unsplash.it/600.jpg?image={{$product->id}}" alt="">
+                                    <img src="https://unsplash.it/600.jpg?image={{$product->id}}" style="width: 100%;" alt="">
                                 </div>
                                 <div class="col-8 " wire:click="add({{$product->id}})">
 
