@@ -162,15 +162,13 @@ class SelfTransaction extends Component
             }
         }
         $this->t = $total;
+        $confirmText = 'pesanan atas nama : '.$this->name.'<br>total : Rp.'
+            .number_format($total).'<br>total potongan : Rp.'
+            .number_format($discount,);
         $this->emit('swal:confirm', [
-            'title'                                                   => 'Periksa kembali',
-            'icon'                                                    => 'info',
-            'confirmText'                                             => 'Proses',
-            'text'                                                    => 'pesanan atas nama : '
-                .$this->name.'<br>total : Rp.'.number_format($total)
-                .'<br>total potongan : Rp.'.number_format($discount,)
-                ,
-            'method'                                                  => 'payment',
+            'title'       => 'Periksa kembali', 'icon' => 'info',
+            'confirmText' => 'Proses', 'text' => $confirmText,
+            'method'      => 'payment',
         ],);
     }
 
