@@ -92,19 +92,22 @@ class SelfTransaction extends Component
     public function production()
     {
         $query = $this->query;
-        if (empty($query)) {
-//            dd($query);
-            $this->productSearch = $this->products;
-        } else {
-
-            $this->productSearch = $this->products->filter(function ($item) use
-            (
-                $query
-            ) {
-                return false !== stristr($item->title, $query);
+        if (!empty($query)) {
+            $this->productSearch = $this->products
+                ->filter(function ($item) use ($query) {
+                return false !== ($item->product_type_id==$query);
             },);
 
+        }else{
+            $this->productSearch=[];
         }
+    }
+
+    /**
+     * @param  mixed  $query
+     */
+    public function setQuery($query): void {
+        $this->query = $query;
     }
 
     public function cancel()

@@ -6,34 +6,28 @@
     <h2 style="text-align: center"> Imaji Creative Space</h2>
 
 
-    <div class="col-lg-12 col-sm-12" id="menu">
-        <x-form.input title="" placeholder="Pencarian" model="query"/>
+    {{--        <x-form.input title="" placeholder="Pencarian" model="query"/>--}}
+    <div class="col-lg-12 col-sm-12" id="menu" wire:ignore>
         <div class="row">
-            <div class="col-3">
-                <a href="#type13" class=" btn btn-warning" style="width: 100%">
-                    <i class="fa-solid fa-blender text-success" style="font-size: 40px"></i> <br>
-                    Milkshake
-                </a>
-            </div>
-            <div class="col-3">
-                <a href="#type18" class=" btn btn-warning" style="width: 100%">
-                    <i class="fa-solid fa-bread-slice text-success" style="font-size: 40px"></i> <br>
-                    Toast
-                </a>
-            </div>
-            <div class="col-3">
-                <a href="#type13" class="btn btn-warning" style="width: 100%">
-                    <i class="fa-solid fa-bowl-food text-success" style="font-size: 40px"></i> <br>
-                    Mie Imaji
-                </a>
-            </div>
-            <div class="col-3">
-                <a href="#type13" class="btn btn-warning" style="width: 100%">
-                    <i class="fa-solid fa-bowl-food text-success" style="font-size: 40px"></i> <br>
-                    Mie Imaji
-                </a>
-            </div>
+            @php($productType=0)
+
+            @foreach($productSearch as $product)
+                @if($product->self_transaction_status==0 or $product->productType->status==0)
+                    @continue
+                @endif
+                @if($productType!=$product->product_type_id)
+                    @php($productType=$product->product_type_id)
+                    <div class="col-3">
+                        <a href="#type{{$productType}}" wire:click="setQuery({{ $productType }})"
+                           class=" btn btn-warning" style="width: 100%">
+                            <i class="fa-solid fa-blender text-success" style="font-size: 40px"></i> <br>
+                            {{ ProductType::find($product->product_type_id)->title }}
+                        </a>
+                    </div>
+                @endif
+            @endforeach
         </div>
+
         <br>
 
         <div class="">
