@@ -1,5 +1,11 @@
 @php use App\Models\ProductType; @endphp
 <div class="row">
+
+    <div style="text-align: center">
+        <br>
+        <img src="{{ asset('assets/logo.jpg') }}" alt="" style="width: 120px">
+        <br><br>
+    </div>
     <h1 style="text-align: center">
         <b>Pemesanan Mandiri</b>
     </h1>
@@ -62,12 +68,15 @@
                     <div class="col-xl-12 col-sm-12 xl-12">
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
-                                <div class="col-4" wire:click="add({{$product->id}})"
-                                     style="padding-top:5px;text-align: center;vertical-align: center">
-                                    <img src="https://unsplash.it/600.jpg?image={{$product->id}}" style="width: 100%;"
-                                         alt="">
-                                </div>
-                                <div class="col-7">
+                                @if($product->thumbnail!=null)
+                                    <div class="col-4" wire:click="add({{$product->id}})"
+                                         style="padding-top:5px;text-align: center;vertical-align: center">
+                                        <img src="{{ asset('storage/'.$product->thumbnail) }}"
+                                             style="width: 100%;"
+                                             alt="">
+                                    </div>
+                                @endif
+                                <div class="@if($product->thumbnail!=null) col-8 @else col-12 @endif">
                                     <div wire:click="add({{$product->id}})">
                                         <h5>{{ $product->title }}</h5>
                                         @if($product->description!=null)
@@ -83,7 +92,7 @@
                                         </div>
                                     </div>
                                     @isset($orderList[$product->id])
-                                        <div class="row">
+                                        <div class="row" style="padding-left: 10px">
                                             <button style="height: 40px; width: 40px" class="btn btn-danger col-4"
                                                     wire:click="decreaseOrderList({{$product->id}})">
                                                 -
@@ -106,7 +115,7 @@
         </div>
     </div>
 
-    <div class="col-lg-12 col-sm-12">
+    <div class="col-lg-12 col-sm-12" id="menuPesanan">
         <div class="card">
             <div class="card-header" style="padding: 10px">
                 <div class="header-top">
@@ -242,24 +251,17 @@
             </button>
         </div>
         <div class="col-lg-12 mt-1">
-            <button class="btn btn-primary" style="width: 100%" wire:click="cancel()">
+            <button class="btn btn-primary" style="width: 100%" wire:click="payment()">
                 Proses
             </button>
         </div>
         <br><br>
     </div>
-    <div class="btn btn-primary" wire:click="setOpen"
-         style="position:fixed; text-align: center; font-size: 12px; padding-right: 0; padding-left: 0; bottom: 355px; right: 20px; z-index: 10; @if($open) width: 155px; @else width: 55px; @endif">
-        {{--        <i style="font-size: 30px" class="p-1 fa fa-cart-shopping"></i> <br>--}}
-        {{--        <i class="fa-solid fa-cart-shopping"></i>--}}
+    <a href="#menuPesanan" class="btn btn-primary" wire:click="setOpen"
+       style="position:fixed; text-align: center; font-size: 12px; padding-right: 0; padding-left: 0; bottom: 355px; right: 20px; z-index: 10;  width: 55px;">
         <i style="font-size: 20px" class="fa fa-shopping-basket"></i> <br>
         {{ number_format($total,0,'.','.') }} <br>
-        @if($open)
-            @foreach($orderList as $order=>$value)
-                {{ $products->find($order)->title }} ({{$value}}) <br>
-            @endforeach
-        @endif
-    </div>
+    </a>
 
     <a href="#menu" wire:click="cancel()"
        style="position:fixed; bottom: 285px; right: 20px; z-index: 10; width: 55px;height: 55px"
