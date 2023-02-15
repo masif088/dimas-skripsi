@@ -174,8 +174,6 @@
                 <div class="card">
                     <div class="card-body" style="padding: 10px">
                         <x-form.input type="text" title="" placeholder="nama pembeli" model="name"/>
-                        <x-form.input type="number" title="" placeholder="jumlah pengunjung" model="visitors"/>
-
                         <div style="text-align: center">
 
                             <button type="button" class="btn m-1" style="background-color: #9a7160;color: white"
