@@ -114,8 +114,8 @@
             </div>
         </div>
     </div>
-    <br><br>
-    <div class="col-lg-12 col-sm-12" id="menuPesanan">
+
+    <div class="col-lg-12 mt-3 col-sm-12" id="menuPesanan">
         <div class="card">
             <div class="card-header" style="padding: 10px">
                 <div class="header-top">
@@ -174,37 +174,36 @@
                 <div class="card">
                     <div class="card-body" style="padding: 10px">
                         <x-form.input type="text" title="" placeholder="nama pembeli" model="name"/>
-                        <div style="text-align: center">
+{{--                        <div style="text-align: center">--}}
 
-                            <button type="button" class="btn m-1" style="background-color: #9a7160;color: white"
-                                    wire:click="feeOnChange(5000)">5.000
-                            </button>
-                            <button type="button" class="btn m-1" style="background-color: #827788;color: white"
-                                    wire:click="feeOnChange(10000)">10.000
-                            </button>
-                            <button type="button" class="btn m-1" style="background-color: #6b9281;color: white"
-                                    wire:click="feeOnChange(20000)">20.000
-                            </button>
-                            <button type="button" class="btn m-1" style="background-color: #447db0;color: white"
-                                    wire:click="feeOnChange(50000)">50.000
-                            </button>
-                            <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
-                                    wire:click="feeOnChange(100000)">100.000
-                            </button>
-                            @if(is_numeric($donate))
-                                <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
-                                        wire:click="feeOnChange({{$total + $donate}})">Uang Pas
-                                </button>
-                            @else
-                                <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"
-                                        wire:click="feeOnChange({{ $total }})">Uang Pas
-                                </button>
-                            @endif
-
-                            <br>
-                        </div>
-                        <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee"
-                                      style="margin-bottom: 0"/>
+{{--                            <button type="button" class="btn m-1" style="background-color: #9a7160;color: white"--}}
+{{--                                    wire:click="feeOnChange(5000)">5.000--}}
+{{--                            </button>--}}
+{{--                            <button type="button" class="btn m-1" style="background-color: #827788;color: white"--}}
+{{--                                    wire:click="feeOnChange(10000)">10.000--}}
+{{--                            </button>--}}
+{{--                            <button type="button" class="btn m-1" style="background-color: #6b9281;color: white"--}}
+{{--                                    wire:click="feeOnChange(20000)">20.000--}}
+{{--                            </button>--}}
+{{--                            <button type="button" class="btn m-1" style="background-color: #447db0;color: white"--}}
+{{--                                    wire:click="feeOnChange(50000)">50.000--}}
+{{--                            </button>--}}
+{{--                            <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"--}}
+{{--                                    wire:click="feeOnChange(100000)">100.000--}}
+{{--                            </button>--}}
+{{--                            @if(is_numeric($donate))--}}
+{{--                                <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"--}}
+{{--                                        wire:click="feeOnChange({{$total + $donate}})">Uang Pas--}}
+{{--                                </button>--}}
+{{--                            @else--}}
+{{--                                <button type="button" class="btn m-1" style="background-color: #b1515d;color: white"--}}
+{{--                                        wire:click="feeOnChange({{ $total }})">Uang Pas--}}
+{{--                                </button>--}}
+{{--                            @endif--}}
+{{--                            <br>--}}
+{{--                        </div>--}}
+{{--                        <x-form.input type="number" title="" placeholder="uang pembayaran" model="fee"--}}
+{{--                                      style="margin-bottom: 0"/>--}}
                         <x-form.textarea title="" placeholder="Catatan" model=""/>
                         <x-form.select :options="$optionMethod" :selected="$paymentMethod" model="paymentMethod"
                                        title="" defer="true"/>
@@ -249,7 +248,7 @@
             </button>
         </div>
         <div class="col-lg-12 mt-1">
-            <button class="btn btn-primary" style="width: 100%" wire:click="payment()">
+            <button class="btn btn-primary" style="width: 100%" wire:click="proses()">
                 Proses
             </button>
         </div>

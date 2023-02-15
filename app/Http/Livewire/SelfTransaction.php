@@ -93,20 +93,23 @@ class SelfTransaction extends Component
     {
         $query = $this->query;
         if (!empty($query)) {
-            $this->productSearch = $this->products
-                ->filter(function ($item) use ($query) {
-                return false !== ($item->product_type_id==$query);
+            $this->productSearch = $this->products->filter(function ($item) use
+            (
+                $query
+            ) {
+                return false !== ($item->product_type_id == $query);
             },);
 
-        }else{
-            $this->productSearch=[];
+        } else {
+            $this->productSearch = [];
         }
     }
 
     /**
      * @param  mixed  $query
      */
-    public function setQuery($query): void {
+    public function setQuery($query)
+    : void {
         $this->query = $query;
     }
 
@@ -166,7 +169,7 @@ class SelfTransaction extends Component
             'text'                                                    => 'pesanan atas nama : '
                 .$this->name.'<br>total : Rp.'.number_format($total)
                 .'<br>total potongan : Rp.'.number_format($discount,)
-                .'<br>jumlah pengunjung : '.$this->visitors,
+                ,
             'method'                                                  => 'payment',
         ],);
     }
@@ -180,7 +183,7 @@ class SelfTransaction extends Component
         $transaction = \App\Models\Transaction::create([
             'name'              => $this->table.' - '.$this->name,
             'transaction_code'  => \App\Models\Transaction::getCode(),
-            'user_id'           => auth()->id(), 'status_order_id' => 1,
+            'user_id'           => 13, 'status_order_id' => 1,
             'payment_method_id' => $this->paymentMethod,
             'reservation'       => $this->reservation,
             'visitors'          => $this->visitors, 'fee' => $this->fee,
@@ -218,7 +221,7 @@ class SelfTransaction extends Component
         ],);
         $this->emitTo('transaction-active-notification', 'refresh');
 
-        $url = route('admin.transaction.struck', $transaction->id);
-        $this->emit('redirect:new', $url);
+//        $url = route('admin.transaction.struck', $transaction->id);
+//        $this->emit('redirect:new', $url);
     }
 }
