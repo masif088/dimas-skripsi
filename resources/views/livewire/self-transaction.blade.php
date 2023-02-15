@@ -7,20 +7,22 @@
 
 
     {{--        <x-form.input title="" placeholder="Pencarian" model="query"/>--}}
-    <div class="col-lg-12 col-sm-12" id="menu" wire:ignore>
+    <div class="col-lg-12 col-sm-12" id="menu" >
         <div class="row">
             @php($productType=0)
-
-            @foreach($productSearch as $product)
+            @foreach($products as $product)
                 @if($product->self_transaction_status==0 or $product->productType->status==0)
                     @continue
                 @endif
+                @php($type=ProductType::find($product->product_type_id))
+
                 @if($productType!=$product->product_type_id)
                     @php($productType=$product->product_type_id)
-                    <div class="col-3">
+
+                    <div class="col-4 p-1" >
                         <a href="#type{{$productType}}" wire:click="setQuery({{ $productType }})"
-                           class=" btn btn-warning" style="width: 100%">
-                            <i class="fa-solid fa-blender text-success" style="font-size: 40px"></i> <br>
+                           class=" btn " style="width: 100%;font-size: 10px !important;background: #277f79; color: white!important;">
+                            {!! $type->photo_path !!} <br>
                             {{ ProductType::find($product->product_type_id)->title }}
                         </a>
                     </div>
@@ -92,35 +94,6 @@
                                         </button>
                                     @endisset
 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                @endforeach
-            </div>
-            <div class="row">
-                <h4>Habis</h4>
-                @foreach($productSold as $product)
-                    <div class="col-xl-3 col-sm-3 xl-3 mobile-cashier" style="opacity: 0.5">
-                        <div class="card">
-                            <div class="product-box">
-                                <div class="product-img">
-                                    <div class="text-center">
-                                        <img class="img-fluid" src="{{ asset('storage/'.$product->thumbnail) }}" alt=""
-                                             style="width:100px">
-                                    </div>
-                                </div>
-                                <div class="product-price text-center">
-                                    @if($product->discount_state)
-                                        Rp. {{ number_format($product->discount_price) }}
-                                        <del>Rp. {{ number_format($product->price) }}</del>
-                                    @else
-                                        Rp. {{ number_format($product->price) }}
-                                    @endif
-                                </div>
-                                <div class="product-details text-center" style="margin: 0;padding: 0">
-                                    <h6 style="margin: 0">{{ $product->title }}</h6>
-                                    <p>{{ $product->description }}</p>
                                 </div>
                             </div>
                         </div>
