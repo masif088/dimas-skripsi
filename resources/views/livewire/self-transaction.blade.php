@@ -69,15 +69,15 @@
                         <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
                             <div class="row">
                                 @if($product->thumbnail!=null)
-                                    <div class="col-4" wire:click="add({{$product->id}})"
+                                    <div class="col-4" @if($product->product_status_id) wire:click="add({{$product->id}})" @endif
                                          style="padding-top:5px;text-align: center;vertical-align: center">
                                         <img src="{{ asset('storage/'.$product->thumbnail) }}"
                                              style="width: 100%;"
                                              alt="">
                                     </div>
                                 @endif
-                                <div class="@if($product->thumbnail!=null) col-8 @else col-12 @endif">
-                                    <div wire:click="add({{$product->id}})">
+                                <div class="@if($product->thumbnail!=null) col-8 @else col-12 @endif  @if($product->product_status_id) text-danger @endif">
+                                    <div  @if($product->product_status_id) wire:click="add({{$product->id}})" @endif>
                                         <h5>{{ $product->title }}</h5>
                                         @if($product->description!=null)
                                             <p>{{ $product->description }}</p>
@@ -249,7 +249,7 @@
         </div>
         <div class="col-lg-12 mt-1">
             <button class="btn btn-primary" style="width: 100%" wire:click="proses()">
-                Proses
+                Bayar
             </button>
         </div>
         <br><br>

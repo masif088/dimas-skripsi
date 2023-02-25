@@ -35,7 +35,7 @@ class Transaction extends Model
     /**
      * @var array
      */
-    protected $fillable = ['fee', 'donate', 'user_id', 'status_order_id', 'payment_method_id', 'created_at', 'updated_at', 'transaction_code', 'name', 'visitors', 'reservation'];
+    protected $fillable = ['fee', 'table_code','donate', 'user_id', 'status_order_id', 'payment_method_id', 'created_at', 'updated_at', 'transaction_code', 'name', 'visitors', 'reservation'];
 
     public static function getCode()
     {

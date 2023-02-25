@@ -2,7 +2,6 @@
 
 namespace App\Http\Livewire;
 
-use App\Models\EmployeePayment;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\TransactionDetail;
@@ -48,11 +47,11 @@ class SelfTransaction extends Component
         $this->paymentMethod = 1;
         $this->optionMethod = eloquent_to_options(PaymentMethod::get(), 'id',
             'title',);
-        $this->products = Product::where('product_status_id', 1)
+        $this->products = Product::whereIn('product_status_id', [1, 3])
             ->orderByRaw("FIELD(product_type_id,17,6,19,18,20,21,14,13,12,9,8,11,10,5,15) desc")
+            ->orderBy('product_status_id')
             ->get();
-        $this->productSold = Product::where('product_status_id', 3)
-            ->orderBy('product_type_id',)->get();
+
     }
 
     public function add($product)
@@ -93,12 +92,10 @@ class SelfTransaction extends Component
     {
         $query = $this->query;
         if (!empty($query)) {
-            $this->productSearch = $this->products->filter(function ($item) use
-            (
-                $query
-            ) {
-                return false !== ($item->product_type_id == $query);
-            },);
+            $this->productSearch = $this->products->filter(
+                function ($item) use ($query) {
+                    return false !== ($item->product_type_id == $query);
+                },);
 
         } else {
             $this->productSearch = [];
