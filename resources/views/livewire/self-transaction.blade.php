@@ -66,7 +66,9 @@
                             )</h4>
                     @endif
                     <div class="col-xl-12 col-sm-12 xl-12">
-                        <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset ">
+                        <div class="card p-2 mb-1 @isset($orderList[$product->id]) border-3 border-success @endisset "
+                             @if($product->product_status_id==3) style="background: #ddd" @endif
+                        >
                             <div class="row">
                                 @if($product->thumbnail!=null)
                                     <div class="col-4" @if($product->product_status_id) wire:click="add({{$product->id}})" @endif
@@ -76,8 +78,8 @@
                                              alt="">
                                     </div>
                                 @endif
-                                <div class="@if($product->thumbnail!=null) col-8 @else col-12 @endif  @if($product->product_status_id) text-danger @endif">
-                                    <div  @if($product->product_status_id) wire:click="add({{$product->id}})" @endif>
+                                <div class="@if($product->thumbnail!=null) col-8 @else col-12 @endif  @if($product->product_status_id==3) text-danger @endif">
+                                    <div  @if($product->product_status_id==1) wire:click="add({{$product->id}})" @endif>
                                         <h5>{{ $product->title }}</h5>
                                         @if($product->description!=null)
                                             <p>{{ $product->description }}</p>
@@ -216,14 +218,6 @@
                             </h6>
                         @endif
                         <h6>Rp. {{ number_format($total) }} </h6>
-
-                        {{--                        Total Keseluruhan :--}}
-                        {{--                        @if(is_numeric($donate))--}}
-                        {{--                            <h4>Rp. {{ number_format($total+$donate) }}</h4>--}}
-                        {{--                        @else--}}
-                        {{--                            <h4>Rp. {{ number_format($total)}}</h4>--}}
-                        {{--                        @endif--}}
-
 
                         @if($discount!=0)
                             <h6>Hemat Rp. {{number_format($discount)}}</h6>
