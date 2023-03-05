@@ -34,8 +34,8 @@ class TransactionHistoryListMonth extends Component
     public $product;
     public $method;
 
-    public $visitorCount=0;
-    public $transactionCount=0;
+    public $visitorCount = 0;
+    public $transactionCount = 0;
     public $tdactionCount;
 
     public $dayOfWeekMoney;
@@ -65,12 +65,24 @@ class TransactionHistoryListMonth extends Component
             '20.00-00.00',
         ];
         $c = [
-            $time[0] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[1] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[2] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[3] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[4] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-            $time[5] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+            $time[0] => [
+                1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+            ],
+            $time[1] => [
+                1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+            ],
+            $time[2] => [
+                1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+            ],
+            $time[3] => [
+                1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+            ],
+            $time[4] => [
+                1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+            ],
+            $time[5] => [
+                1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+            ],
         ];
         $a = 4;
         if (config('app.name', 'Laravel') == "Lekker Putar") {
@@ -90,11 +102,21 @@ class TransactionHistoryListMonth extends Component
                 '22.00-24.00',
             ];
             $c = [
-                $time[7] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[8] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[9] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[10] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
-                $time[11] => [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,],
+                $time[7]  => [
+                    1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+                ],
+                $time[8]  => [
+                    1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+                ],
+                $time[9]  => [
+                    1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+                ],
+                $time[10] => [
+                    1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+                ],
+                $time[11] => [
+                    1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,
+                ],
             ];
         }
 
@@ -102,7 +124,9 @@ class TransactionHistoryListMonth extends Component
         $this->type = ProductType::get();
         $this->company = ProductCompany::get();
         $this->totalMonth = 0;
-        $monthly = \App\Models\Transaction::whereStatusOrderId(2)->whereMonth('created_at', $this->month)->whereYear('created_at', $this->year)->get();
+        $monthly = \App\Models\Transaction::whereStatusOrderId(2)
+            ->whereMonth('created_at', $this->month)
+            ->whereYear('created_at', $this->year)->get();
         foreach ($monthly as $d) {
             foreach ($d->transactionDetails as $td) {
                 $this->totalMonth += $td->amount * $td->price;
@@ -121,8 +145,10 @@ GROUP BY date(transactions.created_at)";
         $g = DB::select(DB::raw($query));
         $this->income = [];
         $now = Carbon::create($this->year, $this->month, 1);
-        $start = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
-        $end = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
+        $start
+            = (new DateTime($now->format('Y-m-d')))->modify('first day of this month');
+        $end
+            = (new DateTime($now->format('Y-m-d')))->modify('first day of next month');
 
         $interval = DateInterval::createFromDateString('1 day');
         $period = new DatePeriod($start, $interval, $end);
@@ -136,7 +162,9 @@ GROUP BY date(transactions.created_at)";
             $this->visitorCount += $g1->visitors;
             $this->transactionCount += $g1->counter;
         }
-        $this->transactions = \App\Models\Transaction::where('status_order_id', 2)->whereBetween('created_at', [$start->format('Y-m-d'), $end->format('Y-m-d')])->get();
+        $this->transactions = \App\Models\Transaction::where('status_order_id',
+            2)->whereBetween('created_at',
+            [$start->format('Y-m-d'), $end->format('Y-m-d')])->get();
         $this->productAmounts = [];
         $this->productTotals = [];
         $total = 0;
@@ -148,7 +176,8 @@ GROUP BY date(transactions.created_at)";
        sum(transaction_details.amount*transaction_details.price) as total
 FROM `transactions` JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE transactions.status_order_id=2 and
-month(transactions.created_at)= $this->month
+month(transactions.created_at)= $this->month and 
+year(transactions.created_at)= $this->year
 group BY DAYOFWEEK(transactions.created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -161,7 +190,8 @@ group BY DAYOFWEEK(transactions.created_at)";
        sum(visitors) as total
 FROM `transactions`
 WHERE status_order_id=2 and
-month(created_at)= $this->month
+month(created_at)= $this->month and
+year(created_at)= $this->year
 group BY DAYOFWEEK(created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -174,7 +204,8 @@ group BY DAYOFWEEK(created_at)";
        sum(transaction_details.amount) as total
 FROM `transactions` JOIN transaction_details ON transaction_details.transaction_id=transactions.id
 WHERE transactions.status_order_id=2 and
-month(transactions.created_at)= $this->month
+month(transactions.created_at)= $this->month and
+year(transactions.created_at)= $this->year
 group BY DAYOFWEEK(transactions.created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -187,7 +218,8 @@ group BY DAYOFWEEK(transactions.created_at)";
        count(id) as total
 FROM `transactions`
 WHERE status_order_id=2 and
-month(created_at)= $this->month
+month(created_at)= $this->month and 
+year(created_at)= $this->year
 group BY DAYOFWEEK(created_at)";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -205,7 +237,8 @@ group BY DAYOFWEEK(created_at)";
         FROM `transactions`
             JOIN transaction_details ON transaction_details.transaction_id=transactions.id
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = $this->month
+              MONTH(transactions.created_at) = $this->month and
+              year(transactions.created_at)= $this->year
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
@@ -215,7 +248,7 @@ group BY DAYOFWEEK(created_at)";
         foreach ($dow as $d) {
             if ($w != $d->weeks) {
                 if ($w != 0) {
-                    $this->dayMoney['Minggu ke-' . $w0] = $b;
+                    $this->dayMoney['Minggu ke-'.$w0] = $b;
                     $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -223,7 +256,7 @@ group BY DAYOFWEEK(created_at)";
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayMoney['Minggu ke-' . $w0] = $b;
+        $this->dayMoney['Minggu ke-'.$w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -233,7 +266,8 @@ group BY DAYOFWEEK(created_at)";
         FROM `transactions`
             JOIN transaction_details ON transaction_details.transaction_id=transactions.id
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = $this->month
+              MONTH(transactions.created_at) = $this->month and 
+              year(transactions.created_at)= $this->year
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
@@ -243,7 +277,7 @@ group BY DAYOFWEEK(created_at)";
         foreach ($dow as $d) {
             if ($w != $d->weeks) {
                 if ($w != 0) {
-                    $this->dayItem['Minggu ke-' . $w0] = $b;
+                    $this->dayItem['Minggu ke-'.$w0] = $b;
                     $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -251,7 +285,7 @@ group BY DAYOFWEEK(created_at)";
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayItem['Minggu ke-' . $w0] = $b;
+        $this->dayItem['Minggu ke-'.$w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -260,7 +294,8 @@ group BY DAYOFWEEK(created_at)";
                SUM(transactions.visitors) as total
         FROM `transactions`
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = $this->month
+              MONTH(transactions.created_at) = $this->month and 
+              year(transactions.created_at)= $this->year
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
@@ -270,7 +305,7 @@ group BY DAYOFWEEK(created_at)";
         foreach ($dow as $d) {
             if ($w != $d->weeks) {
                 if ($w != 0) {
-                    $this->dayVisitor['Minggu ke-' . $w0] = $b;
+                    $this->dayVisitor['Minggu ke-'.$w0] = $b;
                     $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
@@ -278,7 +313,7 @@ group BY DAYOFWEEK(created_at)";
             }
             $b[$d->days] = intval($d->total);
         }
-        $this->dayVisitor['Minggu ke-' . $w0] = $b;
+        $this->dayVisitor['Minggu ke-'.$w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -287,27 +322,28 @@ group BY DAYOFWEEK(created_at)";
                count(transactions.id) as total
         FROM `transactions`
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = $this->month
+              MONTH(transactions.created_at) = $this->month and 
+              year(transactions.created_at)= $this->year
         GROUP BY days, weeks, dates
         ORDER BY weeks, days";
         $dow = DB::select(DB::raw($query));
         $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
         $w = 0;
         $w0 = 1;
-        $this->transactionCount=0;
+        $this->transactionCount = 0;
         foreach ($dow as $d) {
             if ($w != $d->weeks) {
                 if ($w != 0) {
-                    $this->dayTransaction['Minggu ke-' . $w0] = $b;
+                    $this->dayTransaction['Minggu ke-'.$w0] = $b;
                     $w0 += 1;
                 }
                 $b = [1 => 0, 2 => 0, 3 => 0, 4 => 0, 5 => 0, 6 => 0, 7 => 0,];
                 $w = $d->weeks;
             }
             $b[$d->days] = intval($d->total);
-            $this->transactionCount+=intval($d->total);
+            $this->transactionCount += intval($d->total);
         }
-        $this->dayTransaction['Minggu ke-' . $w0] = $b;
+        $this->dayTransaction['Minggu ke-'.$w0] = $b;
 
         $query = "
         SELECT DAYOFWEEK(transactions.created_at) as days,
@@ -315,7 +351,8 @@ FLOOR(hour(transactions.created_at) / $a) as hourgroup,
 COUNT(transactions.id) as total
 FROM `transactions`
 WHERE transactions.status_order_id=2 and
-	MONTH(transactions.created_at) = 3
+	MONTH(transactions.created_at) = $this->month and
+	year(transactions.created_at)= $this->year
 GROUP BY days,hourgroup
 ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
@@ -332,7 +369,8 @@ ORDER BY hourgroup, days ASC;";
                SUM(transactions.visitors) as total
         FROM `transactions`
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = $this->month
+              MONTH(transactions.created_at) = $this->month and 
+              year(transactions.created_at)= $this->year
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
@@ -350,7 +388,8 @@ ORDER BY hourgroup, days ASC;";
         FROM `transactions`
             JOIN transaction_details ON transaction_details.transaction_id=transactions.id
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = $this->month
+              MONTH(transactions.created_at) = $this->month and 
+              year(transactions.created_at)= $this->year
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
@@ -367,7 +406,8 @@ ORDER BY hourgroup, days ASC;";
         FROM `transactions`
             JOIN transaction_details ON transaction_details.transaction_id=transactions.id
         WHERE transactions.status_order_id=2 and
-              MONTH(transactions.created_at) = $this->month
+              MONTH(transactions.created_at) = $this->month and 
+              year(transactions.created_at)= $this->year
         GROUP BY days,hourgroup
         ORDER BY hourgroup, days ASC;";
         $dow = DB::select(DB::raw($query));
@@ -386,25 +426,33 @@ ORDER BY hourgroup, days ASC;";
                     $product['type'][$td->product->product_type_id][$td->product_id] += $td->amount;
                     $product['company'][$td->product->product_company_id][$td->product_id] += $td->amount;
                 } else {
-                    $product['type'][$td->product->product_type_id][$td->product_id] = $td->amount;
-                    $product['company'][$td->product->product_company_id][$td->product_id] = $td->amount;
+                    $product['type'][$td->product->product_type_id][$td->product_id]
+                        = $td->amount;
+                    $product['company'][$td->product->product_company_id][$td->product_id]
+                        = $td->amount;
                 }
                 if (isset($product['payment_method'][$td->transaction->payment_method_id])) {
-                    $product['payment_method'][$td->transaction->payment_method_id] += $td->price * $td->amount;
+                    $product['payment_method'][$td->transaction->payment_method_id] += $td->price
+                        * $td->amount;
                 } else {
-                    $product['payment_method'][$td->transaction->payment_method_id] = $td->price * $td->amount;
+                    $product['payment_method'][$td->transaction->payment_method_id]
+                        = $td->price * $td->amount;
                 }
                 if (isset($this->productAmounts[$td->product_id])) {
                     $this->productAmounts[$td->product_id] += $td->amount;
-                    $this->productTotals[$td->product_id] += $td->amount * $td->price;
+                    $this->productTotals[$td->product_id] += $td->amount
+                        * $td->price;
                 } else {
                     $this->productAmounts[$td->product_id] = $td->amount;
-                    $this->productTotals[$td->product_id] = $td->amount * $td->price;
+                    $this->productTotals[$td->product_id] = $td->amount
+                        * $td->price;
                 }
                 if (isset($this->money[$td->transaction->payment_method_id])) {
-                    $this->money[$td->transaction->payment_method_id] += $td->price * $td->amount;
+                    $this->money[$td->transaction->payment_method_id] += $td->price
+                        * $td->amount;
                 } else {
-                    $this->money[$td->transaction->payment_method_id] = $td->price * $td->amount;
+                    $this->money[$td->transaction->payment_method_id]
+                        = $td->price * $td->amount;
                 }
             }
         }
@@ -416,14 +464,14 @@ ORDER BY hourgroup, days ASC;";
 
     public function downlaod()
     {
-        $fileName = "Rekap-kas_$this->month-$this->year" . ".csv";
-        $headers = array(
-            "Content-type" => "text/csv",
+        $fileName = "Rekap-kas_$this->month-$this->year".".csv";
+        $headers = [
+            "Content-type"        => "text/csv",
             "Content-Disposition" => "attachment; filename=$fileName",
-            "Pragma" => "no-cache",
-            "Cache-Control" => "must-revalidate, post-check=0, pre-check=0",
-            "Expires" => "0"
-        );
+            "Pragma"              => "no-cache",
+            "Cache-Control"       => "must-revalidate, post-check=0, pre-check=0",
+            "Expires"             => "0",
+        ];
         $callback = function () {
             $delimiter = ';';
             $file = fopen('php://output', 'w');
@@ -433,7 +481,8 @@ ORDER BY hourgroup, days ASC;";
             foreach ($company as $c) {
                 fputcsv($file, [$c->title], $delimiter);
                 fputcsv($file, $head, $delimiter);
-                $transaction = EmployeePayment::whereMonth('created_at', $this->month)
+                $transaction = EmployeePayment::whereMonth('created_at',
+                    $this->month)
                     ->whereYear('created_at', $this->year)
                     ->whereHas('product', function ($q) use ($c) {
                         $q->where('product_company_id', $c->id);
@@ -442,9 +491,13 @@ ORDER BY hourgroup, days ASC;";
                 foreach ($transaction as $t) {
                     if ($date != $t->created_at->format('d/M/Y')) {
                         $date = $t->created_at->format('d/M/Y');
-                        fputcsv($file, [$t->created_at->format('d/M/Y')], $delimiter);
+                        fputcsv($file, [$t->created_at->format('d/M/Y')],
+                            $delimiter);
                     }
-                    fputcsv($file, ['', $t->name, $t->product->title, $t->amount, $t->discount, $t->amount * $t->discount], $delimiter);
+                    fputcsv($file, [
+                        '', $t->name, $t->product->title, $t->amount,
+                        $t->discount, $t->amount * $t->discount,
+                    ], $delimiter);
                 }
                 fputcsv($file, [''], $delimiter);
             }
