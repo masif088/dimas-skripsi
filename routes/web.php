@@ -149,12 +149,13 @@ Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')
                 }
             }
             $month = date('n');
+            $year= $now->year;
             $query = "
 SELECT day(transactions.created_at) as dateList, sum(amount) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
-WHERE month(transactions.created_at)=$month and
+WHERE month(transactions.created_at)=$month and year(transactions.created_at)=$year  and
  transactions.status_order_id=2
 GROUP BY day(transactions.created_at)";
             $g = DB::select(DB::raw($query));
@@ -182,7 +183,7 @@ SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
-WHERE month(transactions.created_at)=$month and
+WHERE month(transactions.created_at)=$month and year(transactions.created_at)=$year  and 
  transactions.status_order_id=2
 GROUP BY day(transactions.created_at)";
             $g = DB::select(DB::raw($query));
