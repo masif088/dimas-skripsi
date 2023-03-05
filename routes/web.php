@@ -141,7 +141,9 @@ Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')
             }
             $totalMonth = 0;
             $monthly = Transaction::whereStatusOrderId(2)
-                ->whereMonth('created_at', Carbon::now())->get();
+                ->whereMonth('created_at', Carbon::now())
+                ->whereYear('created_at', Carbon::now())
+                ->get();
 
             foreach ($monthly as $d) {
                 foreach ($d->transactionDetails as $td) {
