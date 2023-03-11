@@ -238,7 +238,6 @@
         var channel = pusher.subscribe('orders');
 
         channel.bind('order-event', function (data) {
-            alert("asdads")
             play();
         });
     </script>
