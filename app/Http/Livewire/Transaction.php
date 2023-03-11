@@ -174,8 +174,8 @@ class Transaction extends Component
         $total = 0;
         $discount = 0;
         foreach ($this->orderList as $order => $value) {
-            $total += $this->roundUpToAny($this->products->find($order)->price * 90 / 100) * $value;
-            $discount += ($this->products->find($order)->price - $this->roundUpToAny($this->products->find($order)->price * 90 / 100)) * $value;
+            $total += $this->roundUpToAny($this->products->find($order)->price * 0) * $value;
+            $discount += ($this->products->find($order)->price - $this->roundUpToAny($this->products->find($order)->price * 0)) * $value;
         }
 
         $this->emit('swal:confirm', ['title' => 'Periksa kembali',

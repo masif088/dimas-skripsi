@@ -218,7 +218,7 @@
             </div>
             <div class="col-lg-12 p-1">
                 <button class="btn btn-danger" style="width: 100%" wire:click="prosesRed()">
-                    Proses diskon 10% RED
+                    Proses diskon 100%
                 </button>
             </div>
 
