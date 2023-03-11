@@ -2,28 +2,36 @@
 
 namespace App\Http\Livewire;
 
-use Carbon\Carbon;
-use DateTime;
+use App\Events\NewOrder;
 use Livewire\Component;
 
 class Check extends Component
 {
-    public $count=0;
-public $some;
-    public function increment()
+    public $count = 0;
+    public $some;
+
+
+    public $showNewOrderNotification = false;
+
+    // Special Syntax: ['echo:{channel},{event}' => '{method}']
+    protected $listeners = ['echo:orders,NewOrder' => 'notifyNewOrder','check'=>'check'];
+
+    public function notifyNewOrder()
     {
-        $this->count++;
-//        dd($this->count);
+        $this->showNewOrderNotification = true;
+        dd("asda");
     }
-    public function mount(){
 
-//        $this->some=Carbon::create('2022','01','29')->dayOfWeek;
-//        $this->something='';
+    public function button()
+    {
+        $socketa="asdasd";
+        event(new NewOrder($socketa));
     }
-    public function change(){
+    public function check(){
+        dd("asdasd");
+    }
 
-//        dd($this->some);
-    }
+
     public function render()
     {
         return view('livewire.check');

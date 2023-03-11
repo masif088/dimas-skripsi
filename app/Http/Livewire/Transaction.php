@@ -26,7 +26,7 @@ class Transaction extends Component
     public $t;
     public $donate;
 
-    protected $listeners = ["payment" => "payment", "paymentIm" => "paymentIm"];
+    protected $listeners = ["payment" => "payment", "paymentIm" => "paymentIm",'fresh'=>'fresh'];
 
     public function mount()
     {
@@ -340,5 +340,8 @@ class Transaction extends Component
 //        $this->emit('redirect:new', $url);
 //        $this->some= "<script>window.open('".$url."', '_blank')</script>";
 //        return redirect(route('admin.transaction.struck',$transaction->id));
+    }
+    public function fresh(){
+        $this->emitTo('transaction-active-notification', 'refresh');
     }
 }

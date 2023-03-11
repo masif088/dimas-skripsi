@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Events\NewOrder;
 use App\Models\PaymentMethod;
 use App\Models\Product;
 use App\Models\TransactionDetail;
@@ -214,7 +215,9 @@ class SelfTransaction extends Component
             'type'  => 'primary',
             'title' => $transaction->transaction_code." dalam waiting list",
         ],);
-        $this->emitTo('transaction-active-notification', 'refresh');
+//        $this->emitTo('transaction-active-notification', 'refresh');
+
+        event(new NewOrder());
 
 //        $url = route('admin.transaction.struck', $transaction->id);
 //        $this->emit('redirect:new', $url);

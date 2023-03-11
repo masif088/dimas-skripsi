@@ -82,7 +82,10 @@
         {{ $style }}
     @endisset
 
+
+
     @livewireStyles
+    <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 </head>
 <body onload="startTime()">
 <div class="loader-wrapper">
@@ -152,6 +155,7 @@
 <!-- latest jquery-->
 {{--<script src="{{asset('assets/js/jquery-3.6.0.min.js')}}"></script>--}}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
 <!-- Bootstrap js-->
 <script src="{{asset('assets/js/bootstrap/bootstrap.min.js')}}"></script>
 <script src="{{asset('assets/js/bootstrap/popper.min.js')}}"></script>
@@ -277,5 +281,7 @@
 </script>
 <!-- Plugin used-->
 @livewireScripts
+<script src="{{ asset('js/app.js') }}"></script>
+
 </body>
 </html>

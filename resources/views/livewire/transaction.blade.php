@@ -72,7 +72,7 @@
                     <h5 class="m-0">Menu Pesanan</h5>
                 </div>
             </div>
-            <div class="card-body p-0 " >
+            <div class="card-body p-0 ">
                 @php($total=0)
                 @php($discount=0)
                 @foreach($orderList as $order=>$value)
@@ -90,13 +90,13 @@
                             </div>
                             <div class="col-md-5 text-center row">
                                 <div class="row">
-                                    <button class=" btn-sm btn-danger col-4" style="height: 50px"  type="button"
-                                             wire:click="decreaseOrderList({{$order}})">
+                                    <button class=" btn-sm btn-danger col-4" style="height: 50px" type="button"
+                                            wire:click="decreaseOrderList({{$order}})">
                                         <i class="icon-minus"></i>
                                     </button>
                                     <h6 class="col-4">{{ number_format($value) }}</h6>
                                     <button class="btn-sm btn-primary col-4" style="height: 50px" type="button"
-                                             wire:click="increaseOrderList({{$order}})">
+                                            wire:click="increaseOrderList({{$order}})">
                                         <i class="icon-plus"></i>
                                     </button>
                                 </div>
@@ -225,4 +225,20 @@
         </div>
         <br>
     </div>
+    <script src="https://js.pusher.com/7.2/pusher.min.js"></script>
+    <script>
+        function play() {
+            new Audio('{{ asset('pesan.m4a') }}').play();
+        }
+
+        var pusher = new Pusher('f4851f400c2b4a770a38', {
+            cluster: 'ap1'
+        });
+
+        var channel = pusher.subscribe('orders');
+
+        channel.bind('order-event', function (data) {
+            play();
+        });
+    </script>
 </div>
