@@ -12,7 +12,7 @@
                 <div class="col-sm-6 col-xl-3 col-lg-6">
                     <x-simple-card icon="users" value="100" title="Product" color="bg-secondary"/>
                 </div>
-                <livewire:check/>
+                <livewire:data-income-outcome/>
             </div>
         </div>
     </div>
