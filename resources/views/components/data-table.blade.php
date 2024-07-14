@@ -4,6 +4,7 @@
             Per Page: &nbsp;
             <select wire:model="perPage" class="form-control" style="">
                 <option>10</option>
+                <option>12</option>
                 <option>15</option>
                 <option>25</option>
             </select>

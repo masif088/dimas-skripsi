@@ -23,6 +23,19 @@ class TransactionController extends Controller
     {
         return view('pages.transaction.active');
     }
+    public function forecastTab()
+    {
+        return view('pages.transaction.forecast-tab');
+    }
+    public function forecastTabCreate()
+    {
+        return view('pages.transaction.forecast-tab-create');
+    }
+
+    public function forecastTabEdit($id)
+    {
+        return view('pages.transaction.forecast-tab-edit',compact('id'));
+    }
 
     public function history()
     {

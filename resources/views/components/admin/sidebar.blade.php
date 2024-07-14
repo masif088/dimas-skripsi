@@ -38,6 +38,11 @@
                                 <i class="fas fa-home"></i><span> Dashboard</span>
                             </a>
                         </li>
+                        <li class="sidebar-list">
+                            <a class="sidebar-link sidebar-title link-nav" href="{{ route('admin.forecast-tab') }}">
+                                <i class="fas fa-home"></i><span> Peramalan</span>
+                            </a>
+                        </li>
                     @endif
                     @if(auth()->user()->role==1 or auth()->user()->role==2 or auth()->user()->role==4)
                         <li class="sidebar-list">

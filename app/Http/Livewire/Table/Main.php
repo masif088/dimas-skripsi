@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire\Table;
 
+use App\Models\Forecast;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -48,6 +49,17 @@ class Main extends Component
                 return [
                     "view" => 'livewire.table.user',
                     "users" => $users,
+                ];
+                break;
+            case 'forecast':
+//                $this->perPage =12;
+                $this->model= Forecast::class;
+                $users = Forecast::
+                    orderBy($this->sortField, $this->sortAsc ? 'asc' : 'desc')
+                    ->paginate($this->perPage);
+                return [
+                    "view" => 'livewire.table.forecast',
+                    "forecasts" => $users,
                 ];
                 break;
             case 'product':

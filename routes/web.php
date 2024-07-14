@@ -7,9 +7,9 @@ use App\Http\Controllers\Admin\StockGoodController;
 use App\Http\Controllers\Admin\SupplierController;
 use App\Http\Controllers\Admin\TransactionController;
 use App\Http\Controllers\SupportController;
+use App\Models\Forecast;
 use App\Models\Transaction;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 use Laravel\Jetstream\Http\Controllers\CurrentTeamController;
@@ -31,6 +31,71 @@ use Laravel\Jetstream\Jetstream;
 */
 
 Route::get('/', function () {
+//    $a = 0.18;
+//    $b = 0.08;
+//    $g = 1;
+//    $d = 1;
+//    for ($year = 2022; $year < 2024; $year++) {
+//        for ($month = 0; $month < 12; $month++) {
+//            $m = $month;
+//            $y = $year;
+//            if ($month == 0) {
+//                $m = 12;
+//                $y -= 1;
+//            }
+//
+//            $forecastLastMonth = Forecast::where('month', $m)->where('year', $y)->first();
+//            $forecastYear = Forecast::where('month', $month + 1)->where('year', $year - 1)->first();
+//            $forecast = Forecast::where('month', $month + 1)->where('year', $year)->first();
+//
+//            $level = $a * ($forecast->amount / $forecastYear->seasonal) + (1 - $a) * ($forecastLastMonth->level + $forecastLastMonth->trend);
+//            $trend = $b * ($level - $forecastLastMonth->level) + (1 - $b) * $forecastLastMonth->trend;
+//            $seasonal = $g * ($forecast->amount / $level) + (1 - $g) * $forecastYear->seasonal;
+//            $forecastValue = ($forecastLastMonth->level + $d * $forecastLastMonth->trend) * $forecastYear->seasonal;
+//            $forecast->update([
+//                'level' => $level,
+//                'trend' => $trend,
+//                'seasonal' => $seasonal,
+//                'forecast' => $forecastValue,
+//                'error' => abs(($forecast->amount - $forecastValue) / $forecast->amount)
+//            ]);
+//        }
+//    }
+//    $forecastLast = Forecast::whereNotNull('amount')
+//        ->whereNotNull('level')
+//        ->whereNotNull('trend')
+//        ->whereNotNull('seasonal')
+//        ->orderByDesc('year')
+//        ->orderByDesc('month')
+//        ->first();
+//
+//    for ($year = 2024; $year < 2026; $year++) {
+//        for ($month = 0; $month < 12; $month++) {
+//            $forecastLastMonth = Forecast::whereNotNull('amount')
+//                ->whereNotNull('level')
+//                ->whereNotNull('trend')
+//                ->whereNotNull('seasonal')
+//                ->where('month', $month + 1)
+//                ->orderByDesc('year')
+//                ->first();
+//
+//            $d = (($year - $forecastLast->year) * 12) + (($month + 1) - $forecastLast->month);
+//
+//            $forecastValue = ($forecastLast->level + $d * $forecastLast->trend) * $forecastLastMonth->seasonal;
+//            $forecastNow = Forecast::where('month', $month + 1)->where('year', $year)->first();
+//            if ($forecastNow != null) {
+//                $forecastNow->update([
+//                    'forecast' => $forecastValue,
+//                ]);
+//            } else {
+//                Forecast::create([
+//                    'year' => $year,
+//                    'month' => $month + 1,
+//                    'forecast' => $forecastValue,
+//                ]);
+//            }
+//        }
+//    }
     return redirect(route('self-transaction','dGFucGEga2V0ZXJhbmdhbg=='));
 });
 //Route::get('/base64', function () {
@@ -151,7 +216,7 @@ Route::middleware(['auth:sanctum'])->name('admin.')->prefix('admin')
                 }
             }
             $month = date('n');
-            $year= $now->year;
+            $year = $now->year;
             $query = "
 SELECT day(transactions.created_at) as dateList, sum(amount) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total
@@ -185,7 +250,7 @@ SELECT day(transactions.created_at) as dateList,count(*) as counter,
 SUM(transaction_details.price*transaction_details.amount) as total
 FROM transactions
 JOIN transaction_details ON transaction_details.transaction_id=transactions.id
-WHERE month(transactions.created_at)=$month and year(transactions.created_at)=$year  and 
+WHERE month(transactions.created_at)=$month and year(transactions.created_at)=$year  and
  transactions.status_order_id=2
 GROUP BY day(transactions.created_at)";
             $g = DB::select(DB::raw($query));
@@ -211,8 +276,13 @@ GROUP BY day(transactions.created_at)";
                     'category', 'income', 'donate'));
         })->name('dashboard');
 
+        Route::get('forecast-tab', [TransactionController::class, 'forecastTab'])->name('forecast-tab');
+        Route::get('forecast-tab/create', [TransactionController::class, 'forecastTabCreate'])->name('forecast-tab.create');
+        Route::get('forecast-tab/edit/{id}', [TransactionController::class, 'forecastTabEdit'])->name('forecast-tab.edit');
+
         Route::get('transaction', [TransactionController::class, 'index'])
             ->name('transaction.index');
+
         Route::get('transaction/download-employee-payment',
             [TransactionController::class, 'download'])
             ->name('transaction.download');

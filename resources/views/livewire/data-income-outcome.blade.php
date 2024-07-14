@@ -2,56 +2,25 @@
     <div class="card earning-card">
         <div class="card-body p-0">
             <div class="row m-0">
-                <div class="col-xl-3 earning-content p-0">
-                    <div class="row m-0 chart-left">
-                        <div class="col-xl-12 p-0 left_side_earning">
+                <div class="col-xl-12 p-0">
+                    <div class="row p-5 pb-0">
+                        <div class="col-xl-4 p-0 left_side_earning">
                             <h5>DATA</h5>
-                            <p class="font-roboto">Pemasukan - Pengeluaran</p>
+                            <p class="font-roboto">Peramalan Perkiraan</p>
                         </div>
-                        @if($title1!=null)
-                        <div class="col-xl-12 p-0 left_side_earning">
-                            <h5>Rp. {{ number_format($value1) }} </h5>
-                            <p class="font-roboto">{{ $title1 }}</p>
+
+                        <div class="col-xl-4 p-0 left_side_earning">
+                            <h5>Ramalan Error</h5>
+                            <p class="font-roboto">10%</p>
                         </div>
-                        @endif
-                        @if($title2!=null)
-                        <div class="col-xl-12 p-0 left_side_earning">
-                            <h5>Rp. {{ number_format($value2) }}</h5>
-                            <p class="font-roboto">{{$title2}}</p>
+                        <div class="col-xl-4 p-0 left_side_earning">
+                            <h5>Perkiraan kenaikan</h5>
+                            <p class="font-roboto">
+                                <i class="fa fa-sort-up text-success">5%</i>
+                            </p>
                         </div>
-                        @endif
-                        @if($title3!=null)
-                        <div class="col-xl-12 p-0 left_side_earning">
-                            <h5>{{ $value3 }}</h5>
-                            <p class="font-roboto">{{ $title3 }}</p>
-                        </div>
-                        @endif
-                        {{--                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link1}}" class="btn {{$btnColor1}}">{{$btn1}}</a></div>--}}
-                        {{--                        <div class="col-xl-6 p-0 left-btn"><a href="{{$link2}}" class="btn {{$btnColor2}}">{{$btn2}}</a></div>--}}
                     </div>
-                </div>
-                <div class="col-xl-9 p-0">
                     <div class="chart-right">
-                        <div class="row m-0 p-tb">
-                            <div class="col-xl-8 col-md-8 col-sm-8 col-12 p-0">
-                                <div class="inner-top-left">
-                                    <ul class="d-flex list-unstyled">
-                                        {{--                                                    <li>Daily</li>--}}
-                                        {{--                                                    <li class="active">Weekly</li>--}}
-                                        {{--                                                    <li>Monthly</li>--}}
-                                        {{--                                                    <li>Yearly</li>--}}
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="col-xl-4 col-md-4 col-sm-4 col-12 p-0 justify-content-end">
-                                <div class="inner-top-right">
-                                    <ul class="d-flex list-unstyled justify-content-end">
-                                        {{--                                                    <li>Online</li>--}}
-                                        {{--                                                    <li>Store</li>--}}
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-xl-12">
                                 <div class="card-body p-0">
@@ -71,14 +40,14 @@
             // currently sale
             var options = {
                 series: [{
-                    name: 'Pengeluaran',
+                    name: 'Data asli',
                     data: [
                         @foreach($data1 as $d1)
                             {{$d1}},
                         @endforeach
                     ]
                 }, {
-                    name: 'Pemasukan',
+                    name: 'Hasil ramalan',
                     data: [
                         @foreach($data2 as $d2)
                             {{$d2}},
@@ -86,7 +55,7 @@
                     ]
                 }],
                 chart: {
-                    height: 320,
+                    height: 500,
                     type: 'area',
                     toolbar: {
                         show: false
@@ -112,12 +81,12 @@
                     labels: {
                         low: 0,
                         offsetX: 0,
-                        show: false,
+                        show: true,
                     },
                     axisBorder: {
                         low: 0,
                         offsetX: 0,
-                        show: false,
+                        show: true,
                     },
                 },
                 markers: {
@@ -132,25 +101,25 @@
                     low: 0,
                     offsetX: 0,
                     offsetY: 0,
-                    show: false,
+                    show: true,
                     labels: {
                         low: 0,
                         offsetX: 0,
-                        show: false,
+                        show: true,
                     },
                     axisBorder: {
                         low: 0,
                         offsetX: 0,
-                        show: false,
+                        show: true,
                     },
                 },
                 grid: {
-                    show: false,
+                    show: true,
                     padding: {
                         left: 0,
                         right: 0,
-                        bottom: -15,
-                        top: -40
+                        // bottom: -15,
+                        // top: -20
                     }
                 },
                 colors: [CubaAdminConfig.primary, CubaAdminConfig.secondary],
@@ -177,4 +146,5 @@
             chart.render();
         });
     </script>
+
 </div>

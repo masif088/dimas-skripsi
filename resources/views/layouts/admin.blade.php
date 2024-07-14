@@ -87,7 +87,7 @@
     @livewireStyles
     <script src="https://cdn.jsdelivr.net/gh/alpinejs/alpine@v2.8.2/dist/alpine.min.js" defer></script>
 </head>
-<body onload="startTime()">
+<body onload="startTime()" class="light-only">
 <div class="loader-wrapper">
 
     <div class="loader-index"><span></span></div>

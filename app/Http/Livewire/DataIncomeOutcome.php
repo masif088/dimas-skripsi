@@ -2,6 +2,7 @@
 
 namespace App\Http\Livewire;
 
+use App\Models\Forecast;
 use Livewire\Component;
 
 class DataIncomeOutcome extends Component
@@ -35,17 +36,26 @@ class DataIncomeOutcome extends Component
     public $dataTitle1;
     public $dataTitle2;
     public $categories;
+    public $monthName=['','Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
     public function mount(){
-//        dd("asd");
-        if ($this->data1==null){
-            $this->data1=[];
+
+
+        foreach (Forecast::get() as $f){
+            $this->data1[]=round($f->amount,2)??0;
+            $this->data2[]=round($f->forecast,2)??0;
+            $this->categories[]=$this->monthName[$f->month].' '.$f->year;
         }
-        if ($this->data2==null){
-            $this->data2=[];
-        }
-        if ($this->categories==null){
-            $this->categories=[];
-        }
+//        dd($this->data1);
+
+//        if ($this->data1==null){
+//            $this->data1=[];
+//        }
+//        if ($this->data2==null){
+//            $this->data2=[];
+//        }
+//        if ($this->categories==null){
+//            $this->categories=[];
+//        }
     }
 
     public function render()
