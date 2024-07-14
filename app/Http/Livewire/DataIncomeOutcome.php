@@ -37,6 +37,11 @@ class DataIncomeOutcome extends Component
     public $dataTitle2;
     public $categories;
     public $monthName=['','Jan','Feb','Mar','Apr','Mei','Jun','Jul','Agu','Sep','Okt','Nov','Des'];
+
+    public $forecast;
+    public $error=0;
+    public $cError=0;
+
     public function mount(){
 
 
@@ -44,6 +49,26 @@ class DataIncomeOutcome extends Component
             $this->data1[]=round($f->amount,2)??0;
             $this->data2[]=round($f->forecast,2)??0;
             $this->categories[]=$this->monthName[$f->month].' '.$f->year;
+            if ($f->error!=null){
+                $this->error+=$f->error;
+                $this->cError+=1;
+            }
+        }
+        $f0 =0;
+        $f1 = 0;
+        foreach (Forecast::orderByDesc('year')->orderByDesc('month')->get()->take(24) as $f){
+            if ($f->amount==null){
+                $f1+=$f->forecast;
+            }else{
+                $f0 +=$f->amount;
+            }
+        }
+        if ($f0!=0){
+            $this->forecast = number_format(($f1-$f0)/$f0*100,2);
+        }
+
+        if ($this->cError!=0){
+            $this->error = $this->error/$this->cError*100;
         }
 //        dd($this->data1);
 

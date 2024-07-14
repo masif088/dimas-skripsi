@@ -11,12 +11,17 @@
 
                         <div class="col-xl-4 p-0 left_side_earning">
                             <h5>Ramalan Error</h5>
-                            <p class="font-roboto">10%</p>
+                            <p class="font-roboto">{{ number_format($error,2)??'-' }}%</p>
                         </div>
                         <div class="col-xl-4 p-0 left_side_earning">
-                            <h5>Perkiraan kenaikan</h5>
+                            <h5>Perkiraan kenaikan dalam 12bulan</h5>
                             <p class="font-roboto">
-                                <i class="fa fa-sort-up text-success">5%</i>
+                                @if($forecast>0)
+                                    <i class="fa fa-sort-up text-success">{{$forecast}}%</i>
+                                @else
+                                    <i class="fa fa-sort-down text-danger">{{$forecast}}%</i>
+                                @endif
+
                             </p>
                         </div>
                     </div>
