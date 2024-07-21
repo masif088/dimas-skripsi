@@ -62,7 +62,7 @@
     </nav>
 </section>
 
-<section data-bs-version="5.1" class="header09 startm5 cid-uj8bR6fSjJ" id="header09-1s">
+<section data-bs-version="5.1" class="header09 startm5 cid-uj8bR6fSjJ" id="header09-1s" style="background-image: url('{{asset("asset-kue-kacang/images/background1.jpg")}}')">
 
 
 
@@ -165,7 +165,7 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="features028 cid-uj87r6umq5" id="features028-1q">
+<section data-bs-version="5.1" class="features028 cid-uj87r6umq5" id="features028-1q" style="background-image: url('{{asset("asset-kue-kacang/images/background1.jpg")}}')">
 
 
 

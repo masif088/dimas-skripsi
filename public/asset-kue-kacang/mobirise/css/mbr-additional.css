@@ -1336,7 +1336,7 @@ a {
   display: flex;
   padding-top: 6rem;
   padding-bottom: 0rem;
-  background-image: url("../../../assets/images/background1.jpg");
+  background-image: url("../../images/background1.jpg");
 }
 .cid-uj8bR6fSjJ .mbr-overlay {
   background-color: #f92c50;
@@ -1553,7 +1553,7 @@ a {
 .cid-uj87r6umq5 {
   padding-top: 3rem;
   padding-bottom: 3rem;
-  background-image: url("../../../assets/images/background1.jpg");
+  background-image: url("../../images/background1.jpg");
 }
 .cid-uj87r6umq5 .mbr-fallback-image.disabled {
   display: none;
