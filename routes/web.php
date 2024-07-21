@@ -96,7 +96,8 @@ Route::get('/', function () {
 //            }
 //        }
 //    }
-    return redirect(route('self-transaction','dGFucGEga2V0ZXJhbmdhbg=='));
+//    return redirect(route('self-transaction','dGFucGEga2V0ZXJhbmdhbg=='));
+    return view('index');
 });
 //Route::get('/base64', function () {
 ////    \BaconQrCode\Encoder\QrCode::png('');
