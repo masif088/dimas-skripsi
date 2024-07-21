@@ -62,6 +62,7 @@ class Forecast extends Component
             ->orderByDesc('year')
             ->orderByDesc('month')
             ->first();
+//        dd($fLast);
 
         for ($year = 2022; $year <= $fLast->year; $year++) {
             for ($month = 0; $month < 12; $month++) {
@@ -97,15 +98,14 @@ class Forecast extends Component
                 ]);
             }
         }
+//        dd($forecast);
 
 
         $fLast = \App\Models\Forecast::whereNotNull('amount')
-            ->whereNotNull('level')
-            ->whereNotNull('trend')
-            ->whereNotNull('seasonal')
             ->orderByDesc('year')
             ->orderByDesc('month')
             ->first();
+//        dd($fLast,'asd');
 
         for ($year = $fLast->year; $year <= $fLast->year+1; $year++) {
             for ($month = 0; $month < 12; $month++) {
@@ -125,10 +125,12 @@ class Forecast extends Component
                     ->where('month', $month + 1)
                     ->orderByDesc('year')
                     ->first();
+//                dd($forecastLastMonth);
 
                 $d = (($year - $fLast->year) * 12) + (($month + 1) - $fLast->month);
 
                 if ($d!=0){
+//                    dd($d);
                     $forecastValue = ($fLast->level + $d * $fLast->trend) * $forecastLastMonth->seasonal;
                     $forecastNow = \App\Models\Forecast::where('month', $month + 1)->where('year', $year)->first();
                     if ($forecastNow != null) {
