@@ -59,9 +59,6 @@ class Forecast extends Component
         $d = 1;
 
         $fLast = \App\Models\Forecast::whereNotNull('amount')
-            ->whereNotNull('level')
-            ->whereNotNull('trend')
-            ->whereNotNull('seasonal')
             ->orderByDesc('year')
             ->orderByDesc('month')
             ->first();
@@ -131,20 +128,23 @@ class Forecast extends Component
 
                 $d = (($year - $fLast->year) * 12) + (($month + 1) - $fLast->month);
 
-                $forecastValue = ($fLast->level + $d * $fLast->trend) * $forecastLastMonth->seasonal;
-                $forecastNow = \App\Models\Forecast::where('month', $month + 1)->where('year', $year)->first();
-                if ($forecastNow != null) {
-                    $forecastNow->update([
-                        'forecast' => $forecastValue,
+                if ($d!=0){
+                    $forecastValue = ($fLast->level + $d * $fLast->trend) * $forecastLastMonth->seasonal;
+                    $forecastNow = \App\Models\Forecast::where('month', $month + 1)->where('year', $year)->first();
+                    if ($forecastNow != null) {
+                        $forecastNow->update([
+                            'forecast' => $forecastValue,
 
-                    ]);
-                } else {
-                    \App\Models\Forecast::create([
-                        'year' => $year,
-                        'month' => $month + 1,
-                        'forecast' => $forecastValue,
-                    ]);
+                        ]);
+                    } else {
+                        \App\Models\Forecast::create([
+                            'year' => $year,
+                            'month' => $month + 1,
+                            'forecast' => $forecastValue,
+                        ]);
+                    }
                 }
+
             }
         }
     }
