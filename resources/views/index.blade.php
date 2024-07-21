@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html  >
+<html>
 <head>
     <!-- Site made with Mobirise Website Builder v5.9.18, https://mobirise.com -->
     <meta charset="UTF-8">
@@ -19,12 +19,16 @@
     <link rel="stylesheet" href="{{ asset('asset-kue-kacang/dropdown/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('asset-kue-kacang/socicon/css/styles.css') }}">
     <link rel="stylesheet" href="{{ asset('asset-kue-kacang/theme/css/style.css') }}">
-    <link rel="preload" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
-    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"></noscript>
+    <link rel="preload"
+          href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap"
+          as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript>
+        <link rel="stylesheet"
+              href="https://fonts.googleapis.com/css?family=Inter+Tight:100,200,300,400,500,600,700,800,900,100i,200i,300i,400i,500i,600i,700i,800i,900i&display=swap">
+    </noscript>
     <link rel="preload" as="style" href="{{ asset('asset-kue-kacang/mobirise/css/mbr-additional.css?v=8cZS6o') }}">
-<link rel="stylesheet" href="{{ asset('asset-kue-kacang/mobirise/css/mbr-additional.css?v=8cZS6o')}}" type="text/css">
-
-
+    <link rel="stylesheet" href="{{ asset('asset-kue-kacang/mobirise/css/mbr-additional.css?v=8cZS6o')}}"
+          type="text/css">
 
 
 </head>
@@ -38,12 +42,16 @@
             <div class="navbar-brand">
 				<span class="navbar-logo">
 					<a href="https://mobirise.com">
-						<img src="{{ asset('asset-kue-kacang/images/logo-kks-96x96.png') }}" alt="Mobirise Website Builder" style="height: 3rem;">
+						<img src="{{ asset('asset-kue-kacang/images/logo-kks-96x96.png') }}"
+                             alt="Mobirise Website Builder" style="height: 3rem;">
 					</a>
 				</span>
-                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-4" href="index.html#header05-1">Kue Kacang Sultan</a></span>
+                <span class="navbar-caption-wrap"><a class="navbar-caption text-primary display-4"
+                                                     href="index.html#header05-1">Kue Kacang Sultan</a></span>
             </div>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-bs-toggle="collapse"
+                    data-target="#navbarSupportedContent" data-bs-target="#navbarSupportedContent"
+                    aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <div class="hamburger">
                     <span></span>
                     <span></span>
@@ -52,18 +60,34 @@
                 </div>
             </button>
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true"><li class="nav-item">
-                        <a class="nav-link link text-black text-primary display-4" href="index.html#header01-7" aria-expanded="false">Tentang</a>
-                    </li><li class="nav-item"><a class="nav-link link text-black text-primary show display-4" href="index.html#header01-7">Hubungi Kami</a></li><li class="nav-item dropdown"><a class="nav-link link text-black text-primary dropdown-toggle show display-4" href="index.html#header01-7" data-toggle="dropdown-submenu" data-bs-toggle="dropdown" data-bs-auto-close="outside" aria-expanded="true">Admin</a><div class="dropdown-menu show" aria-labelledby="dropdown-753" data-bs-popper="none"><a class="text-black text-primary show dropdown-item display-4" href="index.html#header01-7">Pesanan Masuk</a><a class="text-black text-primary show dropdown-item display-4" href="index.html#header01-7">Kasir</a></div></li></ul>
+                <ul class="navbar-nav nav-dropdown" data-app-modern-menu="true">
+                    <li class="nav-item">
+                        <a class="nav-link link text-black text-primary display-4" href="index.html#header01-7"
+                           aria-expanded="false">Tentang</a>
+                    </li>
+                    <li class="nav-item"><a class="nav-link link text-black text-primary show display-4"
+                                            href="index.html#header01-7">Hubungi Kami</a></li>
+                    <li class="nav-item dropdown"><a
+                            class="nav-link link text-black text-primary dropdown-toggle show display-4"
+                            href="index.html#header01-7" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
+                            data-bs-auto-close="outside" aria-expanded="true">Admin</a>
+                        <div class="dropdown-menu show" aria-labelledby="dropdown-753" data-bs-popper="none"><a
+                                class="text-black text-primary show dropdown-item display-4"
+                                href="index.html#header01-7">Pesanan Masuk</a><a
+                                class="text-black text-primary show dropdown-item display-4"
+                                href="index.html#header01-7">Kasir</a></div>
+                    </li>
+                </ul>
 
-                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4" href="index.html#form02-6">Pesan Sekarang</a></div>
+                <div class="navbar-buttons mbr-section-btn"><a class="btn btn-primary display-4"
+                                                               href="index.html#form02-6">Pesan Sekarang</a></div>
             </div>
         </div>
     </nav>
 </section>
 
-<section data-bs-version="5.1" class="header09 startm5 cid-uj8bR6fSjJ" id="header09-1s" style="background-image: url('{{asset("asset-kue-kacang/images/background1.jpg")}}')">
-
+<section data-bs-version="5.1" class="header09 startm5 cid-uj8bR6fSjJ" id="header09-1s"
+         style="background-image: url('{{asset("asset-kue-kacang/images/background1.jpg")}}')">
 
 
     <div class="container">
@@ -72,8 +96,10 @@
                 <h1 class="mbr-section-title mbr-fonts-style mbr-white mb-4 display-1">
                     <strong>Kue Kacang Sultan</strong></h1>
 
-                <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Rumah Produksi kuliner yang bergerak di bidang produksi kue tradisional dengan bahan utama kacang tanah. Berdiri sejak tahun 2020.</p>
-                <div class="mbr-section-btn"><a class="btn btn-danger display-7" href="https://mobiri.se">Tentang Kami</a></div>
+                <p class="mbr-fonts-style mbr-text mbr-white mb-4 display-7">Rumah Produksi kuliner yang bergerak di
+                    bidang produksi kue tradisional dengan bahan utama kacang tanah. Berdiri sejak tahun 2020.</p>
+                <div class="mbr-section-btn"><a class="btn btn-danger display-7" href="https://mobiri.se">Tentang
+                        Kami</a></div>
             </div>
         </div>
     </div>
@@ -82,19 +108,20 @@
 <section data-bs-version="5.1" class="start article2 cid-uj8iPyvJ4k" id="article02-1y">
 
 
-
-
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-12 col-lg-4 image-wrapper">
-                <img class="w-100" src="{{ asset('asset-kue-kacang/images/1u6a2187-1-816x816.jpg') }}" alt="Mobirise Website Builder">
+                <img class="w-100" src="{{ asset('asset-kue-kacang/images/1u6a2187-1-816x816.jpg') }}"
+                     alt="Mobirise Website Builder">
             </div>
             <div class="col-12 col-md-12 col-lg">
                 <div class="text-wrapper align-left">
-                    <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>Kue Spesial untuk Semua!</strong></h1>
+                    <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>Kue Spesial untuk
+                            Semua!</strong></h1>
                     <p class="mbr-text align-left mbr-fonts-style mb-4 display-7">
-                        Selamat datang di Kue Kacang Sultan, tempat di mana cita rasa dan tradisi bertemu dalam setiap gigitan! Kami adalah penggemar sejati kue kacang, dan kami bangga menyajikan camilan yang tidak hanya lezat tetapi juga penuh cinta dari Jember, Jawa Timur.
+                        Selamat datang di Kue Kacang Sultan, tempat di mana cita rasa dan tradisi bertemu dalam setiap
+                        gigitan! Kami adalah penggemar sejati kue kacang, dan kami bangga menyajikan camilan yang tidak
+                        hanya lezat tetapi juga penuh cinta dari Jember, Jawa Timur.
                     </p>
 
                 </div>
@@ -106,19 +133,19 @@
 <section data-bs-version="5.1" class="start article4 cid-uj8hkz0NYW" id="article04-1x">
 
 
-
-
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 col-md-12 col-lg-4 image-wrapper">
-                <img class="w-100" src="{{ asset('asset-kue-kacang/images/1u6a2099-1256x1256.jpg') }}" alt="Mobirise Website Builder">
+                <img class="w-100" src="{{ asset('asset-kue-kacang/images/1u6a2099-1256x1256.jpg') }}"
+                     alt="Mobirise Website Builder">
             </div>
             <div class="col-12 col-md-12 col-lg">
                 <div class="text-wrapper align-left">
                     <h1 class="mbr-section-title mbr-fonts-style mb-4 display-2"><strong>Cita Rasa Unik</strong></h1>
                     <p class="mbr-text mbr-fonts-style mb-4 display-7">
-                        Diolah dengan resep turun-temurun, menggunakan kacang tanah pilihan dan bahan-bahan alami tanpa pengawet. Proses produksi dilakukan dengan standar kebersihan yang tinggi, mulai dari pemilihan bahan baku, pengolahan, hingga pengemasan.
+                        Diolah dengan resep turun-temurun, menggunakan kacang tanah pilihan dan bahan-bahan alami tanpa
+                        pengawet. Proses produksi dilakukan dengan standar kebersihan yang tinggi, mulai dari pemilihan
+                        bahan baku, pengolahan, hingga pengemasan.
                     </p>
 
                 </div>
@@ -145,7 +172,8 @@
             <div class="item features-image col-12 col-md-6 col-lg-4">
                 <div class="item-wrapper">
                     <div class="item-img">
-                        <img src="{{ asset('asset-kue-kacang/images/produk-2-1080x1080.jpg') }}" alt="Mobirise Website Builder">
+                        <img src="{{ asset('asset-kue-kacang/images/produk-2-1080x1080.jpg') }}"
+                             alt="Mobirise Website Builder">
                     </div>
                     <div class="item-content">
                         <h5 class="item-title mbr-fonts-style display-5">
@@ -154,7 +182,8 @@
                             Rp 22.000,-</h6>
                         <p class="mbr-text mbr-fonts-style display-7">
                             Kemasan 500 g, isi 40 keping Kue Kacang Sultan</p>
-                        <div class="mbr-section-btn item-footer"><a href="" class="btn item-btn btn-primary display-7">Pesan Sekarang</a></div>
+                        <div class="mbr-section-btn item-footer"><a href="" class="btn item-btn btn-primary display-7">Pesan
+                                Sekarang</a></div>
                     </div>
 
                 </div>
@@ -165,9 +194,8 @@
     </div>
 </section>
 
-<section data-bs-version="5.1" class="features028 cid-uj87r6umq5" id="features028-1q" style="background-image: url('{{asset("asset-kue-kacang/images/background1.jpg")}}')">
-
-
+<section data-bs-version="5.1" class="features028 cid-uj87r6umq5" id="features028-1q"
+         style="background-image: url('{{asset("asset-kue-kacang/images/background1.jpg")}}')">
 
 
     <div class="container">
@@ -191,7 +219,8 @@
                             <h5 class="mbr-card-title mbr-fonts-style mt-0 mb-3 mbr-number display-2">
                                 <strong>01. Rasa Otentik</strong></h5>
 
-                            <p class="card-text mbr-fonts-style mt-0 mb-0 display-7">Dibuat dengan resep turun-temurun yang disempurnakan</p>
+                            <p class="card-text mbr-fonts-style mt-0 mb-0 display-7">Dibuat dengan resep turun-temurun
+                                yang disempurnakan</p>
 
                         </div>
 
@@ -226,7 +255,8 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="image-wrapper">
-                    <img class="w-100" src="{{ asset('asset-kue-kacang/images/1u6a2587-up-1-1256x1256.jpg') }}" alt="Mobirise Website Builder">
+                    <img class="w-100" src="{{ asset('asset-kue-kacang/images/1u6a2587-up-1-1256x1256.jpg') }}"
+                         alt="Mobirise Website Builder">
                 </div>
             </div>
         </div>
@@ -244,27 +274,37 @@
         </div>
         <div class="row justify-content-center mt-4">
             <div class="col-lg-8 mx-auto mbr-form" data-form-type="formoid">
-                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler" data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true" value="1xrySOykl2OOU3QgIKrGOXrzJBVRFNNKCt1zxLuGDr/YkVQ+vcwkhEqmCF0/t0W115OeqLzpYgKpAdG5qRJbnN7t1q1M9daqDSe4Id8WntZ4F3rcUdddmYMsGds2DuPs">
+                <form action="https://mobirise.eu/" method="POST" class="mbr-form form-with-styler"
+                      data-form-title="Form Name"><input type="hidden" name="email" data-form-email="true"
+                                                         value="1xrySOykl2OOU3QgIKrGOXrzJBVRFNNKCt1zxLuGDr/YkVQ+vcwkhEqmCF0/t0W115OeqLzpYgKpAdG5qRJbnN7t1q1M9daqDSe4Id8WntZ4F3rcUdddmYMsGds2DuPs">
                     <div class="row">
-                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling out the form!</div>
+                        <div hidden="hidden" data-form-alert="" class="alert alert-success col-12">Thanks for filling
+                            out the form!
+                        </div>
                         <div hidden="hidden" data-form-alert-danger="" class="alert alert-danger col-12">
                             Oops...! some problem!
                         </div>
                     </div>
                     <div class="dragArea row">
                         <div class="col-md col-sm-12 form-group mb-3" data-for="name">
-                            <input type="text" name="name" placeholder="Nama" data-form-field="name" class="form-control" value="" id="name-form02-6">
+                            <input type="text" name="name" placeholder="Nama" data-form-field="name"
+                                   class="form-control" value="" id="name-form02-6">
                         </div>
                         <div class="col-md col-sm-12 form-group mb-3" data-for="email">
-                            <input type="email" name="email" placeholder="Email" data-form-field="email" class="form-control" value="" id="email-form02-6">
+                            <input type="email" name="email" placeholder="Email" data-form-field="email"
+                                   class="form-control" value="" id="email-form02-6">
                         </div>
                         <div class="col-12 form-group mb-3" data-for="phone">
-                            <input type="tel" name="phone" placeholder="Telepon" data-form-field="phone" class="form-control" value="" id="phone-form02-6">
+                            <input type="tel" name="phone" placeholder="Telepon" data-form-field="phone"
+                                   class="form-control" value="" id="phone-form02-6">
                         </div>
                         <div class="col-12 form-group mb-3" data-for="textarea">
-                            <textarea name="textarea" placeholder="Pesan" data-form-field="textarea" class="form-control" id="textarea-form02-6"></textarea>
+                            <textarea name="textarea" placeholder="Pesan" data-form-field="textarea"
+                                      class="form-control" id="textarea-form02-6"></textarea>
                         </div>
-                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn"><button type="submit" class="btn btn-primary display-7">Kirim pesan</button></div>
+                        <div class="col-lg-12 col-md-12 col-sm-12 align-center mbr-section-btn">
+                            <button type="submit" class="btn btn-primary display-7">Kirim pesan</button>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -275,20 +315,17 @@
 <section data-bs-version="5.1" class="social06 cid-uj7Lsulb9H" id="social06-1j">
 
 
-
-
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-12 content-head">
                 <div class="mb-5">
-                    <h5 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2"><strong>Sosial Media</strong></h5>
+                    <h5 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2"><strong>Sosial
+                            Media</strong></h5>
 
                 </div>
             </div>
         </div>
         <div class="row">
-
-
 
 
             <div class="item features-without-image col-12 col-md-6 col-lg-3 active">
@@ -301,7 +338,8 @@
                         <h5 class="card-text mbr-fonts-style display-7">Kue Kacang Sultan</h5>
                     </div>
                 </div>
-            </div><div class="item features-without-image col-12 col-md-6 col-lg-3">
+            </div>
+            <div class="item features-without-image col-12 col-md-6 col-lg-3">
                 <div class="item-wrapper">
                     <span class="mbr-iconfont m-auto socicon-tiktok socicon"></span>
                     <div class="card-box">
@@ -311,7 +349,8 @@
                         <h5 class="card-text mbr-fonts-style display-7">Kue Kacang Sultan</h5>
                     </div>
                 </div>
-            </div><div class="item features-without-image col-12 col-md-6 col-lg-3">
+            </div>
+            <div class="item features-without-image col-12 col-md-6 col-lg-3">
                 <div class="item-wrapper">
                     <span class="mbr-iconfont m-auto socicon-youtube socicon"></span>
                     <div class="card-box">
@@ -321,7 +360,8 @@
                         <h5 class="card-text mbr-fonts-style display-7">Kue Kacang Sultan</h5>
                     </div>
                 </div>
-            </div><div class="item features-without-image col-12 col-md-6 col-lg-3">
+            </div>
+            <div class="item features-without-image col-12 col-md-6 col-lg-3">
                 <div class="item-wrapper">
                     <span class="mbr-iconfont m-auto socicon-twitter socicon"></span>
                     <div class="card-box">
@@ -338,8 +378,6 @@
 <section data-bs-version="5.1" class="contacts2 map1 cid-tLdYHD757A" id="contacts02-9">
 
 
-
-
     <div class="container">
         <div class="mbr-section-head mb-5">
             <h3 class="mbr-section-title mbr-fonts-style align-center mb-0 display-2">
@@ -353,25 +391,35 @@
                         <h5 class="cardTitle mbr-fonts-style mb-2 display-5">
                             <strong>Hubungi kami</strong></h5>
                         <ul class="list mbr-fonts-style display-7">
-                            <li class="mbr-text item-wrap"><span style="font-size: 1.4rem;">Phone: </span><a href="tel:+6281336717981" class="text-primary" style="font-size: 1.4rem;">081 336 717 981&nbsp;</a><br></li>
-                            <li class="mbr-text item-wrap">WhatsApp: <a href="https://wa.me/12345678910" class="text-primary">081 336 717 981&nbsp;</a></li>
-                            <li class="mbr-text item-wrap">Email: <a href="mailto:info@site.com" class="text-primary">kuekacangsultan@gmail.com</a></li><li class="mbr-text item-wrap"><br></li>
-                            <li class="mbr-text item-wrap">Alamat: </li><li class="mbr-text item-wrap">Bernady Land Slawu, Cluster Gardenia, Blok D.34, Kec. Patrang, Jember</li>
+                            <li class="mbr-text item-wrap"><span style="font-size: 1.4rem;">Phone: </span><a
+                                    href="tel:+6281336717981" class="text-primary" style="font-size: 1.4rem;">081 336
+                                    717 981&nbsp;</a><br></li>
+                            <li class="mbr-text item-wrap">WhatsApp: <a href="https://wa.me/12345678910"
+                                                                        class="text-primary">081 336 717 981&nbsp;</a>
+                            </li>
+                            <li class="mbr-text item-wrap">Email: <a href="mailto:info@site.com" class="text-primary">kuekacangsultan@gmail.com</a>
+                            </li>
+                            <li class="mbr-text item-wrap"><br></li>
+                            <li class="mbr-text item-wrap">Alamat:</li>
+                            <li class="mbr-text item-wrap">Bernady Land Slawu, Cluster Gardenia, Blok D.34, Kec.
+                                Patrang, Jember
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
             <div class="map-wrapper col-12 col-md-7">
-                <div class="google-map"><iframe frameborder="0" style="border:0" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d439.82974036244946!2d113.69501232057128!3d-8.148572897098225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1721533381844!5m2!1sid!2sid" allowfullscreen=""></iframe></div>
+                <div class="google-map">
+                    <iframe frameborder="0" style="border:0"
+                            src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d439.82974036244946!2d113.69501232057128!3d-8.148572897098225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sid!2sid!4v1721533381844!5m2!1sid!2sid"
+                            allowfullscreen=""></iframe>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <section data-bs-version="5.1" class="footer4 cid-uj7MqfBuil" once="footers" id="footer04-1k">
-
-
-
 
 
     <div class="container">
@@ -382,7 +430,23 @@
             </div>
         </div>
     </div>
-</section><section class="display-7" style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;    align-content: center;display: flex;position: relative;height: 4rem;"><a href="https://mobiri.se/1319748" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img alt="" style="height: 4rem;" src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a><p style="margin: 0;text-align: center;" class="display-7">&#8204;</p><a style="z-index:1" href="https://mobirise.com/builder/ai-website-builder.html">Free AI Website Software</a></section><script src="{{ asset('asset-kue-kacang/bootstrap/js/bootstrap.bundle.min.js') }}"></script>  <script src="{{ asset('asset-kue-kacang/smoothscroll/smooth-scroll.js') }}"></script>  <script src="{{ asset('asset-kue-kacang/ytplayer/index.js') }}"></script>  <script src="{{ asset('asset-kue-kacang/dropdown/js/navbar-dropdown.js') }}"></script>  <script src="{{ asset('asset-kue-kacang/theme/js/script.js') }}"></script>  <script src="{{ asset('asset-kue-kacang/formoid/formoid.min.js') }}"></script>
+</section>
+<section class="display-7"
+         style="padding: 0;align-items: center;justify-content: center;flex-wrap: wrap;align-content: center;display: flex;position: relative;height: 4rem;">
+    <a href="https://mobiri.se/1319748" style="flex: 1 1;height: 4rem;position: absolute;width: 100%;z-index: 1;"><img
+            alt="" style="height: 4rem;"
+            src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="></a>
+    <p style="margin: 0;text-align: center;" class="display-7">&#8204;</p>
+    <a style="z-index:1" href="https://mobirise.com/builder/ai-website-builder.html">
+        Free AI Website Software
+    </a>
+</section>
+<script src="{{ asset('asset-kue-kacang/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ asset('asset-kue-kacang/smoothscroll/smooth-scroll.js') }}"></script>
+<script src="{{ asset('asset-kue-kacang/ytplayer/index.js') }}"></script>
+<script src="{{ asset('asset-kue-kacang/dropdown/js/navbar-dropdown.js') }}"></script>
+<script src="{{ asset('asset-kue-kacang/theme/js/script.js') }}"></script>
+<script src="{{ asset('asset-kue-kacang/formoid/formoid.min.js') }}"></script>
 
 
 <input name="animation" type="hidden">
