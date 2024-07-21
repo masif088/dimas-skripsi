@@ -67,7 +67,8 @@ class Forecast extends Component
         for ($year = 2022; $year <= $fLast->year; $year++) {
             for ($month = 0; $month < 12; $month++) {
 
-                if ($year==$fLast->year and $fLast->month==$month+1){
+                if ($year==$fLast->year and $fLast->month<=$month){
+//                    dd($year,$month);
                     break;
                 }
 
@@ -98,7 +99,8 @@ class Forecast extends Component
                 ]);
             }
         }
-//        dd($forecast);
+//        dd($year,$month);
+
 
 
         $fLast = \App\Models\Forecast::whereNotNull('amount')
@@ -118,19 +120,31 @@ class Forecast extends Component
                     break;
                 }
 
-                $forecastLastMonth = \App\Models\Forecast::whereNotNull('amount')
-                    ->whereNotNull('level')
-                    ->whereNotNull('trend')
-                    ->whereNotNull('seasonal')
+                $m = $month;
+                $y = $year;
+                if ($month == 0) {
+                    $m = 12;
+                    $y -= 1;
+                }
+
+                $forecastLastYear = \App\Models\Forecast::whereNotNull('amount')
                     ->where('month', $month + 1)
                     ->orderByDesc('year')
+                    ->orderByDesc('month')
                     ->first();
+
+//                $forecastLastMonth = \App\Models\Forecast::whereNotNull('amount')
+//                    ->where('month', $m)
+//                    ->where('year', $y)
+//                    ->orderByDesc('year')
+//                    ->orderByDesc('month')
+//                    ->first();
 //                dd($forecastLastMonth);
 
                 $d = (($year - $fLast->year) * 12) + (($month + 1) - $fLast->month);
 
                 if ($d!=0){
-//                    dd($d);
+//                    dd($d, $forecastLastMonth, $month,$fLast);
                     $forecastValue = ($fLast->level + $d * $fLast->trend) * $forecastLastMonth->seasonal;
                     $forecastNow = \App\Models\Forecast::where('month', $month + 1)->where('year', $year)->first();
                     if ($forecastNow != null) {
