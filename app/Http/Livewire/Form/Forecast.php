@@ -112,54 +112,46 @@ class Forecast extends Component
         for ($year = $fLast->year; $year <= $fLast->year+1; $year++) {
             for ($month = 0; $month < 12; $month++) {
 
-                if ($fLast->year == $year and $month==0){
-                    $month = $fLast->month-1;
+                if ($fLast->year == $year and $fLast->month>$month){
+                    continue;
                 }
 
-                if ($year==$fLast->year+1 and $fLast->month==$month){
-                    break;
+                if ($year==$fLast->year+1 and $fLast->month<=$month){
+                    continue;
                 }
 
-                $m = $month;
-                $y = $year;
-                if ($month == 0) {
-                    $m = 12;
-                    $y -= 1;
-                }
 
-                $forecastLastYear = \App\Models\Forecast::whereNotNull('amount')
+                $forecastLastMonth = \App\Models\Forecast::whereNotNull('amount')
                     ->where('month', $month + 1)
+                    ->where('year', $year - 1)
                     ->orderByDesc('year')
                     ->orderByDesc('month')
                     ->first();
 
-//                $forecastLastMonth = \App\Models\Forecast::whereNotNull('amount')
-//                    ->where('month', $m)
-//                    ->where('year', $y)
-//                    ->orderByDesc('year')
-//                    ->orderByDesc('month')
-//                    ->first();
-//                dd($forecastLastMonth);
 
-                $d = (($year - $fLast->year) * 12) + (($month + 1) - $fLast->month);
+                $d = (($year - $fLast->year) * 12) + (($month+1 ) - $fLast->month);
 
-                if ($d!=0){
+                if ($d>0){
 //                    dd($d, $forecastLastMonth, $month,$fLast);
                     $forecastValue = ($fLast->level + $d * $fLast->trend) * $forecastLastMonth->seasonal;
                     $forecastNow = \App\Models\Forecast::where('month', $month + 1)->where('year', $year)->first();
+//                    dd($d,$month,$forecastNow,$forecastLastMonth,$fLast);
                     if ($forecastNow != null) {
                         $forecastNow->update([
                             'forecast' => $forecastValue,
-
                         ]);
                     } else {
-                        \App\Models\Forecast::create([
+                        $forecastNow =\App\Models\Forecast::create([
                             'year' => $year,
                             'month' => $month + 1,
                             'forecast' => $forecastValue,
                         ]);
                     }
+//                    if ($month==2 and $year==2024){
+//                        dd($forecastNow);
+//                    }
                 }
+
 
             }
         }
