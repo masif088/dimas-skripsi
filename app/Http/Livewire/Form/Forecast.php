@@ -53,25 +53,27 @@ class Forecast extends Component
 
     public function generateForecast()
     {
-        $a = 0.18;
-        $b = 0.08;
-        $g = 1;
-        $d = 1;
+        $a = 0.18; // nilai alpa
+        $b = 0.08; // nilai beta
+        $g = 1; // nilai gama
+        $d = 1; // nilai distance/jarak 1 <=
 
-        $fLast = \App\Models\Forecast::whereNotNull('amount')
+        $fLast = \App\Models\Forecast::whereNotNull('amount') // ambil batas akhir yang memiliki nilai
             ->orderByDesc('year')
             ->orderByDesc('month')
             ->first();
-//        dd($fLast);
 
-        for ($year = 2022; $year <= $fLast->year; $year++) {
-            for ($month = 0; $month < 12; $month++) {
 
+        //perulangan untuk mengisi data level, seasonal, trend
+        for ($year = 2022; $year <= $fLast->year; $year++) { // data dimulai dari 2022 hingga nilai terakhir flast
+            for ($month = 0; $month < 12; $month++) { // perulangan bulan
+
+                // memastikan saat sudah yang terakhir maka perulangan dihentikan
                 if ($year==$fLast->year and $fLast->month<=$month){
-//                    dd($year,$month);
                     break;
                 }
 
+                //untuk ambil data bulang terakhir untuk menghindari kesalahan saat bulan januari agar dapat mengambil data desember
                 $m = $month;
                 $y = $year;
                 if ($month == 0) {
@@ -79,12 +81,15 @@ class Forecast extends Component
                     $y -= 1;
                 }
 
+                //data bulan terakhir
                 $forecastLastMonth = \App\Models\Forecast::where('month', $m)->where('year', $y)->first();
-
+                //data bulan yang sama di tahun sebelumnya
                 $forecastYear = \App\Models\Forecast::where('month', $month + 1)->where('year', $year - 1)->first();
-
+                //data bulan ini
                 $forecast = \App\Models\Forecast::where('month', $month + 1)->where('year', $year)->first();
+                //$month+1 karena for/perulangan dimulai dari 0
 
+                //untuk mendapatkan nilai level, trend, seasonal, dan forecast untuk bulan ini
                 $level = $a * ($forecast->amount / $forecastYear->seasonal) + (1 - $a) * ($forecastLastMonth->level + $forecastLastMonth->trend);
                 $trend = $b * ($level - $forecastLastMonth->level) + (1 - $b) * $forecastLastMonth->trend;
                 $seasonal = $g * ($forecast->amount / $level) + (1 - $g) * $forecastYear->seasonal;
@@ -103,24 +108,29 @@ class Forecast extends Component
 
 
 
+        // ambil batas akhir yang memiliki nilai
         $fLast = \App\Models\Forecast::whereNotNull('amount')
             ->orderByDesc('year')
             ->orderByDesc('month')
             ->first();
 //        dd($fLast,'asd');
 
+        // perulangan untuk 1 tahun kedepan
         for ($year = $fLast->year; $year <= $fLast->year+1; $year++) {
             for ($month = 0; $month < 12; $month++) {
 
+                // memastikan perulangan dimulai dari $flast month + 1
                 if ($fLast->year == $year and $fLast->month>$month){
                     continue;
                 }
 
+                // memastikan forecast dilakukan 1 tahun(12 bulan) kedepan tidak lebih
                 if ($year==$fLast->year+1 and $fLast->month<=$month){
                     continue;
                 }
 
 
+                // mengambil value tahun terakhir (harusnya forecastLastYear :D)
                 $forecastLastMonth = \App\Models\Forecast::whereNotNull('amount')
                     ->where('month', $month + 1)
                     ->where('year', $year - 1)
@@ -128,14 +138,13 @@ class Forecast extends Component
                     ->orderByDesc('month')
                     ->first();
 
-
+                // untuk mengukur jarak dari bulan terakhir yang masih memiliki amount atau data penjualan
                 $d = (($year - $fLast->year) * 12) + (($month+1 ) - $fLast->month);
 
+                // memastikan forecast hanya untuk 12 bulan kedepan
                 if ($d>0){
-//                    dd($d, $forecastLastMonth, $month,$fLast);
                     $forecastValue = ($fLast->level + $d * $fLast->trend) * $forecastLastMonth->seasonal;
                     $forecastNow = \App\Models\Forecast::where('month', $month + 1)->where('year', $year)->first();
-//                    dd($d,$month,$forecastNow,$forecastLastMonth,$fLast);
                     if ($forecastNow != null) {
                         $forecastNow->update([
                             'forecast' => $forecastValue,
