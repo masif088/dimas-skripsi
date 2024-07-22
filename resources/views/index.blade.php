@@ -69,13 +69,14 @@
                                             href="index.html#header01-7">Hubungi Kami</a></li>
                     <li class="nav-item dropdown"><a
                             class="nav-link link text-black text-primary dropdown-toggle show display-4"
-                            href="index.html#header01-7" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
+                            href="{{ route('login') }}" data-toggle="dropdown-submenu" data-bs-toggle="dropdown"
                             data-bs-auto-close="outside" aria-expanded="true">Admin</a>
                         <div class="dropdown-menu show" aria-labelledby="dropdown-753" data-bs-popper="none"><a
                                 class="text-black text-primary show dropdown-item display-4"
-                                href="index.html#header01-7">Pesanan Masuk</a><a
+                                href="{{ route('admin.transaction.active') }}">Pesanan Masuk</a>
+                            <a
                                 class="text-black text-primary show dropdown-item display-4"
-                                href="index.html#header01-7">Kasir</a></div>
+                                href="{{ route('admin.transaction.index') }}">Kasir</a></div>
                     </li>
                 </ul>
 
